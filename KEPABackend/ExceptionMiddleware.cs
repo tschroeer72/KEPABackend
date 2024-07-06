@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using FluentValidation;
+using KEPABackend.Exceptions;
 
 namespace KEPABackend;
 
@@ -19,57 +20,23 @@ public class ExceptionMiddleware
         {
             await Next(context);
         }
-        //catch (IsbnDuplicateException)
-        //{
-        //    context.Response.ContentType = "application/problem+json";
-        //    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        catch (MitgliedNotFoundException)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
 
-        //    var problemDetails = new ProblemDetails()
-        //    {
-        //        Status = StatusCodes.Status400BadRequest,
-        //        Detail = string.Empty,
-        //        Instance = "",
-        //        Title = "Isbn already Exists.",
-        //        Type = ""
-        //    };
+            var problemDetails = new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Detail = string.Empty,
+                Instance = "",
+                Title = "Mitglied nicht gefunden !",
+                Type = ""
+            };
 
-        //    var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
-        //    await context.Response.WriteAsync(problemDetailsJson);
-        //}
-        //catch (AuthorNotFoundException)
-        //{
-        //    context.Response.ContentType = "application/problem+json";
-        //    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-        //    var problemDetails = new ProblemDetails()
-        //    {
-        //        Status = StatusCodes.Status400BadRequest,
-        //        Detail = string.Empty,
-        //        Instance = "",
-        //        Title = "Author not found.",
-        //        Type = ""
-        //    };
-
-        //    var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
-        //    await context.Response.WriteAsync(problemDetailsJson);
-        //}
-        //catch (BookNotFoundException)
-        //{
-        //    context.Response.ContentType = "application/problem+json";
-        //    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-        //    var problemDetails = new ProblemDetails()
-        //    {
-        //        Status = StatusCodes.Status400BadRequest,
-        //        Detail = string.Empty,
-        //        Instance = "",
-        //        Title = "Book not found.",
-        //        Type = ""
-        //    };
-
-        //    var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
-        //    await context.Response.WriteAsync(problemDetailsJson);
-        //}
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
         catch (ValidationException ex)
         {
             context.Response.ContentType = "application/problem+json";

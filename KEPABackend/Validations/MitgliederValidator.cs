@@ -3,9 +3,9 @@ using KEPABackend.DTOs;
 
 namespace KEPABackend.Validations;
 
-public class MitgliederCreateValidator :AbstractValidator<MitgliedCreate>
+public class MitgliederValidator :AbstractValidator<MitgliedCreate>
 {
-    public MitgliederCreateValidator()
+    public MitgliederValidator()
     {
         RuleFor(mitglied => mitglied.Anrede).MaximumLength(50);
         RuleFor(mitglied => mitglied.Vorname).NotEmpty().MaximumLength(50);

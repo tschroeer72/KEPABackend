@@ -1,31 +1,30 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using KEPABackend.DTOs;
+using KEPABackend.Exceptions;
+using KEPABackend.Interfaces;
 using KEPABackend.Modell;
+using KEPABackend.Repositorys;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Serialization;
 
 namespace KEPABackend.Services;
 
 public class MitgliederService
 {
-    public ApplicationDbContext DbContext { get; }
-    public MitgliederCreateValidator MitgliederValidator { get; }
+    public IMitgliederRepository MitgliederRepository { get; }
     public IMapper Mapper { get; }
+    public MitgliederValidator MitgliederValidator { get; }
 
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="dbContext"></param>
-    /// <param name="mitgliederCreateValidator"></param>
-    /// <param name="mapper"></param>
-    public MitgliederService(ApplicationDbContext dbContext, MitgliederCreateValidator mitgliederCreateValidator, IMapper mapper)
+    public MitgliederService(IMitgliederRepository mitgliederRepository, IMapper mapper, MitgliederValidator mitgliederValidator)
     {
-        DbContext = dbContext;
-        MitgliederValidator = mitgliederCreateValidator;
+        MitgliederRepository = mitgliederRepository;
         Mapper = mapper;
+        MitgliederValidator = mitgliederValidator;
     }
 
+    
     /// <summary>
     /// Service CreateMitgliederAsync
     /// </summary>
@@ -43,9 +42,7 @@ public class MitgliederService
         }
 
         var mitglied = Mapper.Map<TblMitglieder>(mitgliedCreate);
-        await DbContext.TblMitglieders.AddAsync(mitglied);
-        await DbContext.SaveChangesAsync();
-        long lngID = mitglied.Id;
+        long lngID = await MitgliederRepository.CreateMitgliederAsync(mitglied);
         return lngID;
     }
 
@@ -55,31 +52,7 @@ public class MitgliederService
     /// <returns>Liste aller Mitglieder</returns>
     public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync()
     {
-        var lst = await DbContext.TblMitglieders
-            .Select(s => new GetMitgliederliste
-            {
-                ID = s.Id,
-                Anrede = s.Anrede,
-                Vorname = s.Vorname,
-                Spitzname = s.Spitzname,
-                Nachname = s.Nachname,
-                Straße = s.Straße,
-                PLZ = s.Plz,
-                Ort = s.Ort,
-                Geburtsdatum = s.Geburtsdatum,
-                MitgliedSeit = s.MitgliedSeit,
-                PassivSeit = s.PassivSeit,
-                AusgeschiedenAm = s.AusgeschiedenAm,
-                Email = s.Email,
-                TelefonFirma = s.TelefonFirma,
-                TelefonPrivat = s.TelefonPrivat,
-                TelefonMobil = s.TelefonMobil,
-                Fax = s.Fax,
-                Bemerkungen = s.Bemerkungen,
-                Notizen = s.Notizen
-            }).ToListAsync();
-
-        return lst;
+        return await MitgliederRepository.GetAllMitgliederAsync();
     }
 
     /// <summary>
@@ -89,31 +62,14 @@ public class MitgliederService
     /// <returns>Mitglied mit der ID </returns>
     public async Task<GetMitgliederliste> GetMitgliedByIDAsync(int ID)
     {
-        var mitglied = await DbContext.TblMitglieders
-            .Where(w => w.Id == ID)
-            .Select(s => new GetMitgliederliste
-            {
-                ID = s.Id,
-                Anrede = s.Anrede,
-                Vorname = s.Vorname,
-                Spitzname = s.Spitzname,
-                Nachname = s.Nachname,
-                Straße = s.Straße,
-                PLZ = s.Plz,
-                Ort = s.Ort,
-                Geburtsdatum = s.Geburtsdatum,
-                MitgliedSeit = s.MitgliedSeit,
-                PassivSeit = s.PassivSeit,
-                AusgeschiedenAm = s.AusgeschiedenAm,
-                Email = s.Email,
-                TelefonFirma = s.TelefonFirma,
-                TelefonPrivat = s.TelefonPrivat,
-                TelefonMobil = s.TelefonMobil,
-                Fax = s.Fax,
-                Bemerkungen = s.Bemerkungen,
-                Notizen = s.Notizen
-            }).SingleOrDefaultAsync();
+
+        GetMitgliederliste? mitglied = await MitgliederRepository.GetMitgliedByIDAsync(ID);
+
+        if (mitglied == null)
+        {
+            throw new MitgliedNotFoundException();
+        }
 
         return mitglied;
-    }
+    }    
 }
