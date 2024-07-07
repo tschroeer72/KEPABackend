@@ -3,7 +3,7 @@ using KEPABackend.Modell;
 
 namespace KEPABackend.Interfaces;
 
-public interface IMitgliederRepository
+public interface IMitgliederDBService
 {
     Task<long> CreateMitgliederAsync(TblMitglieder mitglied);
     Task<List<GetMitgliederliste>> GetAllMitgliederAsync();

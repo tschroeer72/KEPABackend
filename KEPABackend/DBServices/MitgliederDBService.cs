@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KEPABackend.Repositorys;
 
-public class MitgliederRepository : IMitgliederRepository
+public class MitgliederDBService : IMitgliederDBService
 {
     public ApplicationDbContext DbContext { get; }
     public MitgliederValidator MitgliederValidator { get; }
@@ -20,7 +20,7 @@ public class MitgliederRepository : IMitgliederRepository
     /// <param name="dbContext"></param>
     /// <param name="mitgliederCreateValidator"></param>
     /// <param name="mapper"></param>
-    public MitgliederRepository(ApplicationDbContext dbContext, MitgliederValidator mitgliederCreateValidator, IMapper mapper)
+    public MitgliederDBService(ApplicationDbContext dbContext, MitgliederValidator mitgliederCreateValidator, IMapper mapper)
     {
         DbContext = dbContext;
         MitgliederValidator = mitgliederCreateValidator;

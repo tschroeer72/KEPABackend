@@ -13,11 +13,11 @@ namespace KEPABackend.Services;
 
 public class MitgliederService
 {
-    public IMitgliederRepository MitgliederRepository { get; }
+    public IMitgliederDBService MitgliederRepository { get; }
     public IMapper Mapper { get; }
     public MitgliederValidator MitgliederValidator { get; }
 
-    public MitgliederService(IMitgliederRepository mitgliederRepository, IMapper mapper, MitgliederValidator mitgliederValidator)
+    public MitgliederService(IMitgliederDBService mitgliederRepository, IMapper mapper, MitgliederValidator mitgliederValidator)
     {
         MitgliederRepository = mitgliederRepository;
         Mapper = mapper;

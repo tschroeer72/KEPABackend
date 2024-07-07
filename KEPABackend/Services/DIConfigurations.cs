@@ -10,7 +10,7 @@ public static class DIConfigurations
     {
         services.AddScoped<MitgliederService>();
         services.AddScoped<MitgliederValidator>();
-        services.AddScoped<IMitgliederRepository, MitgliederRepository>();
+        services.AddScoped<IMitgliederDBService, MitgliederDBService>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }
