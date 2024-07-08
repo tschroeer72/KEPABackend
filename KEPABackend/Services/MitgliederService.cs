@@ -38,6 +38,7 @@ public class MitgliederService
         }
         catch (ValidationException ex)
         {
+            string message = ex.Message;
             throw;
         }
 

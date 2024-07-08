@@ -7,6 +7,7 @@ using KEPABackend.Validations;
 using Moq;
 using Xunit;
 using FluentValidation;
+using KEPABackend.Exceptions;
 
 namespace KEPABackendUnitTests.Services;
 
@@ -63,8 +64,9 @@ public class MitgliederServiceTests
         }
         catch(ValidationException ex)
         {
+            string message = ex.Message;
             //Assert
-            
+
         }
     }
 
@@ -103,12 +105,36 @@ public class MitgliederServiceTests
     [Fact]
     public async Task GetMitgliedByID_Success()
     {
+        //Arrange
+        var Mitglieder = new GetMitgliederliste()
+        {
+            ID = 1,
+            Vorname = "Test 1",
+            Nachname = "Test 1",
+            MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+        };
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(Mitglieder);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
 
+        //Act
+        var result = await mitgliederService.GetMitgliedByIDAsync(1);
+
+        //Assert
+        Assert.Equal(1, result.ID);
     }
 
-    //[Fact]
-    //public async Task MitgliedNotFoundExeption_for_GetMitgliedByID_with_Non_Exiting_ID()
-    //{
+    [Fact]
+    public void MitgliedNotFoundExeption_for_GetMitgliedByID_with_Non_Exiting_ID()
+    {
+        //Arrange
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
 
-    //}
+        //Act
+        Func<Task> func = async () => await mitgliederService.GetMitgliedByIDAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
 }
