@@ -67,4 +67,48 @@ public class MitgliederServiceTests
             
         }
     }
+
+    [Fact]
+    public async Task GetAllMitglieder_Success()
+    {
+        //Arrange
+        var lstMitglieder = new List<GetMitgliederliste>()
+        {
+            new GetMitgliederliste()
+            {
+                ID = 1,
+                Vorname = "Test 1",
+                Nachname = "Test 1",
+                MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+            },
+            new GetMitgliederliste()
+            {
+                ID = 2,
+                Vorname = "Test 2",
+                Nachname = "Test 2",
+                MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+            }
+        };
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetAllMitgliederAsync()).ReturnsAsync(lstMitglieder);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+
+        //Act
+        var result = await mitgliederService.GetAllMitgliederAsync();
+
+        //Assert
+        Assert.Equal(2, result.Count);
+    }
+
+    [Fact]
+    public async Task GetMitgliedByID_Success()
+    {
+
+    }
+
+    //[Fact]
+    //public async Task MitgliedNotFoundExeption_for_GetMitgliedByID_with_Non_Exiting_ID()
+    //{
+
+    //}
 }
