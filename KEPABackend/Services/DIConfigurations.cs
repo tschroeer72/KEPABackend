@@ -1,5 +1,5 @@
 ﻿using KEPABackend.Interfaces;
-using KEPABackend.Repositorys;
+using KEPABackend.DBServices;
 using KEPABackend.Validations;
 
 namespace KEPABackend.Services;

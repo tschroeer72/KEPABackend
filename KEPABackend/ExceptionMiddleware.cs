@@ -47,7 +47,7 @@ public class ExceptionMiddleware
                 Status = StatusCodes.Status400BadRequest,
                 Detail = JsonConvert.SerializeObject(ex.Errors),
                 Instance = "",
-                Title = "Isbn already Exists",
+                Title = "Validation Error",
                 Type = ""
             };
 

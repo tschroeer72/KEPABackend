@@ -6,13 +6,11 @@ using KEPABackend.Modell;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;
 
-namespace KEPABackend.Repositorys;
+namespace KEPABackend.DBServices;
 
 public class MitgliederDBService : IMitgliederDBService
 {
     public ApplicationDbContext DbContext { get; }
-    public MitgliederValidator MitgliederValidator { get; }
-    public IMapper Mapper { get; }
 
     /// <summary>
     /// Constuctur
@@ -20,11 +18,9 @@ public class MitgliederDBService : IMitgliederDBService
     /// <param name="dbContext"></param>
     /// <param name="mitgliederCreateValidator"></param>
     /// <param name="mapper"></param>
-    public MitgliederDBService(ApplicationDbContext dbContext, MitgliederValidator mitgliederCreateValidator, IMapper mapper)
+    public MitgliederDBService(ApplicationDbContext dbContext)
     {
         DbContext = dbContext;
-        MitgliederValidator = mitgliederCreateValidator;
-        Mapper = mapper;
     }
 
     /// <summary>

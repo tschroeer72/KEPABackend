@@ -4,7 +4,7 @@ using KEPABackend.DTOs;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces;
 using KEPABackend.Modell;
-using KEPABackend.Repositorys;
+using KEPABackend.DBServices;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization;
@@ -13,13 +13,13 @@ namespace KEPABackend.Services;
 
 public class MitgliederService
 {
-    public IMitgliederDBService MitgliederRepository { get; }
+    public IMitgliederDBService MitgliederDBService { get; }
     public IMapper Mapper { get; }
     public MitgliederValidator MitgliederValidator { get; }
 
-    public MitgliederService(IMitgliederDBService mitgliederRepository, IMapper mapper, MitgliederValidator mitgliederValidator)
+    public MitgliederService(IMitgliederDBService mitgliederDBService, IMapper mapper, MitgliederValidator mitgliederValidator)
     {
-        MitgliederRepository = mitgliederRepository;
+        MitgliederDBService = mitgliederDBService;
         Mapper = mapper;
         MitgliederValidator = mitgliederValidator;
     }
@@ -42,7 +42,7 @@ public class MitgliederService
         }
 
         var mitglied = Mapper.Map<TblMitglieder>(mitgliedCreate);
-        long lngID = await MitgliederRepository.CreateMitgliederAsync(mitglied);
+        long lngID = await MitgliederDBService.CreateMitgliederAsync(mitglied);
         return lngID;
     }
 
@@ -52,7 +52,7 @@ public class MitgliederService
     /// <returns>Liste aller Mitglieder</returns>
     public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync()
     {
-        return await MitgliederRepository.GetAllMitgliederAsync();
+        return await MitgliederDBService.GetAllMitgliederAsync();
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class MitgliederService
     public async Task<GetMitgliederliste> GetMitgliedByIDAsync(int ID)
     {
 
-        GetMitgliederliste? mitglied = await MitgliederRepository.GetMitgliedByIDAsync(ID);
+        GetMitgliederliste? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID);
 
         if (mitglied == null)
         {
