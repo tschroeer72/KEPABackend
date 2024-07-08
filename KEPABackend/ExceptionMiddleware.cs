@@ -20,7 +20,7 @@ public class ExceptionMiddleware
         {
             await Next(context);
         }
-        catch (MitgliedNotFoundException)
+        catch (MitgliedNotFoundException ex)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -28,7 +28,7 @@ public class ExceptionMiddleware
             var problemDetails = new ProblemDetails()
             {
                 Status = StatusCodes.Status400BadRequest,
-                Detail = string.Empty,
+                Detail = ex.Message,
                 Instance = "",
                 Title = "Mitglied nicht gefunden !",
                 Type = ""

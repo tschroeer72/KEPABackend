@@ -100,7 +100,7 @@ public class MitgliederService
         return result;
     }
 
-    internal async Task<GetMitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
+    public async Task<GetMitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
     {
         try
         {

@@ -139,4 +139,69 @@ public class MitgliederServiceTests
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task Mitglied_Updated()
+    {
+        //Arrange
+        var mitgliedUpdate = new MitgliedUpdate()
+        {
+            ID = 1,
+            Vorname = "Test",
+            Nachname = "Test",
+            MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+        };
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(new TblMitglieder());
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
+
+        //Act
+        await mitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
+
+        //Assert
+        mitgliederDBServiceMock.Verify(mock => mock.UpdateMitgliederAsync(), Times.Once);
+    }
+
+    [Fact]
+    public void ValidationExeption_For_UpdateMitglied()
+    {
+        //Arrange
+        var mitgliedUpdate = new MitgliedUpdate()
+        {
+            ID = 1,
+            Vorname = string.Empty,
+            Nachname = "Test",
+            MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+        };
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(new TblMitglieder() { Id = 1 });
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await mitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<ValidationException>(func);
+    }
+
+    [Fact]
+    public void MitgliedNotFoundExeption_For_Non_Existing_ID()
+    {
+        //Arrange
+        var mitgliedUpdate = new MitgliedUpdate()
+        {
+            ID = 1,
+            Vorname = string.Empty,
+            Nachname = "Test",
+            MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
+        };
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await mitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
 }
