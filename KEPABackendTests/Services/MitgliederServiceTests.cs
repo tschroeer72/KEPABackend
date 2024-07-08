@@ -106,7 +106,7 @@ public class MitgliederServiceTests
     public async Task GetMitgliedByID_Success()
     {
         //Arrange
-        var Mitglieder = new GetMitgliederliste()
+        var mitglieder = new GetMitgliederliste()
         {
             ID = 1,
             Vorname = "Test 1",
@@ -114,11 +114,11 @@ public class MitgliederServiceTests
             MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
-        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(Mitglieder);
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(mitglieder);
         var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
 
         //Act
-        var result = await mitgliederService.GetMitgliedByIDAsync(1);
+        var result = await mitgliederService.GetMitgliedByIDAsync(mitglieder.ID);
 
         //Assert
         Assert.Equal(1, result.ID);
