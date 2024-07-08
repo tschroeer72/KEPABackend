@@ -14,12 +14,14 @@ namespace KEPABackendUnitTests.Services;
 public class MitgliederServiceTests
 {
     private IMapper Mapper { get; }
-    private MitgliederValidator Validator { get; }
+    private MitgliederCreateValidator MitgliederCreateValidator { get; }
+    private MitgliederUpdateValidator MitgliederUpdateValidator { get; }
 
     public MitgliederServiceTests()
     {
         Mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
-        Validator = new MitgliederValidator();
+        MitgliederCreateValidator = new MitgliederCreateValidator();
+        MitgliederUpdateValidator = new MitgliederUpdateValidator();
     }
 
     [Fact]
@@ -34,7 +36,7 @@ public class MitgliederServiceTests
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
         mitgliederDBServiceMock.Setup(mock => mock.CreateMitgliederAsync(It.IsAny<TblMitglieder>())).ReturnsAsync(1);
-        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
 
         //Act
         await mitgliederService.CreateMitgliederAsync(mitgliedCreate);
@@ -54,7 +56,7 @@ public class MitgliederServiceTests
             MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
-        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
 
         //Act
         try
@@ -93,7 +95,7 @@ public class MitgliederServiceTests
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
         mitgliederDBServiceMock.Setup(mock => mock.GetAllMitgliederAsync(It.IsAny<bool>())).ReturnsAsync(lstMitglieder);
-        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
 
         //Act
         var result = await mitgliederService.GetAllMitgliederAsync();
@@ -106,19 +108,19 @@ public class MitgliederServiceTests
     public async Task GetMitgliedByID_Success()
     {
         //Arrange
-        var mitglieder = new GetMitgliederliste()
+        var mitglieder = new TblMitglieder()
         {
-            ID = 1,
+            Id = 1,
             Vorname = "Test 1",
             Nachname = "Test 1",
             MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
         mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(1)).ReturnsAsync(mitglieder);
-        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
 
         //Act
-        var result = await mitgliederService.GetMitgliedByIDAsync(mitglieder.ID);
+        var result = await mitgliederService.GetMitgliedByIDAsync(mitglieder.Id);
 
         //Assert
         Assert.Equal(1, result.ID);
@@ -129,7 +131,7 @@ public class MitgliederServiceTests
     {
         //Arrange
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
-        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
+        var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, MitgliederCreateValidator, MitgliederUpdateValidator);
 
         //Act
         Func<Task> func = async () => await mitgliederService.GetMitgliedByIDAsync(It.IsAny<int>());

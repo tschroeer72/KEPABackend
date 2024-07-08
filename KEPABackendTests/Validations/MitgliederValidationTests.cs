@@ -8,7 +8,7 @@ public class MitgliederValidationTests
     private DateTime dtTestDatum20240101_090000 = Convert.ToDateTime("2024-01-01 09:00:00");
     private DateTime dtTestDatum20241201_090000 = Convert.ToDateTime("2024-01-01 09:00:00");
 
-    private MitgliederValidator MitgliederCreateValidator { get; } = new MitgliederValidator();
+    private MitgliederCreateValidator MitgliederCreateValidator { get; } = new MitgliederCreateValidator();
 
     [Fact]
     public void Mitglied_Create_Passes_Validation()

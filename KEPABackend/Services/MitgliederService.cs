@@ -15,13 +15,15 @@ public class MitgliederService
 {
     public IMitgliederDBService MitgliederDBService { get; }
     public IMapper Mapper { get; }
-    public MitgliederValidator MitgliederValidator { get; }
+    public MitgliederCreateValidator MitgliederCreateValidator { get; }
+    public MitgliederUpdateValidator MitgliederUpdateValidator { get; }
 
-    public MitgliederService(IMitgliederDBService mitgliederDBService, IMapper mapper, MitgliederValidator mitgliederValidator)
+    public MitgliederService(IMitgliederDBService mitgliederDBService, IMapper mapper, MitgliederCreateValidator mitgliederCreateValidator, MitgliederUpdateValidator mitgliederUpdateValidator)
     {
         MitgliederDBService = mitgliederDBService;
         Mapper = mapper;
-        MitgliederValidator = mitgliederValidator;
+        MitgliederCreateValidator = mitgliederCreateValidator;
+        MitgliederUpdateValidator = mitgliederUpdateValidator;
     }
 
     
@@ -34,7 +36,7 @@ public class MitgliederService
     {
         try
         {
-            await MitgliederValidator.ValidateAndThrowAsync(mitgliedCreate);
+            await MitgliederCreateValidator.ValidateAndThrowAsync(mitgliedCreate);
         }
         catch (ValidationException ex)
         {
@@ -65,13 +67,83 @@ public class MitgliederService
     public async Task<GetMitgliederliste> GetMitgliedByIDAsync(int ID)
     {
 
-        GetMitgliederliste? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID);
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID);
 
         if (mitglied == null)
         {
             throw new MitgliedNotFoundException();
         }
 
-        return mitglied;
-    }    
+        var result = new GetMitgliederliste()
+        {
+            ID = mitglied.Id,
+            Anrede = mitglied.Anrede,
+            Vorname = mitglied.Vorname,
+            Spitzname = mitglied.Spitzname,
+            Nachname = mitglied.Nachname,
+            Straße = mitglied.Straße,
+            PLZ = mitglied.Plz,
+            Ort = mitglied.Ort,
+            Geburtsdatum = mitglied.Geburtsdatum,
+            MitgliedSeit = mitglied.MitgliedSeit,
+            PassivSeit = mitglied.PassivSeit,
+            AusgeschiedenAm = mitglied.AusgeschiedenAm,
+            Ehemaltiger = mitglied.Ehemaliger,
+            Email = mitglied.Email,
+            TelefonFirma = mitglied.TelefonFirma,
+            TelefonPrivat = mitglied.TelefonPrivat,
+            TelefonMobil = mitglied.TelefonMobil,
+            Fax = mitglied.Fax,
+            Bemerkungen = mitglied.Bemerkungen,
+            Notizen = mitglied.Notizen
+        };
+        return result;
+    }
+
+    internal async Task<GetMitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
+    {
+        try
+        {
+            await MitgliederUpdateValidator.ValidateAndThrowAsync(mitgliedUpdate);
+        }
+        catch (ValidationException ex)
+        {
+            string message = ex.Message;
+            throw;
+        }
+
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID);
+        if(mitglied == null)
+        {
+            throw new MitgliedNotFoundException();
+        }
+
+        Mapper.Map(mitgliedUpdate, mitglied);
+        await MitgliederDBService.UpdateMitgliederAsync();
+
+        var updatedMitglied = new GetMitgliederliste()
+        {
+            ID = mitglied.Id,
+            Anrede = mitglied.Anrede,
+            Vorname = mitglied.Vorname,
+            Spitzname = mitglied.Spitzname,
+            Nachname = mitglied.Nachname,
+            Straße = mitglied.Straße,
+            PLZ = mitglied.Plz,
+            Ort = mitglied.Ort,
+            Geburtsdatum = mitglied.Geburtsdatum,
+            MitgliedSeit = mitglied.MitgliedSeit,
+            PassivSeit = mitglied.PassivSeit,
+            AusgeschiedenAm = mitglied.AusgeschiedenAm,
+            Ehemaltiger = mitglied.Ehemaliger,
+            Email = mitglied.Email,
+            TelefonFirma = mitglied.TelefonFirma,
+            TelefonPrivat = mitglied.TelefonPrivat,
+            TelefonMobil = mitglied.TelefonMobil,
+            Fax = mitglied.Fax,
+            Bemerkungen = mitglied.Bemerkungen,
+            Notizen = mitglied.Notizen
+        };
+        return updatedMitglied;
+    }
 }

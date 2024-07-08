@@ -78,33 +78,43 @@ public class MitgliederDBService : IMitgliederDBService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>Mitglied mit der ID </returns>
-    public async Task<GetMitgliederliste?> GetMitgliedByIDAsync(int ID)
+    public async Task<TblMitglieder?> GetMitgliedByIDAsync(int ID)
     {
+        //var mitglied = await DbContext.TblMitglieders
+        //    .Where(w => w.Id == ID)
+        //    .Select(s => new GetMitgliederliste
+        //    {
+        //        ID = s.Id,
+        //        Anrede = s.Anrede,
+        //        Vorname = s.Vorname,
+        //        Spitzname = s.Spitzname,
+        //        Nachname = s.Nachname,
+        //        Straße = s.Straße,
+        //        PLZ = s.Plz,
+        //        Ort = s.Ort,
+        //        Geburtsdatum = s.Geburtsdatum,
+        //        MitgliedSeit = s.MitgliedSeit,
+        //        PassivSeit = s.PassivSeit,
+        //        AusgeschiedenAm = s.AusgeschiedenAm,
+        //        Ehemaltiger = s.Ehemaliger,
+        //        Email = s.Email,
+        //        TelefonFirma = s.TelefonFirma,
+        //        TelefonPrivat = s.TelefonPrivat,
+        //        TelefonMobil = s.TelefonMobil,
+        //        Fax = s.Fax,
+        //        Bemerkungen = s.Bemerkungen,
+        //        Notizen = s.Notizen
+        //    }).SingleOrDefaultAsync();
         var mitglied = await DbContext.TblMitglieders
             .Where(w => w.Id == ID)
-            .Select(s => new GetMitgliederliste
-            {
-                ID = s.Id,
-                Anrede = s.Anrede,
-                Vorname = s.Vorname,
-                Spitzname = s.Spitzname,
-                Nachname = s.Nachname,
-                Straße = s.Straße,
-                PLZ = s.Plz,
-                Ort = s.Ort,
-                Geburtsdatum = s.Geburtsdatum,
-                MitgliedSeit = s.MitgliedSeit,
-                PassivSeit = s.PassivSeit,
-                AusgeschiedenAm = s.AusgeschiedenAm,
-                Email = s.Email,
-                TelefonFirma = s.TelefonFirma,
-                TelefonPrivat = s.TelefonPrivat,
-                TelefonMobil = s.TelefonMobil,
-                Fax = s.Fax,
-                Bemerkungen = s.Bemerkungen,
-                Notizen = s.Notizen
-            }).SingleOrDefaultAsync();
+            .Select(s => s)
+            .SingleOrDefaultAsync();
 
         return mitglied;
+    }
+
+    public async Task UpdateMitgliederAsync()
+    {
+        await DbContext.SaveChangesAsync();
     }
 }

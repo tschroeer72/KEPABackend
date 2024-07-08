@@ -23,6 +23,14 @@ public class MitgliederController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost]
+    [Route("Update")]
+    public async Task<ActionResult> UpdateMitglieder(MitgliedUpdate mitgliedUpdate)
+    {
+        var result = await MitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
+        return Ok(result);
+    }
+
     [HttpGet]
     [Route("GetAllMitglieder")]
     public async Task<ActionResult> GetAllMitglieder(bool Aktiv = true)
