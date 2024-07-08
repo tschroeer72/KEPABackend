@@ -50,10 +50,11 @@ public class MitgliederService
     /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>
+    /// <param name="bAktiv" true (Default) = nur aktive Mitglieder; false = alle Mitglieder
     /// <returns>Liste aller Mitglieder</returns>
-    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync()
+    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
     {
-        return await MitgliederDBService.GetAllMitgliederAsync();
+        return await MitgliederDBService.GetAllMitgliederAsync(bAktiv);
     }
 
     /// <summary>

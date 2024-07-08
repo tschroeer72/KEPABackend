@@ -40,10 +40,12 @@ public class MitgliederDBService : IMitgliederDBService
     /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>
+    /// /// <param name="bAktiv" true (Default) = nur aktive Mitglieder; false = alle Mitglieder
     /// <returns>Liste aller Mitglieder</returns>
-    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync()
+    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
     {
         var lst = await DbContext.TblMitglieders
+            .Where(w => bAktiv ? w.Ehemaliger == 0 : w.Ehemaliger == 1 || w.Ehemaliger == 0)
             .Select(s => new GetMitgliederliste
             {
                 ID = s.Id,
@@ -58,6 +60,7 @@ public class MitgliederDBService : IMitgliederDBService
                 MitgliedSeit = s.MitgliedSeit,
                 PassivSeit = s.PassivSeit,
                 AusgeschiedenAm = s.AusgeschiedenAm,
+                Ehemaltiger = s.Ehemaliger,
                 Email = s.Email,
                 TelefonFirma = s.TelefonFirma,
                 TelefonPrivat = s.TelefonPrivat,

@@ -92,7 +92,7 @@ public class MitgliederServiceTests
             }
         };
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
-        mitgliederDBServiceMock.Setup(mock => mock.GetAllMitgliederAsync()).ReturnsAsync(lstMitglieder);
+        mitgliederDBServiceMock.Setup(mock => mock.GetAllMitgliederAsync(It.IsAny<bool>())).ReturnsAsync(lstMitglieder);
         var mitgliederService = new MitgliederService(mitgliederDBServiceMock.Object, Mapper, Validator);
 
         //Act

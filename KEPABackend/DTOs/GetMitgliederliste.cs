@@ -10,6 +10,7 @@ public class GetMitgliederliste
     public string? Anrede { get; set; }
     public DateTime MitgliedSeit { get; set; }
     public DateTime? AusgeschiedenAm { get; set; }
+    public ulong? Ehemaltiger { get; set; }
     public string? Email { get; set; }
     public string? Fax { get; set; }
     public DateTime? Geburtsdatum { get; set; }

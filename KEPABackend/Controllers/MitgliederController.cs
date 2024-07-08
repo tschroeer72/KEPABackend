@@ -25,9 +25,9 @@ public class MitgliederController : ControllerBase
 
     [HttpGet]
     [Route("GetAllMitglieder")]
-    public async Task<ActionResult> GetAllMitglieder()
+    public async Task<ActionResult> GetAllMitglieder(bool Aktiv = true)
     {
-        var result = await MitgliederService.GetAllMitgliederAsync();
+        var result = await MitgliederService.GetAllMitgliederAsync(Aktiv);
         return Ok(result);
     }
 
