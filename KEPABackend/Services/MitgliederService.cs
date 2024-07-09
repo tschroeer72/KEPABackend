@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using KEPABackend.DTOs;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces;
 using KEPABackend.Modell;
@@ -8,6 +7,8 @@ using KEPABackend.DBServices;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization;
+using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Post;
 
 namespace KEPABackend.Services;
 
@@ -54,7 +55,7 @@ public class MitgliederService
     /// </summary>
     /// <param name="bAktiv" true (Default) = nur aktive Mitglieder; false = alle Mitglieder
     /// <returns>Liste aller Mitglieder</returns>
-    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
+    public async Task<List<Mitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
     {
         return await MitgliederDBService.GetAllMitgliederAsync(bAktiv);
     }
@@ -64,7 +65,7 @@ public class MitgliederService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>Mitglied mit der ID </returns>
-    public async Task<GetMitgliederliste> GetMitgliedByIDAsync(int ID)
+    public async Task<Mitgliederliste> GetMitgliedByIDAsync(int ID)
     {
 
         TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID);
@@ -74,7 +75,7 @@ public class MitgliederService
             throw new MitgliedNotFoundException();
         }
 
-        var result = new GetMitgliederliste()
+        var result = new Mitgliederliste()
         {
             ID = mitglied.Id,
             Anrede = mitglied.Anrede,
@@ -100,7 +101,13 @@ public class MitgliederService
         return result;
     }
 
-    public async Task<GetMitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
+    /// <summary>
+    /// Service UpdateMitglied
+    /// </summary>
+    /// <param name="mitgliedUpdate"></param>
+    /// <returns>Geänderte Entity</returns>
+    /// <exception cref="MitgliedNotFoundException"></exception>
+    public async Task<Mitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
     {
         try
         {
@@ -121,7 +128,7 @@ public class MitgliederService
         Mapper.Map(mitgliedUpdate, mitglied);
         await MitgliederDBService.UpdateMitgliederAsync();
 
-        var updatedMitglied = new GetMitgliederliste()
+        var updatedMitglied = new Mitgliederliste()
         {
             ID = mitglied.Id,
             Anrede = mitglied.Anrede,

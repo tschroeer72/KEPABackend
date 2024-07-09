@@ -23,11 +23,11 @@ public class ExceptionMiddleware
         catch (MitgliedNotFoundException ex)
         {
             context.Response.ContentType = "application/problem+json";
-            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
 
             var problemDetails = new ProblemDetails()
             {
-                Status = StatusCodes.Status400BadRequest,
+                Status = StatusCodes.Status404NotFound,
                 Detail = ex.Message,
                 Instance = "",
                 Title = "Mitglied nicht gefunden !",

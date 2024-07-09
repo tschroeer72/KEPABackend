@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs;
+namespace KEPABackend.DTOs.Post;
 
-//public record MitgliedCreate(
+//public record MitgliedUpdate(
 //    [Required] string Vorname,
 //    [Required] string Nachname, 
 //    string? Anrede,
@@ -31,8 +31,10 @@ namespace KEPABackend.DTOs;
 //    string? TelefonPrivat,
 //    string? TurboDbnummer);
 
-public record MitgliedCreate
+public record MitgliedUpdate
 {
+    [Required]
+    public int ID { get; set; }
     [Required]
     [MaxLength(50)]
     public string Vorname { get; set; } = default!;

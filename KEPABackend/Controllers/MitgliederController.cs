@@ -1,4 +1,4 @@
-﻿using KEPABackend.DTOs;
+﻿using KEPABackend.DTOs.Post;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +15,13 @@ public class MitgliederController : ControllerBase
         MitgliederService = mitgliederCreateService;
     }
 
+    /// <summary>
+    /// Anlegen eines neuen Mitglieds
+    /// </summary>
+    /// <param name="mitgliedCreate"></param>
+    /// <returns></returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="400">Validation Error</response>
     [HttpPost]
     [Route("Create")]
     public async Task<ActionResult> CreateMitglieder(MitgliedCreate mitgliedCreate)
@@ -23,6 +30,14 @@ public class MitgliederController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Ändern eines vorhandenen Mitglieds
+    /// </summary>
+    /// <param name="mitgliedUpdate"></param>
+    /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="400">Validation Error</response>
+    /// <response code="404">Mitglied nicht gefunden</response>
     [HttpPost]
     [Route("Update")]
     public async Task<ActionResult> UpdateMitglieder(MitgliedUpdate mitgliedUpdate)
@@ -31,6 +46,11 @@ public class MitgliederController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Liste aller Mitglieder
+    /// </summary>
+    /// <param name="Aktiv"></param>
+    /// <returns></returns>
     [HttpGet]
     [Route("GetAllMitglieder")]
     public async Task<ActionResult> GetAllMitglieder(bool Aktiv = true)
@@ -39,6 +59,11 @@ public class MitgliederController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Rückgabe eines bestimmten Mitglieds
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     [HttpGet]
     [Route("GetMitgliedByID")]
     public async Task<ActionResult> GetMitgliedByID(int ID)

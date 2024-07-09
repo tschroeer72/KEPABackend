@@ -1,4 +1,4 @@
-using KEPABackend.DTOs;
+using KEPABackend.DTOs.Post;
 using KEPABackend.Validations;
 
 namespace KEPABackendUnitTests.Validation;

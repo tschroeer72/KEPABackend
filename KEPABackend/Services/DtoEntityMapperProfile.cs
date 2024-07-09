@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KEPABackend.DTOs;
+using KEPABackend.DTOs.Post;
 using KEPABackend.Modell;
 
 namespace KEPABackend.Services;

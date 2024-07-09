@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using KEPABackend.DTOs;
+using KEPABackend.DTOs.Get;
 using KEPABackend.Interfaces;
 using KEPABackend.Modell;
 using KEPABackend.Validations;
@@ -42,11 +42,11 @@ public class MitgliederDBService : IMitgliederDBService
     /// </summary>
     /// /// <param name="bAktiv" true (Default) = nur aktive Mitglieder; false = alle Mitglieder
     /// <returns>Liste aller Mitglieder</returns>
-    public async Task<List<GetMitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
+    public async Task<List<Mitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
     {
         var lst = await DbContext.TblMitglieders
             .Where(w => bAktiv ? w.Ehemaliger == 0 : w.Ehemaliger == 1 || w.Ehemaliger == 0)
-            .Select(s => new GetMitgliederliste
+            .Select(s => new Mitgliederliste
             {
                 ID = s.Id,
                 Anrede = s.Anrede,

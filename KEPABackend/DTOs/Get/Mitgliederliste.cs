@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs;
+namespace KEPABackend.DTOs.Get;
 
-public class GetMitgliederliste
+public class Mitgliederliste
 {
     public int ID { get; set; }
     public string Vorname { get; set; } = default!;

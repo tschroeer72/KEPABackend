@@ -8,6 +8,8 @@ using Moq;
 using Xunit;
 using FluentValidation;
 using KEPABackend.Exceptions;
+using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Post;
 
 namespace KEPABackendUnitTests.Services;
 
@@ -76,16 +78,16 @@ public class MitgliederServiceTests
     public async Task GetAllMitglieder_Success()
     {
         //Arrange
-        var lstMitglieder = new List<GetMitgliederliste>()
+        var lstMitglieder = new List<Mitgliederliste>()
         {
-            new GetMitgliederliste()
+            new Mitgliederliste()
             {
                 ID = 1,
                 Vorname = "Test 1",
                 Nachname = "Test 1",
                 MitgliedSeit = Convert.ToDateTime("2024-01-01 00:00:00")
             },
-            new GetMitgliederliste()
+            new Mitgliederliste()
             {
                 ID = 2,
                 Vorname = "Test 2",
