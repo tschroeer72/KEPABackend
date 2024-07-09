@@ -4,12 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
 
+/// <summary>
+/// API Controller für Mitglieder
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class MitgliederController : ControllerBase
 {
-    public MitgliederService MitgliederService { get; }
+    private MitgliederService MitgliederService { get; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="mitgliederCreateService"></param>
     public MitgliederController(MitgliederService mitgliederCreateService)
     {
         MitgliederService = mitgliederCreateService;

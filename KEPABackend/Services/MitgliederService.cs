@@ -12,13 +12,23 @@ using KEPABackend.DTOs.Post;
 
 namespace KEPABackend.Services;
 
+/// <summary>
+/// Service für Mitglieder
+/// </summary>
 public class MitgliederService
 {
-    public IMitgliederDBService MitgliederDBService { get; }
-    public IMapper Mapper { get; }
-    public MitgliederCreateValidator MitgliederCreateValidator { get; }
-    public MitgliederUpdateValidator MitgliederUpdateValidator { get; }
+    private IMitgliederDBService MitgliederDBService { get; }
+    private IMapper Mapper { get; }
+    private MitgliederCreateValidator MitgliederCreateValidator { get; }
+    private MitgliederUpdateValidator MitgliederUpdateValidator { get; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="mitgliederDBService"></param>
+    /// <param name="mapper"></param>
+    /// <param name="mitgliederCreateValidator"></param>
+    /// <param name="mitgliederUpdateValidator"></param>
     public MitgliederService(IMitgliederDBService mitgliederDBService, IMapper mapper, MitgliederCreateValidator mitgliederCreateValidator, MitgliederUpdateValidator mitgliederUpdateValidator)
     {
         MitgliederDBService = mitgliederDBService;
@@ -53,7 +63,7 @@ public class MitgliederService
     /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>
-    /// <param name="bAktiv" true (Default) = nur aktive Mitglieder; false = alle Mitglieder
+    /// <param name="bAktiv"> true (Default) = nur aktive Mitglieder; false = alle Mitglieder</param>
     /// <returns>Liste aller Mitglieder</returns>
     public async Task<List<Mitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true)
     {

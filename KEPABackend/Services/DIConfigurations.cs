@@ -4,8 +4,15 @@ using KEPABackend.Validations;
 
 namespace KEPABackend.Services;
 
+/// <summary>
+/// Dependency Injection Konfigurationen
+/// </summary>
 public static class DIConfigurations
 {
+    /// <summary>
+    /// Dependency Injection Konfigurationen
+    /// </summary>
+    /// <param name="services"></param>
     public static void RegisterServices(IServiceCollection services)
     {
         services.AddScoped<MitgliederService>();

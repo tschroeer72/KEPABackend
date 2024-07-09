@@ -3,12 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
 
+/// <summary>
+/// API Controller für Meisterschaftstypen
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class MeisterschaftstypController : ControllerBase
 {
-    public MeisterschaftstypService MeisterschaftstypService { get; }
+    private MeisterschaftstypService MeisterschaftstypService { get; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="meisterschaftstypService"></param>
     public MeisterschaftstypController(MeisterschaftstypService meisterschaftstypService)
     {
         MeisterschaftstypService = meisterschaftstypService;

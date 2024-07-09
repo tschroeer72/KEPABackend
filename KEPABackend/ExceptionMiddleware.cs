@@ -5,15 +5,27 @@ using KEPABackend.Exceptions;
 
 namespace KEPABackend;
 
+/// <summary>
+/// Exception Middleware
+/// </summary>
 public class ExceptionMiddleware
 {
     private RequestDelegate Next { get; }
 
+    /// <summary>
+    /// Construtor
+    /// </summary>
+    /// <param name="next"></param>
     public ExceptionMiddleware(RequestDelegate next)
     {
         Next = next;
     }
 
+    /// <summary>
+    /// Invoke
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public async Task Invoke(HttpContext context)
     {
         try

@@ -4,8 +4,14 @@ using KEPABackend.Modell;
 
 namespace KEPABackend.Services;
 
+/// <summary>
+/// Config für AutoMapper
+/// </summary>
 public class DtoEntityMapperProfile : Profile
 {
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public DtoEntityMapperProfile()
     {
         CreateMap<MitgliedCreate, TblMitglieder>().ForMember(dest => dest.Id, opt => opt.Ignore());

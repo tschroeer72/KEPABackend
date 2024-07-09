@@ -11,8 +11,9 @@ public class Meisterschaftstypen
     /// ID
     /// </summary>
     public int ID { get; set; }
+
     /// <summary>
     /// Meisterschaftstyp
     /// </summary>
-    public string Meisterschaftstyp { get; set; }
+    public string Meisterschaftstyp { get; set; } = default!;
 }

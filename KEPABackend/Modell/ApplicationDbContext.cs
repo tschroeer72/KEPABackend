@@ -10,30 +10,97 @@ namespace KEPABackend.Modell
     /// </summary>
     public partial class ApplicationDbContext : DbContext
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ApplicationDbContext()
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options"></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<Tbl9erRatten> Tbl9erRattens { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblDbchangeLog> TblDbchangeLogs { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblMeisterschaften> TblMeisterschaftens { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblMeisterschaftstyp> TblMeisterschaftstyps { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblMitglieder> TblMitglieders { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSetting> TblSettings { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpiel6TageRennen> TblSpiel6TageRennens { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpielBlitztunier> TblSpielBlitztuniers { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpielKombimeisterschaft> TblSpielKombimeisterschafts { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpielMeisterschaft> TblSpielMeisterschafts { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpielPokal> TblSpielPokals { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpielSargKegeln> TblSpielSargKegelns { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblSpieltag> TblSpieltags { get; set; } = null!;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DbSet<TblTeilnehmer> TblTeilnehmers { get; set; } = null!;
 
+
+        /// <summary>
+        /// OnConfiguring
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -42,6 +109,10 @@ namespace KEPABackend.Modell
             }
         }
 
+        /// <summary>
+        /// OnModelCreating
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseCollation("utf8mb4_general_ci")
@@ -603,6 +674,10 @@ namespace KEPABackend.Modell
             OnModelCreatingPartial(modelBuilder);
         }
 
+        /// <summary>
+        /// OnModelCreatingPartial
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

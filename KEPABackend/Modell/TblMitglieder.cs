@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace KEPABackend.Modell
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class TblMitglieder
     {
         public TblMitglieder()
@@ -65,4 +66,5 @@ namespace KEPABackend.Modell
         public virtual ICollection<TblSpielSargKegeln> TblSpielSargKegelns { get; set; }
         public virtual ICollection<TblTeilnehmer> TblTeilnehmers { get; set; }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

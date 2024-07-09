@@ -3,8 +3,14 @@ using KEPABackend.DTOs.Post;
 
 namespace KEPABackend.Validations;
 
+/// <summary>
+/// Validatorklasse für das Aktualisieren von Mitgliedern
+/// </summary>
 public class MitgliederUpdateValidator :AbstractValidator<MitgliedUpdate>
 {
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public MitgliederUpdateValidator()
     {
         RuleFor(mitglied => mitglied.Anrede).MaximumLength(50);

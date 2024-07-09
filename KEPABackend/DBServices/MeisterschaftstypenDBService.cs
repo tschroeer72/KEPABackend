@@ -13,7 +13,7 @@ namespace KEPABackend.DBServices;
 /// </summary>
 public class MeisterschaftstypenDBService : IMeisterschaftstypenDBService
 {
-    public ApplicationDbContext DbContext { get; }
+    private ApplicationDbContext DbContext { get; }
 
     /// <summary>
     /// Constuctur
@@ -40,6 +40,11 @@ public class MeisterschaftstypenDBService : IMeisterschaftstypenDBService
         return lst;
     }
 
+    /// <summary>
+    /// Suche Meisterschaftstyp mit der ID
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>Meisterschaftstyp oder null</returns>
     public async Task<Meisterschaftstypen?> GetMeisterschaftstypByIDAsync(int ID)
     {
         var mt = await DbContext.TblMeisterschaftstyps
