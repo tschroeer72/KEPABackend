@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KEPABackend.Modell
 {
+    /// <summary>
+    /// ApplicationDbContext
+    /// </summary>
     public partial class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()

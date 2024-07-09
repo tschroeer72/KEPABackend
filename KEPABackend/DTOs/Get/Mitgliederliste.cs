@@ -2,6 +2,9 @@
 
 namespace KEPABackend.DTOs.Get;
 
+/// <summary>
+/// DTP GET Mitgliederliste
+/// </summary>
 public class Mitgliederliste
 {
     public int ID { get; set; }

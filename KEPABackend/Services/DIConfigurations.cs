@@ -13,6 +13,9 @@ public static class DIConfigurations
         services.AddScoped<MitgliederUpdateValidator>();
         services.AddScoped<IMitgliederDBService, MitgliederDBService>();
 
+        services.AddScoped<MeisterschaftstypService>();
+        services.AddScoped<IMeisterschaftstypenDBService, MeisterschaftstypenDBService>();
+
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }
 }

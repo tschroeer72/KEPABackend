@@ -64,6 +64,8 @@ public class MitgliederController : ControllerBase
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
+    /// <response code="200">Mitglied gefunden</response>
+    /// <response code="404">Mitglied nicht gefunden</response>
     [HttpGet]
     [Route("GetMitgliedByID")]
     public async Task<ActionResult> GetMitgliedByID(int ID)

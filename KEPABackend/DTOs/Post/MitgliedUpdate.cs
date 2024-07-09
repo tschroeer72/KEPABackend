@@ -31,6 +31,9 @@ namespace KEPABackend.DTOs.Post;
 //    string? TelefonPrivat,
 //    string? TurboDbnummer);
 
+/// <summary>
+/// DTO PUSH MitgliedUpdate
+/// </summary>
 public record MitgliedUpdate
 {
     [Required]

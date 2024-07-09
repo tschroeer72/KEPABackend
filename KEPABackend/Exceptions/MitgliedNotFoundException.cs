@@ -2,6 +2,9 @@
 
 namespace KEPABackend.Exceptions;
 
+/// <summary>
+/// Exception Mitglied not found
+/// </summary>
 [Serializable]
 public class MitgliedNotFoundException : Exception
 {

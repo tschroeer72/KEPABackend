@@ -1,0 +1,56 @@
+﻿using AutoMapper;
+using FluentValidation;
+using KEPABackend.DTOs.Get;
+using KEPABackend.Interfaces;
+using KEPABackend.Modell;
+using KEPABackend.Validations;
+using Microsoft.EntityFrameworkCore;
+
+namespace KEPABackend.DBServices;
+
+/// <summary>
+/// DBService für TblMeisterschaftstypen
+/// </summary>
+public class MeisterschaftstypenDBService : IMeisterschaftstypenDBService
+{
+    public ApplicationDbContext DbContext { get; }
+
+    /// <summary>
+    /// Constuctur
+    /// </summary>
+    /// <param name="dbContext"></param>
+    public MeisterschaftstypenDBService(ApplicationDbContext dbContext)
+    {
+        DbContext = dbContext;
+    }
+
+    /// <summary>
+    /// Service GetAllMeisterschaftstypenAsync
+    /// </summary>
+    /// <returns>Liste aller Meisterschaftstypen</returns>
+    public async Task<List<Meisterschaftstypen>> GetAllMeisterschaftstypenAsync()
+    {
+        var lst = await DbContext.TblMeisterschaftstyps
+            .Select(s => new Meisterschaftstypen
+            {
+                ID = s.Id,
+                Meisterschaftstyp = s.Meisterschaftstyp
+            }).ToListAsync();
+
+        return lst;
+    }
+
+    public async Task<Meisterschaftstypen?> GetMeisterschaftstypByIDAsync(int ID)
+    {
+        var mt = await DbContext.TblMeisterschaftstyps
+            .Where(w => w.Id == ID)
+            .Select(s => new Meisterschaftstypen
+            {
+                ID = s.Id,
+                Meisterschaftstyp = s.Meisterschaftstyp
+            }).SingleOrDefaultAsync();
+
+        return mt;
+    }
+}
+
