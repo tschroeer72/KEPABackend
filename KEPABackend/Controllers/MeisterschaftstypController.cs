@@ -26,7 +26,7 @@ public class MeisterschaftstypController : ControllerBase
     /// </summary>
     /// <returns>Liste aller Meisterschaftstypen</returns>
     [HttpGet]
-    [Route("GetAllMeisterschaftstypenAsync")]
+    [Route("GetAllMeisterschaftstypen")]
     public async Task<ActionResult> GetAllMeisterschaftstypen()
     {
         var result = await MeisterschaftstypService.GetAllMeisterschaftstypenAsync();
@@ -41,7 +41,7 @@ public class MeisterschaftstypController : ControllerBase
     /// <response code="200">Meisterschaftstyp gefunden</response>
     /// <response code="404">Meisterschaftstyp nicht gefunden</response>
     [HttpGet]
-    [Route("GetMeisterschaftstypByIDAsync")]
+    [Route("GetMeisterschaftstypByID")]
     public async Task<ActionResult> GetMeisterschaftstypByID(int ID)
     {
         var result = await MeisterschaftstypService.GetMeisterschaftstypByIDAsync(ID);
