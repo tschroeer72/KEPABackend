@@ -61,6 +61,59 @@ public class MitgliederService
     }
 
     /// <summary>
+    /// Service UpdateMitglied
+    /// </summary>
+    /// <param name="mitgliedUpdate"></param>
+    /// <returns>Geänderte Entity</returns>
+    /// <exception cref="MitgliedNotFoundException"></exception>
+    public async Task<Mitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
+    {
+        try
+        {
+            await MitgliederUpdateValidator.ValidateAndThrowAsync(mitgliedUpdate);
+        }
+        catch (ValidationException ex)
+        {
+            string message = ex.Message;
+            throw;
+        }
+
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID);
+        if (mitglied == null)
+        {
+            throw new MitgliedNotFoundException();
+        }
+
+        Mapper.Map(mitgliedUpdate, mitglied);
+        await MitgliederDBService.UpdateMitgliederAsync();
+
+        var updatedMitglied = new Mitgliederliste()
+        {
+            ID = mitglied.Id,
+            Anrede = mitglied.Anrede,
+            Vorname = mitglied.Vorname,
+            Spitzname = mitglied.Spitzname,
+            Nachname = mitglied.Nachname,
+            Straße = mitglied.Straße,
+            PLZ = mitglied.Plz,
+            Ort = mitglied.Ort,
+            Geburtsdatum = mitglied.Geburtsdatum,
+            MitgliedSeit = mitglied.MitgliedSeit,
+            PassivSeit = mitglied.PassivSeit,
+            AusgeschiedenAm = mitglied.AusgeschiedenAm,
+            Ehemaltiger = mitglied.Ehemaliger,
+            Email = mitglied.Email,
+            TelefonFirma = mitglied.TelefonFirma,
+            TelefonPrivat = mitglied.TelefonPrivat,
+            TelefonMobil = mitglied.TelefonMobil,
+            Fax = mitglied.Fax,
+            Bemerkungen = mitglied.Bemerkungen,
+            Notizen = mitglied.Notizen
+        };
+        return updatedMitglied;
+    }
+
+    /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>
     /// <param name="bAktiv"> true (Default) = nur aktive Mitglieder; false = alle Mitglieder</param>
@@ -111,56 +164,4 @@ public class MitgliederService
         return result;
     }
 
-    /// <summary>
-    /// Service UpdateMitglied
-    /// </summary>
-    /// <param name="mitgliedUpdate"></param>
-    /// <returns>Geänderte Entity</returns>
-    /// <exception cref="MitgliedNotFoundException"></exception>
-    public async Task<Mitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate)
-    {
-        try
-        {
-            await MitgliederUpdateValidator.ValidateAndThrowAsync(mitgliedUpdate);
-        }
-        catch (ValidationException ex)
-        {
-            string message = ex.Message;
-            throw;
-        }
-
-        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID);
-        if(mitglied == null)
-        {
-            throw new MitgliedNotFoundException();
-        }
-
-        Mapper.Map(mitgliedUpdate, mitglied);
-        await MitgliederDBService.UpdateMitgliederAsync();
-
-        var updatedMitglied = new Mitgliederliste()
-        {
-            ID = mitglied.Id,
-            Anrede = mitglied.Anrede,
-            Vorname = mitglied.Vorname,
-            Spitzname = mitglied.Spitzname,
-            Nachname = mitglied.Nachname,
-            Straße = mitglied.Straße,
-            PLZ = mitglied.Plz,
-            Ort = mitglied.Ort,
-            Geburtsdatum = mitglied.Geburtsdatum,
-            MitgliedSeit = mitglied.MitgliedSeit,
-            PassivSeit = mitglied.PassivSeit,
-            AusgeschiedenAm = mitglied.AusgeschiedenAm,
-            Ehemaltiger = mitglied.Ehemaliger,
-            Email = mitglied.Email,
-            TelefonFirma = mitglied.TelefonFirma,
-            TelefonPrivat = mitglied.TelefonPrivat,
-            TelefonMobil = mitglied.TelefonMobil,
-            Fax = mitglied.Fax,
-            Bemerkungen = mitglied.Bemerkungen,
-            Notizen = mitglied.Notizen
-        };
-        return updatedMitglied;
-    }
 }

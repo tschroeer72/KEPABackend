@@ -7,7 +7,7 @@ namespace KEPABackend.Services;
 /// <summary>
 /// Service für MEisterschaftstypen
 /// </summary>
-public class MeisterschaftstypService
+public class MeisterschaftstypenService
 {
     private IMeisterschaftstypenDBService MeisterschaftstypenDBService { get; }
 
@@ -15,7 +15,7 @@ public class MeisterschaftstypService
     /// Constructor
     /// </summary>
     /// <param name="meisterschaftstypenDBService"></param>
-    public MeisterschaftstypService(IMeisterschaftstypenDBService meisterschaftstypenDBService )
+    public MeisterschaftstypenService(IMeisterschaftstypenDBService meisterschaftstypenDBService )
     {
         MeisterschaftstypenDBService = meisterschaftstypenDBService;
     }

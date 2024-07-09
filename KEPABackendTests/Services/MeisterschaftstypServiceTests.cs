@@ -34,7 +34,7 @@ public class MeisterschaftstypServiceTests
         };
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
         meisterschaftstypenDBServiceMock.Setup(mock => mock.GetAllMeisterschaftstypenAsync()).ReturnsAsync(lstMeisterschaftstypen);
-        var meisterschaftstypService = new MeisterschaftstypService(meisterschaftstypenDBServiceMock.Object);
+        var meisterschaftstypService = new MeisterschaftstypenService(meisterschaftstypenDBServiceMock.Object);
 
         //Act
         var result = await meisterschaftstypService.GetAllMeisterschaftstypenAsync();
@@ -54,7 +54,7 @@ public class MeisterschaftstypServiceTests
         };
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
         meisterschaftstypenDBServiceMock.Setup(mock => mock.GetMeisterschaftstypByIDAsync(1)).ReturnsAsync(meisterschaftstyp);
-        var meisterschaftstypService = new MeisterschaftstypService(meisterschaftstypenDBServiceMock.Object);
+        var meisterschaftstypService = new MeisterschaftstypenService(meisterschaftstypenDBServiceMock.Object);
 
         //Act
         var result = await meisterschaftstypService.GetMeisterschaftstypByIDAsync(meisterschaftstyp.ID);
@@ -68,7 +68,7 @@ public class MeisterschaftstypServiceTests
     {
         //Arrange
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
-        var mitgliederService = new MeisterschaftstypService(meisterschaftstypenDBServiceMock.Object);
+        var mitgliederService = new MeisterschaftstypenService(meisterschaftstypenDBServiceMock.Object);
 
         //Act
         Func<Task> func = async () => await mitgliederService.GetMeisterschaftstypByIDAsync(It.IsAny<int>());

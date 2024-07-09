@@ -115,8 +115,7 @@ namespace KEPABackend.Modell
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("utf8mb4_general_ci")
-                .HasCharSet("utf8mb4");
+            modelBuilder.UseCollation("utf8mb4_general_ci").HasCharSet("utf8mb4");
 
             modelBuilder.Entity<Tbl9erRatten>(entity =>
             {
@@ -174,14 +173,16 @@ namespace KEPABackend.Modell
 
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
-                    .ValueGeneratedNever()
                     .HasColumnName("ID");
 
                 entity.Property(e => e.Aktiv).HasColumnType("int(11)");
 
-                entity.Property(e => e.Beginn).HasColumnType("datetime");
+                entity.Property(e => e.Beginn)
+                    .IsRequired()
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Bezeichnung)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .UseCollation("utf8_general_ci")
                     .HasCharSet("utf8");

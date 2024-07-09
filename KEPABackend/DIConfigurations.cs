@@ -22,8 +22,12 @@ public static class DIConfigurations
         services.AddScoped<MitgliederUpdateValidator>();
         services.AddScoped<IMitgliederDBService, MitgliederDBService>();
 
-        services.AddScoped<MeisterschaftstypService>();
+        services.AddScoped<MeisterschaftstypenService>();
         services.AddScoped<IMeisterschaftstypenDBService, MeisterschaftstypenDBService>();
+
+        services.AddScoped<MeisterschaftService>();
+        services.AddScoped<MeisterschaftCreateValidator>();
+        services.AddScoped<IMeisterschaftsDBService, MeisterschaftDBService>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }

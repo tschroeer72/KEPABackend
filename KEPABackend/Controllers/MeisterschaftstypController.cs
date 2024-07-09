@@ -10,15 +10,15 @@ namespace KEPABackend.Controllers;
 [Route("api/[controller]")]
 public class MeisterschaftstypController : ControllerBase
 {
-    private MeisterschaftstypService MeisterschaftstypService { get; }
+    private MeisterschaftstypenService MeisterschaftstypService { get; }
 
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="meisterschaftstypService"></param>
-    public MeisterschaftstypController(MeisterschaftstypService meisterschaftstypService)
+    /// <param name="meisterschaftService"></param>
+    public MeisterschaftstypController(MeisterschaftstypenService meisterschaftService)
     {
-        MeisterschaftstypService = meisterschaftstypService;
+        MeisterschaftstypService = meisterschaftService;
     }
 
     /// <summary>

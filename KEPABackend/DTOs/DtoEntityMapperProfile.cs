@@ -16,5 +16,7 @@ public class DtoEntityMapperProfile : Profile
     {
         CreateMap<MitgliedCreate, TblMitglieder>().ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<MitgliedUpdate, TblMitglieder>().ForMember(dest => dest.Id, opt => opt.Ignore());
+
+        CreateMap<MeisterschaftCreate, TblMeisterschaften>().ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }
