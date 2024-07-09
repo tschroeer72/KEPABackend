@@ -1,8 +1,10 @@
 ﻿using KEPABackend.Interfaces;
 using KEPABackend.DBServices;
 using KEPABackend.Validations;
+using KEPABackend.Services;
+using KEPABackend.DTOs;
 
-namespace KEPABackend.Services;
+namespace KEPABackend;
 
 /// <summary>
 /// Dependency Injection Konfigurationen

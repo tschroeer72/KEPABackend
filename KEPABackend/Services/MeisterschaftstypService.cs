@@ -24,7 +24,7 @@ public class MeisterschaftstypService
     /// Liste aller Meisterschaftstypen
     /// </summary>
     /// <returns>Liste aller Meisterschaftstypen</returns>
-    public async Task<List<Meisterschaftstypen>> GetAllMeisterschaftstypen()
+    public async Task<List<Meisterschaftstypen>> GetAllMeisterschaftstypenAsync()
     {
         return await MeisterschaftstypenDBService.GetAllMeisterschaftstypenAsync();
     }
@@ -35,7 +35,7 @@ public class MeisterschaftstypService
     /// <param name="ID"></param>
     /// <returns>Meisterschaftstyp oder null</returns>
     /// <exception cref="MeisterschaftstypNotFoundException"></exception>
-    public async Task<Meisterschaftstypen?> GetMeisterschaftstypByID(int ID)
+    public async Task<Meisterschaftstypen> GetMeisterschaftstypByIDAsync(int ID)
     {
         Meisterschaftstypen? mt = await MeisterschaftstypenDBService.GetMeisterschaftstypByIDAsync(ID);
 

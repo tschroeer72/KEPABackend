@@ -2,7 +2,7 @@
 using KEPABackend.DTOs.Post;
 using KEPABackend.Modell;
 
-namespace KEPABackend.Services;
+namespace KEPABackend.DTOs;
 
 /// <summary>
 /// Config für AutoMapper
