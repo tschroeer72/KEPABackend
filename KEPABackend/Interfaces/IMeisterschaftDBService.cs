@@ -5,7 +5,7 @@ namespace KEPABackend.Interfaces;
 /// <summary>
 /// Interface IMeisterschaftsDBService
 /// </summary>
-public interface IMeisterschaftsDBService
+public interface IMeisterschaftDBService
 {
     /// <summary>
     /// Service CreateMeisterschaftAsync

@@ -37,9 +37,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-DIConfigurations.RegisterServices(builder.Services);
 builder.Services.AddDbContext<ApplicationDbContext>();
-
+DIConfigurations.RegisterServices(builder.Services);
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();

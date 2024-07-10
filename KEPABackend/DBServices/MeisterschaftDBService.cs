@@ -6,7 +6,7 @@ namespace KEPABackend.DBServices;
 /// <summary>
 /// DB Service für TblMeisterschaften
 /// </summary>
-public class MeisterschaftDBService : IMeisterschaftsDBService
+public class MeisterschaftDBService : IMeisterschaftDBService
 {
     private ApplicationDbContext DbContext { get; }
 

@@ -187,7 +187,7 @@ public class MitgliederServiceTests
     }
 
     [Fact]
-    public void MitgliedNotFoundExeption_For_Non_Existing_ID()
+    public void MitgliedNotFoundExeption_For_UpdateMitglied_with_Non_Existing_ID()
     {
         //Arrange
         var mitgliedUpdate = new MitgliedUpdate()

@@ -29,11 +29,12 @@ public class MeisterschaftController : ControllerBase
     /// <returns>MeisterschaftsID</returns>
     /// <response code="200">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="404">MeisterschaftstypNotFoundException</response>
     [HttpPost]
     [Route("Create")]
     public async Task<ActionResult> CreateMeisterschaft(MeisterschaftCreate meisterschaftCreate)
     {
-        var result = await MeisterschaftService.CreateMeisterschaft(meisterschaftCreate);
+        var result = await MeisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
         return Ok(result);
     }
 }

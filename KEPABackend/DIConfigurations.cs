@@ -17,17 +17,17 @@ public static class DIConfigurations
     /// <param name="services"></param>
     public static void RegisterServices(IServiceCollection services)
     {
-        services.AddScoped<MitgliederService>();
-        services.AddScoped<MitgliederCreateValidator>();
-        services.AddScoped<MitgliederUpdateValidator>();
-        services.AddScoped<IMitgliederDBService, MitgliederDBService>();
+        services.AddTransient<IMitgliederDBService, MitgliederDBService>();
+        services.AddTransient<MitgliederService>();
+        services.AddTransient<MitgliederCreateValidator>();
+        services.AddTransient<MitgliederUpdateValidator>();
 
-        services.AddScoped<MeisterschaftstypenService>();
-        services.AddScoped<IMeisterschaftstypenDBService, MeisterschaftstypenDBService>();
+        services.AddTransient<IMeisterschaftstypenDBService, MeisterschaftstypenDBService>();
+        services.AddTransient<MeisterschaftstypenService>();
 
-        services.AddScoped<MeisterschaftService>();
-        services.AddScoped<MeisterschaftCreateValidator>();
-        services.AddScoped<IMeisterschaftsDBService, MeisterschaftDBService>();
+        services.AddTransient<IMeisterschaftDBService, MeisterschaftDBService>();
+        services.AddTransient<MeisterschaftService>();
+        services.AddTransient<MeisterschaftCreateValidator>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }
