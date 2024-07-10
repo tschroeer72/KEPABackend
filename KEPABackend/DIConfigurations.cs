@@ -1,8 +1,8 @@
-﻿using KEPABackend.Interfaces;
-using KEPABackend.DBServices;
+﻿using KEPABackend.DBServices;
 using KEPABackend.Validations;
 using KEPABackend.Services;
 using KEPABackend.DTOs;
+using KEPABackend.Interfaces.DBServices;
 
 namespace KEPABackend;
 

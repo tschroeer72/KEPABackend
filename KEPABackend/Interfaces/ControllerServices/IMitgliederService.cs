@@ -1,31 +1,32 @@
 ﻿using KEPABackend.DTOs.Get;
-using KEPABackend.Modell;
+using KEPABackend.DTOs.Post;
 
-namespace KEPABackend.Interfaces;
+namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
 /// Interface 
 /// </summary>
-public interface IMitgliederDBService
+public interface IMitgliederService
 {
     /// <summary>
     /// Service CreateMitgliederAsync
     /// </summary>
-    /// <param name="mitglied"></param>
+    /// <param name="mitgliedCreate"></param>
     /// <returns>ID der neuen Entität</returns>
-    Task<long> CreateMitgliederAsync(TblMitglieder mitglied);
+    Task<long> CreateMitgliederAsync(MitgliedCreate mitgliedCreate);
 
     /// <summary>
-    /// Speichert die Änderungen in der DB
+    /// Service UpdateMitglied
     /// </summary>
-    /// <returns>void</returns>
-    Task UpdateMitgliederAsync();
+    /// <param name="mitgliedUpdate"></param>
+    /// <returns>Geänderte Entity</returns>
+    Task<Mitgliederliste> UpdateMitgliederAsync(MitgliedUpdate mitgliedUpdate);
+
     /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>
-    /// <param name="bAktiv">true (Default) = nur aktive Mitglieder; false = alle Mitglieder</param>
+    /// <param name="bAktiv"> true (Default) = nur aktive Mitglieder; false = alle Mitglieder</param>
     /// <returns>Liste aller Mitglieder</returns>
-    /// 
     Task<List<Mitgliederliste>> GetAllMitgliederAsync(bool bAktiv = true);
 
     /// <summary>
@@ -33,5 +34,5 @@ public interface IMitgliederDBService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>Mitglied mit der ID </returns>
-    Task<TblMitglieder?> GetMitgliedByIDAsync(int ID);
+    Task<Mitgliederliste> GetMitgliedByIDAsync(int ID);
 }

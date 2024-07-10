@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using KEPABackend.DTOs.Get;
 using KEPABackend.Exceptions;
-using KEPABackend.Interfaces;
+using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Services;
 using KEPABackend.Validations;
 using Moq;

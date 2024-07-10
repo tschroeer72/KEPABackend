@@ -1,7 +1,7 @@
 ﻿using KEPABackend.DTOs.Get;
 using KEPABackend.Modell;
 
-namespace KEPABackend.Interfaces;
+namespace KEPABackend.Interfaces.DBServices;
 
 /// <summary>
 /// Interface IMeisterschaftstypenDBService

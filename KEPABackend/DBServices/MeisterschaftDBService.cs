@@ -1,4 +1,4 @@
-﻿using KEPABackend.Interfaces;
+﻿using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
 
 namespace KEPABackend.DBServices;

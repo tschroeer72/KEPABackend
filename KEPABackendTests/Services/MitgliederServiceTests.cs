@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using KEPABackend.DTOs;
-using KEPABackend.Interfaces;
 using KEPABackend.Modell;
 using KEPABackend.Services;
 using KEPABackend.Validations;
@@ -10,6 +9,7 @@ using FluentValidation;
 using KEPABackend.Exceptions;
 using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
+using KEPABackend.Interfaces.DBServices;
 
 namespace KEPABackendUnitTests.Services;
 

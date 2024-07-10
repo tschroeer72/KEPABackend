@@ -1,13 +1,14 @@
 ﻿using KEPABackend.DTOs.Get;
 using KEPABackend.Exceptions;
-using KEPABackend.Interfaces;
+using KEPABackend.Interfaces.ControllerServices;
+using KEPABackend.Interfaces.DBServices;
 
 namespace KEPABackend.Services;
 
 /// <summary>
 /// Service für MEisterschaftstypen
 /// </summary>
-public class MeisterschaftstypenService
+public class MeisterschaftstypenService : IMeisterschaftstypenService
 {
     private IMeisterschaftstypenDBService MeisterschaftstypenDBService { get; }
 

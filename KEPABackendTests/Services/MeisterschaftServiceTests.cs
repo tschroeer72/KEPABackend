@@ -5,7 +5,7 @@ using KEPABackend.DTOs;
 using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
-using KEPABackend.Interfaces;
+using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
 using KEPABackend.Services;
 using KEPABackend.Validations;

@@ -4,7 +4,8 @@ using KEPABackend.DBServices;
 using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
-using KEPABackend.Interfaces;
+using KEPABackend.Interfaces.ControllerServices;
+using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
 using KEPABackend.Validations;
 
@@ -13,7 +14,7 @@ namespace KEPABackend.Services;
 /// <summary>
 /// Service für MEisterschaften
 /// </summary>
-public class MeisterschaftService
+public class MeisterschaftService : IMeisterschaftService
 {
     private IMeisterschaftDBService MeisterschaftsDBService { get; }
     private IMapper Mapper { get; }

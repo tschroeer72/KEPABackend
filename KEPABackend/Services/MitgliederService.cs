@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using KEPABackend.Exceptions;
-using KEPABackend.Interfaces;
 using KEPABackend.Modell;
 using KEPABackend.DBServices;
 using KEPABackend.Validations;
@@ -9,13 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization;
 using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
+using KEPABackend.Interfaces.DBServices;
+using KEPABackend.Interfaces.ControllerServices;
 
 namespace KEPABackend.Services;
 
 /// <summary>
 /// Service für Mitglieder
 /// </summary>
-public class MitgliederService
+public class MitgliederService : IMitgliederService
 {
     private IMitgliederDBService MitgliederDBService { get; }
     private IMapper Mapper { get; }
@@ -78,12 +79,7 @@ public class MitgliederService
             throw;
         }
 
-        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID);
-        if (mitglied == null)
-        {
-            throw new MitgliedNotFoundException();
-        }
-
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID) ?? throw new MitgliedNotFoundException();
         Mapper.Map(mitgliedUpdate, mitglied);
         await MitgliederDBService.UpdateMitgliederAsync();
 
@@ -131,13 +127,7 @@ public class MitgliederService
     public async Task<Mitgliederliste> GetMitgliedByIDAsync(int ID)
     {
 
-        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID);
-
-        if (mitglied == null)
-        {
-            throw new MitgliedNotFoundException();
-        }
-
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(ID) ?? throw new MitgliedNotFoundException();
         var result = new Mitgliederliste()
         {
             ID = mitglied.Id,
