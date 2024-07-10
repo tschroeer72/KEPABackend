@@ -26,7 +26,7 @@ public class MitgliederController : ControllerBase
     /// Anlegen eines neuen Mitglieds
     /// </summary>
     /// <param name="mitgliedCreate"></param>
-    /// <returns></returns>
+    /// <returns>die geänderte Entität</returns>
     /// <response code="200">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
     [HttpPost]

@@ -20,6 +20,7 @@ public interface IMitgliederDBService
     /// </summary>
     /// <returns>void</returns>
     Task UpdateMitgliederAsync();
+
     /// <summary>
     /// Service GetAllMitgliederAsync
     /// </summary>

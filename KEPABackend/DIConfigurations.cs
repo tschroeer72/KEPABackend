@@ -28,6 +28,7 @@ public static class DIConfigurations
         services.AddTransient<IMeisterschaftDBService, MeisterschaftDBService>();
         services.AddTransient<MeisterschaftService>();
         services.AddTransient<MeisterschaftCreateValidator>();
+        services.AddTransient<MeisterschaftUpdateValidator>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }

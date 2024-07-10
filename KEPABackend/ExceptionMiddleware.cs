@@ -57,9 +57,26 @@ public class ExceptionMiddleware
             var problemDetails = new ProblemDetails()
             {
                 Status = StatusCodes.Status404NotFound,
-                Detail = ex.Message,
+                Detail = "",
                 Instance = "",
                 Title = "Meisterschaftstyp nicht gefunden !",
+                Type = ""
+            };
+
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
+        catch (MeisterschaftNotFoundException ex)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+            var problemDetails = new ProblemDetails()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Detail = "",
+                Instance = "",
+                Title = "Meisterschaft nicht gefunden !",
                 Type = ""
             };
 

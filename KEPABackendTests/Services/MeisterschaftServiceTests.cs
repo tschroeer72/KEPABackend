@@ -22,11 +22,13 @@ public class MeisterschaftServiceTests
 {
     private IMapper Mapper { get; }
     private MeisterschaftCreateValidator MeisterschaftCreateValidator {  get; }
+    private MeisterschaftUpdateValidator MeisterschaftUpdateValidator { get; }
 
     public MeisterschaftServiceTests()
     {
         Mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
         MeisterschaftCreateValidator = new MeisterschaftCreateValidator();
+        MeisterschaftUpdateValidator = new MeisterschaftUpdateValidator();
     }
 
     [Fact]
@@ -56,7 +58,12 @@ public class MeisterschaftServiceTests
         meisterschaftstypenDBServiceMock.Setup(mock => mock.GetAllMeisterschaftstypenAsync()).ReturnsAsync(lstMeisterschaftstypen);
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         meisterschaftDBServiceMock.Setup(mock => mock.CreateMeisterschaftAsync(It.IsAny<TblMeisterschaften>())).ReturnsAsync(1);
-        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator);
+        var meisterschaftService = new MeisterschaftService(
+            meisterschaftstypenDBServiceMock.Object, 
+            meisterschaftDBServiceMock.Object, 
+            Mapper, 
+            MeisterschaftCreateValidator, 
+            MeisterschaftUpdateValidator);
 
         //Act
         var result = await meisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
@@ -91,7 +98,12 @@ public class MeisterschaftServiceTests
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
         meisterschaftstypenDBServiceMock.Setup(mock => mock.GetAllMeisterschaftstypenAsync()).ReturnsAsync(lstMeisterschaftstypen);
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
-        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator);
+        var meisterschaftService = new MeisterschaftService(
+            meisterschaftstypenDBServiceMock.Object, 
+            meisterschaftDBServiceMock.Object, 
+            Mapper, 
+            MeisterschaftCreateValidator,
+            MeisterschaftUpdateValidator);
 
         //Act
         try
@@ -133,7 +145,12 @@ public class MeisterschaftServiceTests
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
         meisterschaftstypenDBServiceMock.Setup(mock => mock.GetAllMeisterschaftstypenAsync()).ReturnsAsync(lstMeisterschaftstypen);
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
-        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator);
+        var meisterschaftService = new MeisterschaftService(
+            meisterschaftstypenDBServiceMock.Object, 
+            meisterschaftDBServiceMock.Object, 
+            Mapper, 
+            MeisterschaftCreateValidator,
+            MeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await meisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
