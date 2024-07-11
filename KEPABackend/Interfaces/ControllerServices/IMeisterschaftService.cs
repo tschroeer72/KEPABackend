@@ -14,7 +14,7 @@ public interface IMeisterschaftService
     /// </summary>
     /// <param name="meisterschaftCreate"></param>
     /// <returns>ID der neuen Meisterschaft</returns>
-    Task<long> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate);
+    Task<int> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate);
 
     /// <summary>
     /// Service Update Meisterschaft
@@ -35,4 +35,18 @@ public interface IMeisterschaftService
     /// <param name="ID"></param>
     /// <returns></returns>
     Task<Meisterschaft> GetMeisterschaftByIDAsync(int ID);
+
+    /// <summary>
+    /// Teilnehmer zu einer Meisterschaft hinzufügen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    Task AddTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID);
+
+    /// <summary>
+    /// Teilnehmer aus einer Meisterschaft löschen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    Task DeleteTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID);
 }

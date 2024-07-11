@@ -44,7 +44,7 @@ public class MitgliederService : IMitgliederService
     /// </summary>
     /// <param name="mitgliedCreate"></param>
     /// <returns>ID der neuen Entität</returns>
-    public async Task<long> CreateMitgliederAsync(MitgliedCreate mitgliedCreate)
+    public async Task<int> CreateMitgliederAsync(MitgliedCreate mitgliedCreate)
     {
         try
         {
@@ -57,7 +57,7 @@ public class MitgliederService : IMitgliederService
         }
 
         var mitglied = Mapper.Map<TblMitglieder>(mitgliedCreate);
-        long lngID = await MitgliederDBService.CreateMitgliederAsync(mitglied);
+        int lngID = await MitgliederDBService.CreateMitgliederAsync(mitglied);
         return lngID;
     }
 

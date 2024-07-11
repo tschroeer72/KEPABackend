@@ -18,10 +18,11 @@ namespace KEPABackend.Services;
 public class MeisterschaftService : IMeisterschaftService
 {
     private IMeisterschaftstypenDBService MeisterschaftstypenDBService { get; }
-    private IMeisterschaftDBService MeisterschaftsDBService { get; }
+    private IMeisterschaftDBService MeisterschaftDBService { get; }
     private IMapper Mapper { get; }
     private MeisterschaftCreateValidator MeisterschaftCreateValidator { get; }
     private MeisterschaftUpdateValidator MeisterschaftUpdateValidator { get; }
+    private IMitgliederDBService MitgliederDBService { get; }
 
     /// <summary>
     /// Constructor
@@ -31,14 +32,16 @@ public class MeisterschaftService : IMeisterschaftService
         IMeisterschaftDBService meisterschaftsDBService, 
         IMapper Mapper, 
         MeisterschaftCreateValidator meisterschaftCreateValidator,
-        MeisterschaftUpdateValidator meisterschaftUpdateValidator
+        MeisterschaftUpdateValidator meisterschaftUpdateValidator,
+        IMitgliederDBService mitgliederDBService
         )
     {
         MeisterschaftstypenDBService = meisterschaftstypenDBService;
-        MeisterschaftsDBService = meisterschaftsDBService;
+        MeisterschaftDBService = meisterschaftsDBService;
         this.Mapper = Mapper;
         MeisterschaftCreateValidator = meisterschaftCreateValidator;
         MeisterschaftUpdateValidator = meisterschaftUpdateValidator;
+        MitgliederDBService = mitgliederDBService;
     }
 
     /// <summary>
@@ -46,7 +49,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// </summary>
     /// <param name="meisterschaftCreate"></param>
     /// <returns>ID der neuen Meisterschaft</returns>
-    public async Task<long> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate)
+    public async Task<int> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate)
     {
         try
         {
@@ -66,7 +69,7 @@ public class MeisterschaftService : IMeisterschaftService
         }
 
         var meisterschaft = Mapper.Map<TblMeisterschaften>(meisterschaftCreate);
-        long lngID = await MeisterschaftsDBService.CreateMeisterschaftAsync(meisterschaft);
+        int lngID = await MeisterschaftDBService.CreateMeisterschaftAsync(meisterschaft);
         return lngID;
     }
 
@@ -87,7 +90,7 @@ public class MeisterschaftService : IMeisterschaftService
             throw;
         }
 
-        TblMeisterschaften? meisterschaft = await MeisterschaftsDBService.GetMeisterschaftByIDAsync(meisterschaftUpdate.ID) ?? throw new MeisterschaftNotFoundException();
+        TblMeisterschaften? meisterschaft = await MeisterschaftDBService.GetMeisterschaftByIDAsync(meisterschaftUpdate.ID) ?? throw new MeisterschaftNotFoundException();
 
         List<Meisterschaftstypen> lstMT = await MeisterschaftstypenDBService.GetAllMeisterschaftstypenAsync();
         Meisterschaftstypen? find = lstMT.Find(f => f.ID == meisterschaftUpdate.MeisterschaftstypID);
@@ -97,7 +100,7 @@ public class MeisterschaftService : IMeisterschaftService
         }
 
         Mapper.Map(meisterschaftUpdate, meisterschaft);
-        await MeisterschaftsDBService.UpdateMeisterschaftAsync();
+        await MeisterschaftDBService.UpdateMeisterschaftAsync();
 
         var updatedMeisterschaft = new Meisterschaft()
         {
@@ -118,7 +121,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// <returns>Liste aller Meisterschaften</returns>
     public async Task<List<Meisterschaft>> GetAllMeisterschaftenAsync()
     {
-        return await MeisterschaftsDBService.GetAllMeisterschaften();
+        return await MeisterschaftDBService.GetAllMeisterschaften();
     }
 
     /// <summary>
@@ -128,7 +131,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// <returns></returns>
     public async Task<Meisterschaft> GetMeisterschaftByIDAsync(int ID)
     {
-        TblMeisterschaften? meisterschaft = await MeisterschaftsDBService.GetMeisterschaftByIDAsync(ID) ?? throw new MeisterschaftNotFoundException();
+        TblMeisterschaften? meisterschaft = await MeisterschaftDBService.GetMeisterschaftByIDAsync(ID) ?? throw new MeisterschaftNotFoundException();
         var result = new Meisterschaft()
         {
             ID = meisterschaft.Id,
@@ -140,5 +143,35 @@ public class MeisterschaftService : IMeisterschaftService
             Bemerkungen = meisterschaft.Bemerkungen
         };
         return result;
+    }
+
+    /// <summary>
+    /// Teilnehmer zu einer Meisterschaft hinzufügen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    public async Task AddTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID)
+    {
+        TblMeisterschaften? meisterschaft = await MeisterschaftDBService.GetMeisterschaftByIDAsync(MeisterschaftID) ?? throw new MeisterschaftNotFoundException();
+
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(TeilnehmerID) ?? throw new MitgliedNotFoundException();
+
+        await MeisterschaftDBService.AddTeilnehmerAsync(MeisterschaftID, TeilnehmerID);
+        return; 
+    }
+
+    /// <summary>
+    /// Teilnehmer aus einer Meisterschaft löschen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    public async Task DeleteTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID)
+    {
+        TblMeisterschaften? meisterschaft = await MeisterschaftDBService.GetMeisterschaftByIDAsync(MeisterschaftID) ?? throw new MeisterschaftNotFoundException();
+
+        TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(TeilnehmerID) ?? throw new MitgliedNotFoundException();
+
+        await MeisterschaftDBService.DeleteTeilnehmerAsync(MeisterschaftID, TeilnehmerID);
+        return;
     }
 }

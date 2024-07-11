@@ -11,7 +11,7 @@ public record MeisterschaftUpdate
     /// ID
     /// </summary>
     [Required]
-    public long ID { get; set; }
+    public int ID { get; set; }
 
     /// <summary>
     /// Bezeichnung
@@ -35,7 +35,7 @@ public record MeisterschaftUpdate
     /// <summary>
     /// MeisterschaftstypID
     /// </summary>
-    public long MeisterschaftstypID { get; set; }
+    public int MeisterschaftstypID { get; set; }
 
     /// <summary>
     /// Bemerkungen

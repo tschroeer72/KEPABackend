@@ -13,7 +13,7 @@ public interface IMitgliederDBService
     /// </summary>
     /// <param name="mitglied"></param>
     /// <returns>ID der neuen Entität</returns>
-    Task<long> CreateMitgliederAsync(TblMitglieder mitglied);
+    Task<int> CreateMitgliederAsync(TblMitglieder mitglied);
 
     /// <summary>
     /// Speichert die Änderungen in der DB

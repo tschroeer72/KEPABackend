@@ -80,4 +80,36 @@ public class MeisterschaftController : ControllerBase
         var result = await MeisterschaftService.GetMeisterschaftByIDAsync(ID);
         return Ok(result);
     }
+
+    /// <summary>
+    /// Teilnehmer zu einer Meisterschaft hinzufügen
+    /// </summary>
+    /// <param name="MeisterschaftsID"></param>
+    /// <param name="TeilnehmerID"></param>
+    /// <returns></returns>
+    /// /// <response code="200">Hinzufügen erfolgreich</response>
+    /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
+    [HttpPost]
+    [Route("AddTeilnehmer")]
+    public async Task<ActionResult> AddTeilnehmer(int MeisterschaftsID, int TeilnehmerID)
+    {
+        await MeisterschaftService.AddTeilnehmerAsync(MeisterschaftsID, TeilnehmerID);
+        return Ok();
+    }
+
+    /// <summary>
+    /// Teilnehmer aus einer Meisterschaft löschen
+    /// </summary>
+    /// <param name="MeisterschaftsID"></param>
+    /// <param name="TeilnehmerID"></param>
+    /// <returns></returns>
+    /// /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
+    [HttpPost]
+    [Route("DeleteTeilnehmer")]
+    public async Task<ActionResult> DeleteTeilnehmer(int MeisterschaftsID, int TeilnehmerID)
+    {
+        await MeisterschaftService.DeleteTeilnehmerAsync(MeisterschaftsID, TeilnehmerID);
+        return Ok();
+    }
 }

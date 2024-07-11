@@ -26,11 +26,11 @@ public class MeisterschaftDBService : IMeisterschaftDBService
     /// </summary>
     /// <param name="meisterschaft"></param>
     /// <returns>ID der neuen Meisterschaft</returns>
-    public async Task<long> CreateMeisterschaftAsync(TblMeisterschaften meisterschaft)
+    public async Task<int> CreateMeisterschaftAsync(TblMeisterschaften meisterschaft)
     {
         await DbContext.TblMeisterschaftens.AddAsync(meisterschaft);
         await DbContext.SaveChangesAsync();
-        long lngID = meisterschaft.Id;
+        int lngID = meisterschaft.Id;
         return lngID;
     }
 
@@ -43,13 +43,12 @@ public class MeisterschaftDBService : IMeisterschaftDBService
         await DbContext.SaveChangesAsync();
     }
 
-
     /// <summary>
     /// Service GetMeisterschaftByIDAsync
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>Meisterschaft mit der ID </returns>
-    public async Task<TblMeisterschaften?> GetMeisterschaftByIDAsync(long ID)
+    public async Task<TblMeisterschaften?> GetMeisterschaftByIDAsync(int ID)
     {
         var meisterschaft = await DbContext.TblMeisterschaftens
             .Where(w => w.Id == ID)
@@ -79,5 +78,37 @@ public class MeisterschaftDBService : IMeisterschaftDBService
             .ToListAsync();
 
         return lstMeisterschaften;
+    }
+
+    /// <summary>
+    /// Teilnehmer zu einer Meisterschaft hinzufügen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    public async Task AddTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID)
+    {
+        TblTeilnehmer objTeilnehmer = new TblTeilnehmer();
+        objTeilnehmer.MeisterschaftsId = (int)MeisterschaftID;
+        objTeilnehmer.SpielerId = (int)TeilnehmerID;
+        await DbContext.TblTeilnehmers.AddAsync(objTeilnehmer);
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Teilnehmer aus einer Meisterschaft löschen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    public async Task DeleteTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID)
+    {
+        TblTeilnehmer? teilnehmer = await DbContext.TblTeilnehmers
+            .Where(w => w.MeisterschaftsId == MeisterschaftID && w.SpielerId == TeilnehmerID)
+            .SingleOrDefaultAsync();
+
+        if(teilnehmer != null)
+        {
+            DbContext.TblTeilnehmers.Remove(teilnehmer);
+            await DbContext.SaveChangesAsync();
+        }
     }
 }

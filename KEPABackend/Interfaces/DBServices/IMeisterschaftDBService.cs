@@ -13,7 +13,7 @@ public interface IMeisterschaftDBService
     /// </summary>
     /// <param name="meisterschaft"></param>
     /// <returns>ID der neuen Entität</returns>
-    Task<long> CreateMeisterschaftAsync(TblMeisterschaften meisterschaft);
+    Task<int> CreateMeisterschaftAsync(TblMeisterschaften meisterschaft);
 
     /// <summary>
     /// Speichert die Änderungen in der DB
@@ -32,5 +32,19 @@ public interface IMeisterschaftDBService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>Meisterschaft mit der ID </returns>
-    Task<TblMeisterschaften?> GetMeisterschaftByIDAsync(long ID);
+    Task<TblMeisterschaften?> GetMeisterschaftByIDAsync(int ID);
+
+    /// <summary>
+    /// Teilnehmer zu einer Meisterschaft hinzufügen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    Task AddTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID);
+
+    /// <summary>
+    /// Teilnehmer aus einer Meisterschaft löschen
+    /// </summary>
+    /// <param name="MeisterschaftID"></param>
+    /// <param name="TeilnehmerID"></param>
+    Task DeleteTeilnehmerAsync(int MeisterschaftID, int TeilnehmerID);
 }

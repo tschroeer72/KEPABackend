@@ -32,7 +32,7 @@ public class Meisterschaft
     /// <summary>
     /// MeisterschaftstypID
     /// </summary>
-    public long MeisterschaftstypID { get; set; }
+    public int MeisterschaftstypID { get; set; }
 
     /// <summary>
     /// TurboDB ID

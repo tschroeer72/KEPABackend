@@ -32,7 +32,7 @@ public class ExceptionMiddleware
         {
             await Next(context);
         }
-        catch (MitgliedNotFoundException ex)
+        catch (MitgliedNotFoundException)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
@@ -40,7 +40,7 @@ public class ExceptionMiddleware
             var problemDetails = new ProblemDetails()
             {
                 Status = StatusCodes.Status404NotFound,
-                Detail = ex.Message,
+                Detail = "",
                 Instance = "",
                 Title = "Mitglied nicht gefunden !",
                 Type = ""

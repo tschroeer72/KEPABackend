@@ -29,12 +29,12 @@ public class MitgliederDBService : IMitgliederDBService
     /// </summary>
     /// <param name="mitglied"></param>
     /// <returns>ID der neuen Entität</returns>
-    public async Task<long> CreateMitgliederAsync(TblMitglieder mitglied)
+    public async Task<int> CreateMitgliederAsync(TblMitglieder mitglied)
     {
         
         await DbContext.TblMitglieders.AddAsync(mitglied);
         await DbContext.SaveChangesAsync();
-        long lngID = mitglied.Id;
+        int lngID = mitglied.Id;
         return lngID;
     }
 
