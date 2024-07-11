@@ -27,7 +27,7 @@ public class MitgliederServiceTests
     }
 
     [Fact]
-    public async Task Mitglied_Created()
+    public async Task Mitglied_Created_Success()
     {
         //Arrange
         var mitgliedCreate = new MitgliedCreate()
@@ -143,7 +143,7 @@ public class MitgliederServiceTests
     }
 
     [Fact]
-    public async Task Mitglied_Updated()
+    public async Task Mitglied_Updated_Success()
     {
         //Arrange
         var mitgliedUpdate = new MitgliedUpdate()
