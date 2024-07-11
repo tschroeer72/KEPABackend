@@ -49,7 +49,7 @@ public class ExceptionMiddleware
             var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
             await context.Response.WriteAsync(problemDetailsJson);
         }
-        catch (MeisterschaftstypNotFoundException ex)
+        catch (MeisterschaftstypNotFoundException)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
@@ -66,7 +66,7 @@ public class ExceptionMiddleware
             var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
             await context.Response.WriteAsync(problemDetailsJson);
         }
-        catch (MeisterschaftNotFoundException ex)
+        catch (MeisterschaftNotFoundException)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = StatusCodes.Status404NotFound;

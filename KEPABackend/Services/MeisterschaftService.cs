@@ -116,7 +116,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// Liste aller Meisterschaften
     /// </summary>
     /// <returns>Liste aller Meisterschaften</returns>
-    public async Task<List<Meisterschaft>> GetAllMeisterschaften()
+    public async Task<List<Meisterschaft>> GetAllMeisterschaftenAsync()
     {
         return await MeisterschaftsDBService.GetAllMeisterschaften();
     }
@@ -126,7 +126,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
-    public async Task<Meisterschaft> GetMeisterschaftByID(int ID)
+    public async Task<Meisterschaft> GetMeisterschaftByIDAsync(int ID)
     {
         TblMeisterschaften? meisterschaft = await MeisterschaftsDBService.GetMeisterschaftByIDAsync(ID) ?? throw new MeisterschaftNotFoundException();
         var result = new Meisterschaft()

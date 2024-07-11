@@ -290,4 +290,77 @@ public class MeisterschaftServiceTests
         //Assert
         Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task GetAllMeisterschaften_Success()
+    {
+        //Arrange
+        var lstMeisterschaften = new List<Meisterschaft>()
+        {
+            new Meisterschaft()
+            {
+                ID = 1,
+                Bezeichnung = "Test 1",
+                MeisterschaftstypID = 1,
+                Aktiv = 0,
+                Beginn = DateTime.Now
+            },
+            new Meisterschaft()
+            {
+                ID = 2,
+                Bezeichnung = "Test 2",
+                MeisterschaftstypID = 1,
+                Aktiv = 0,
+                Beginn = DateTime.Now
+            }
+        };
+        var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        meisterschaftDBServiceMock.Setup(mock => mock.GetAllMeisterschaften()).ReturnsAsync(lstMeisterschaften);
+        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator, MeisterschaftUpdateValidator);
+
+        //Act
+        var result = await meisterschaftService.GetAllMeisterschaftenAsync();
+
+        //Assert
+        Assert.Equal(2, result.Count);
+    }
+    [Fact]
+    public async Task GetMeisterschaftByID_Success()
+    {
+        //Arrange
+        var meisterschaft = new TblMeisterschaften()
+        {
+            Id = 1,
+            Bezeichnung = "Test 1",
+            MeisterschaftstypId = 1,
+            Aktiv = 0,
+            Beginn = DateTime.Now
+        };
+        var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        meisterschaftDBServiceMock.Setup(mock => mock.GetMeisterschaftByIDAsync(1)).ReturnsAsync(meisterschaft);
+        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator, MeisterschaftUpdateValidator);
+
+        //Act
+        var result = await meisterschaftService.GetMeisterschaftByIDAsync(meisterschaft.Id);
+
+        //Assert
+        Assert.Equal(1, result.ID);
+    }
+
+    [Fact]
+    public void MeisterschaftNotFoundExeption_for_GetMeisterschaftByIDAsync_with_Non_Exiting_ID()
+    {
+        //Arrange
+        var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var meisterschaftService = new MeisterschaftService(meisterschaftstypenDBServiceMock.Object, meisterschaftDBServiceMock.Object, Mapper, MeisterschaftCreateValidator, MeisterschaftUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await meisterschaftService.GetMeisterschaftByIDAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
+    }
 }

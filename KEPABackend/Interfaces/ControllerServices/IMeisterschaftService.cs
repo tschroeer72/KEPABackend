@@ -27,12 +27,12 @@ public interface IMeisterschaftService
     /// Liste aller Meisterschaften
     /// </summary>
     /// <returns>Liste aller Meisterschaften</returns>
-    Task<List<Meisterschaft>> GetAllMeisterschaften();
+    Task<List<Meisterschaft>> GetAllMeisterschaftenAsync();
 
     /// <summary>
     /// Rückgabe einer bestimmten Meisterschaft
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
-    Task<Meisterschaft> GetMeisterschaftByID(int ID);
+    Task<Meisterschaft> GetMeisterschaftByIDAsync(int ID);
 }

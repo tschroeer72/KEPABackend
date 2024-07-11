@@ -62,7 +62,7 @@ public class MeisterschaftController : ControllerBase
     [Route("GetAllMeisterschaften")]
     public async Task<ActionResult> GetAllMeisterschaften()
     {
-        var result = await MeisterschaftService.GetAllMeisterschaften();
+        var result = await MeisterschaftService.GetAllMeisterschaftenAsync();
         return Ok(result);
     }
 
@@ -77,7 +77,7 @@ public class MeisterschaftController : ControllerBase
     [Route("GetMeisterschaftByID")]
     public async Task<ActionResult> GetMeisterschaftdByID(int ID)
     {
-        var result = await MeisterschaftService.GetMeisterschaftByID(ID);
+        var result = await MeisterschaftService.GetMeisterschaftByIDAsync(ID);
         return Ok(result);
     }
 }
