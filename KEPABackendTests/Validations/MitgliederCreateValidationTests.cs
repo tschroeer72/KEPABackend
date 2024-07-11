@@ -3,7 +3,7 @@ using KEPABackend.Validations;
 
 namespace KEPABackendUnitTests.Validation;
 
-public class MitgliederValidationTests
+public class MitgliederCreateValidationTests
 {
     private DateTime dtTestDatum20240101_090000 = Convert.ToDateTime("2024-01-01 09:00:00");
     private DateTime dtTestDatum20241201_090000 = Convert.ToDateTime("2024-01-01 09:00:00");
