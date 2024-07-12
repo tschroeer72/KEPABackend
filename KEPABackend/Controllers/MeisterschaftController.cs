@@ -46,7 +46,7 @@ public class MeisterschaftController : ControllerBase
     /// <response code="200">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
     /// <response code="404">[MeisterschaftNotFoundException | MeisterschaftstypNotFoundException]</response>
-    [HttpPost]
+    [HttpPut]
     [Route("Update")]
     public async Task<ActionResult> UpdateMeisterschaft(MeisterschaftUpdate meisterschaftUpdate)
     {
@@ -105,7 +105,7 @@ public class MeisterschaftController : ControllerBase
     /// <returns></returns>
     /// /// <response code="200">Löschen erfolgreich</response>
     /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
-    [HttpPost]
+    [HttpDelete]
     [Route("DeleteTeilnehmer")]
     public async Task<ActionResult> DeleteTeilnehmer(int MeisterschaftsID, int TeilnehmerID)
     {

@@ -45,7 +45,7 @@ public class MitgliederController : ControllerBase
     /// <response code="200">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
     /// <response code="404">Mitglied nicht gefunden</response>
-    [HttpPost]
+    [HttpPut]
     [Route("Update")]
     public async Task<ActionResult> UpdateMitglieder(MitgliedUpdate mitgliedUpdate)
     {
