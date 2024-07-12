@@ -68,7 +68,33 @@ public class SpieleingabeController : ControllerBase
     }
 
     /// <summary>
-    /// Erzeuge Tabelleneintrag für 6-Tage-Rennen
+    /// Speichere die 9er und Ratten
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="Neuer"></param>
+    /// <param name="Ratten"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("Update9erRatten")]
+    public async Task<ActionResult> Update9erRatten(int SpieltagID, int Neuer, int Ratten)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche einen 9er/Ratten-Eintrag
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("Delete9erRatten")]
+    public async Task<ActionResult> Delete9erRatten(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Erzeuge eine Mannschaft für das 6-Tage-Rennen
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <param name="Spieler1ID"></param>
@@ -82,7 +108,33 @@ public class SpieleingabeController : ControllerBase
     }
 
     /// <summary>
-    /// Erzeuge Tabelleneintrag für Blitztunier
+    /// Speichere die Runden/Punkte der Mannschaft beim 6-Tage-Rennen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="Runden"></param>
+    /// <param name="Punkte"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("Update6TageRennen")]
+    public async Task<ActionResult> Update6TageRennen(int SpieltagID, int Runden, int Punkte)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche eine Mannschaft aus dem 6-Tage-Rennen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("Delete6TageRennen")]
+    public async Task<ActionResult> Delete6TageRennen(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Erzeuge eine Spielerpaarung für Blitztunier
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <param name="Spieler1ID"></param>
@@ -96,7 +148,33 @@ public class SpieleingabeController : ControllerBase
     }
 
     /// <summary>
-    /// Erzeuge Tabelleneintrag für Meisterschaft
+    /// Speichere die Punkte der Spieler
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="PunkteSpieler1"></param>
+    /// <param name="PunkteSpieler2"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("UpdateBlitztunier")]
+    public async Task<ActionResult> UpdateBlitztunier(int SpieltagID, int PunkteSpieler1, int PunkteSpieler2)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche die Spielerpaarung aus dem Blitztunier
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeleteBlitztunier")]
+    public async Task<ActionResult> DeleteBlitztunier(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Erzeuge Spielerpaarung für Meisterschaft
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <param name="Spieler1ID"></param>
@@ -105,6 +183,32 @@ public class SpieleingabeController : ControllerBase
     [HttpPost]
     [Route("CreateMeisterschaft")]
     public async Task<ActionResult> CreateMeisterschaft(int SpieltagID, int Spieler1ID, int Spieler2ID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Speichere die Holzzahlen der Spielerpaarung
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="HolzSpieler1"></param>
+    /// <param name="HolzSpieler2"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("UpdateMeisterschaft")]
+    public async Task<ActionResult> UpdateMeisterschaft(int SpieltagID, int HolzSpieler1, int HolzSpieler2)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche die Spielerpaarung aus der Meisterschaft
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeleteMeisterschaft")]
+    public async Task<ActionResult> DeleteMeisterschaft(int SpieltagID)
     {
         return Ok(1);
     }
@@ -125,6 +229,33 @@ public class SpieleingabeController : ControllerBase
     }
 
     /// <summary>
+    /// Speichere die Punkte der Spielerpaarung der Kombimeisterschaft
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="Punkte3bis8"></param>
+    /// <param name="Punkte5Kugeln"></param>
+    /// <param name="HinRückrunde"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("UpdateKombimeisterschaft")]
+    public async Task<ActionResult> UpdateKombimeisterschaft(int SpieltagID, int Punkte3bis8, int Punkte5Kugeln, int HinRückrunde)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche die Spielerpaarung aus der Kombimeisterschaft
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeleteKombimeisterschaft")]
+    public async Task<ActionResult> DeleteKombimeisterschaft(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
     /// Erzeuge Tabelleneintrag für Pokal
     /// </summary>
     /// <param name="SpieltagID"></param>
@@ -138,6 +269,31 @@ public class SpieleingabeController : ControllerBase
     }
 
     /// <summary>
+    /// Speichere die Platzierung im Pokal
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="Platzierung"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("UpdatePokal")]
+    public async Task<ActionResult> UpdatePokal(int SpieltagID, int Platzierung)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche den Spieler aus dem Pokal
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeletePokal")]
+    public async Task<ActionResult> DeletePokal(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
     /// Erzeuge Tabelleneintrag für Sargkegeln
     /// </summary>
     /// <param name="SpieltagID"></param>
@@ -146,6 +302,31 @@ public class SpieleingabeController : ControllerBase
     [HttpPost]
     [Route("CreateSargkegeln")]
     public async Task<ActionResult> CreateSargkegeln(int SpieltagID, int SpielerID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Speichere die Platzierung des Spielers beim Sargkegeln
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="Platzierung"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route("UpdateSargkegeln")]
+    public async Task<ActionResult> UpdateSargkegeln(int SpieltagID, int Platzierung)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Lösche den Spieler aus dem Sargkegeln
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeleteSargkegeln")]
+    public async Task<ActionResult> DeleteSargkegeln(int SpieltagID)
     {
         return Ok(1);
     }
