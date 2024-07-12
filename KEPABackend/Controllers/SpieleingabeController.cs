@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Post;
+using KEPABackend.Interfaces.ControllerServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
@@ -10,25 +11,29 @@ namespace KEPABackend.Controllers;
 [Route("api/[controller]")]
 public class SpieleingabeController : ControllerBase
 {
+    private ISpieleingabeService SpieleingabeService { get; }
+
     /// <summary>
     /// Constructor
     /// </summary>
-    public SpieleingabeController()
+    public SpieleingabeController(ISpieleingabeService spieleingabeService)
     {
-        
+        SpieleingabeService = spieleingabeService;
     }
 
     /// <summary>
     /// Erzeuge einen Spieltag
     /// </summary>
-    /// <param name="MeisterschaftsID"></param>
-    /// <param name="Spieltag"></param>
+    /// <param name="spieltagCreate"></param>
     /// <returns>ID des Spieltages</returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="409">Spieltag existiert bereits</response>    
     [HttpPost]
     [Route("CreateSpieltag")]
-    public async Task<ActionResult> CreateSpieltag(int MeisterschaftsID, DateTime Spieltag)
+    public async Task<ActionResult> CreateSpieltag(SpieltagCreate spieltagCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpieltagAsync(spieltagCreate);
+        return Ok(result);
     }
 
     /// <summary>
@@ -36,9 +41,21 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
-    [HttpPost]
+    [HttpPut]
     [Route("CloseSpieltag")]
     public async Task<ActionResult> CloseSpieltag(int SpieltagID)
+    {
+        return Ok(1);
+    }
+
+    /// <summary>
+    /// Spieltag löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("DeleteSpieltag")]
+    public async Task<ActionResult> DeleteSpieltag(int SpieltagID)
     {
         return Ok(1);
     }

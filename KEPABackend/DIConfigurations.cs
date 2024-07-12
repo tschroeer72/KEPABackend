@@ -3,6 +3,7 @@ using KEPABackend.Validations;
 using KEPABackend.Services;
 using KEPABackend.DTOs;
 using KEPABackend.Interfaces.DBServices;
+using KEPABackend.Interfaces.ControllerServices;
 
 namespace KEPABackend;
 
@@ -18,17 +19,20 @@ public static class DIConfigurations
     public static void RegisterServices(IServiceCollection services)
     {
         services.AddTransient<IMitgliederDBService, MitgliederDBService>();
-        services.AddTransient<MitgliederService>();
+        services.AddTransient<IMitgliederService, MitgliederService>();
         services.AddTransient<MitgliederCreateValidator>();
         services.AddTransient<MitgliederUpdateValidator>();
 
         services.AddTransient<IMeisterschaftstypenDBService, MeisterschaftstypenDBService>();
-        services.AddTransient<MeisterschaftstypenService>();
+        services.AddTransient<IMeisterschaftstypenService, MeisterschaftstypenService>();
 
         services.AddTransient<IMeisterschaftDBService, MeisterschaftDBService>();
-        services.AddTransient<MeisterschaftService>();
+        services.AddTransient<IMeisterschaftService, MeisterschaftService>();
         services.AddTransient<MeisterschaftCreateValidator>();
         services.AddTransient<MeisterschaftUpdateValidator>();
+
+        services.AddTransient<ISpieleingabeDBService, SpieleingabeDBService>();
+        services.AddTransient<ISpieleingabeService, SpieleingabeService>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }
