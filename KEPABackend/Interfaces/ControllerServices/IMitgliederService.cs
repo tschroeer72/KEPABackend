@@ -13,7 +13,7 @@ public interface IMitgliederService
     /// </summary>
     /// <param name="mitgliedCreate"></param>
     /// <returns>ID der neuen Entität</returns>
-    Task<int> CreateMitgliederAsync(MitgliedCreate mitgliedCreate);
+    Task<EntityID> CreateMitgliederAsync(MitgliedCreate mitgliedCreate);
 
     /// <summary>
     /// Service UpdateMitglied

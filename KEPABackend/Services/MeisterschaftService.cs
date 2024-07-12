@@ -49,7 +49,7 @@ public class MeisterschaftService : IMeisterschaftService
     /// </summary>
     /// <param name="meisterschaftCreate"></param>
     /// <returns>ID der neuen Meisterschaft</returns>
-    public async Task<int> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate)
+    public async Task<EntityID> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate)
     {
         try
         {
@@ -69,8 +69,9 @@ public class MeisterschaftService : IMeisterschaftService
         }
 
         var meisterschaft = Mapper.Map<TblMeisterschaften>(meisterschaftCreate);
-        int lngID = await MeisterschaftDBService.CreateMeisterschaftAsync(meisterschaft);
-        return lngID;
+        int intID = await MeisterschaftDBService.CreateMeisterschaftAsync(meisterschaft);
+        EntityID entityID = new() { ID = intID };
+        return entityID;
     }
 
     /// <summary>

@@ -14,7 +14,7 @@ public interface IMeisterschaftService
     /// </summary>
     /// <param name="meisterschaftCreate"></param>
     /// <returns>ID der neuen Meisterschaft</returns>
-    Task<int> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate);
+    Task<EntityID> CreateMeisterschaftAsync(MeisterschaftCreate meisterschaftCreate);
 
     /// <summary>
     /// Service Update Meisterschaft
