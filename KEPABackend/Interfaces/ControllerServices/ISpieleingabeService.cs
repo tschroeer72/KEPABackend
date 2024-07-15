@@ -34,4 +34,12 @@ public interface ISpieleingabeService
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
     Task<AktuellerSpieltag> GetSpieltagInBearbeitung();
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für 9er und Ratten
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns></returns>
+    Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID);
 }

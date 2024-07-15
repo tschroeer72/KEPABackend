@@ -50,4 +50,20 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
     Task<AktuellerSpieltag> GetSpieltagInBearbeitung();
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für 9er und Ratten
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns></returns>
+    Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diesen Spieltag für diesen Spieler gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> Check9erRattenExistingAsync(int SpieltagID, int SpielerID);
 }

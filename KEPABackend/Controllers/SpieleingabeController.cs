@@ -85,11 +85,15 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <param name="SpielerID"></param>
     /// <returns></returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("Create9erRatten")]
     public async Task<ActionResult> Create9erRatten(int SpieltagID, int SpielerID)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.Create9erRattenAsync(SpieltagID, SpielerID);
+        return Ok(result);
     }
 
     /// <summary>

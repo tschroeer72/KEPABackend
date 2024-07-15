@@ -86,7 +86,7 @@ public class ExceptionMiddleware
         catch (SpieltagAlreadyExistsException)
         {
             context.Response.ContentType = "application/problem+json";
-            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Response.StatusCode = 409;
 
             var problemDetails = new ProblemDetails()
             {
@@ -120,7 +120,7 @@ public class ExceptionMiddleware
         catch (SpieltagInUseException)
         {
             context.Response.ContentType = "application/problem+json";
-            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Response.StatusCode = 409;
 
             var problemDetails = new ProblemDetails()
             {
@@ -128,6 +128,23 @@ public class ExceptionMiddleware
                 Detail = "",
                 Instance = "",
                 Title = "Spieltag in Verwendung !",
+                Type = ""
+            };
+
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
+        catch (NeunerRattenAlreadyExistsException)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = 409;
+
+            var problemDetails = new ProblemDetails()
+            {
+                Status = 409,
+                Detail = "",
+                Instance = "",
+                Title = "9er/Ratten Eintrag existiert bereits !",
                 Type = ""
             };
 

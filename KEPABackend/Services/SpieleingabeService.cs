@@ -21,6 +21,7 @@ public class SpieleingabeService : ISpieleingabeService
 
     private readonly IMapper Mapper;
     private readonly SpieltagCreateValidator SpieltagCreateValidator;
+    private readonly IMitgliederDBService mitgliederDBService;
 
     /// <summary>
     /// Contructor
@@ -29,12 +30,14 @@ public class SpieleingabeService : ISpieleingabeService
         ISpieleingabeDBService spieleingabeDBService, 
         IMapper mapper, 
         IMeisterschaftDBService meisterschaftDBService,
-        SpieltagCreateValidator spieltagCreateValidator)
+        SpieltagCreateValidator spieltagCreateValidator,
+        IMitgliederDBService mitgliederDBService)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
         this.MeisterschaftDBService = meisterschaftDBService;
         this.SpieltagCreateValidator = spieltagCreateValidator;
+        this.mitgliederDBService = mitgliederDBService;
     }
 
     /// <summary>
@@ -99,5 +102,23 @@ public class SpieleingabeService : ISpieleingabeService
     public async Task<AktuellerSpieltag> GetSpieltagInBearbeitung()
     {
         return await SpieleingabeDBService.GetSpieltagInBearbeitung();
+    }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für 9er und Ratten
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns></returns>
+    public async Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(SpielerID) ?? throw new MitgliedNotFoundException();
+        int? neunerRattenID = await SpieleingabeDBService.Check9erRattenExistingAsync(SpieltagID, SpielerID);        
+        if(neunerRattenID != null) throw new NeunerRattenAlreadyExistsException();
+
+        var result = await SpieleingabeDBService.Create9erRattenAsync(SpieltagID, SpielerID);
+
+        return result;
     }
 }

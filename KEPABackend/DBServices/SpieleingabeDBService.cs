@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
@@ -55,7 +56,7 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         {
             item.InBearbeitung = 0;
         }
-        await DbContext.SaveChangesAsync();
+        //await DbContext.SaveChangesAsync();
 
         spieltag.InBearbeitung = 1;
         await DbContext.TblSpieltags.AddAsync(spieltag);
@@ -149,5 +150,50 @@ public class SpieleingabeDBService : ISpieleingabeDBService
             objSpieltag.ID = -1;
         }
         return objSpieltag;
+    }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für 9er und Ratten
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns></returns>
+    public async Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID)
+    {
+        Tbl9erRatten objNR = new();
+        objNR.SpieltagId = SpieltagID;
+        objNR.SpielerId = SpielerID;
+        objNR.Neuner = 0;
+        objNR.Ratten = 0;
+
+        await DbContext.Tbl9erRattens.AddAsync(objNR);
+        await DbContext.SaveChangesAsync();
+
+        NeunerRatten objResult = new()
+        {
+            ID = objNR.Id,
+            SpieltagID = objNR.SpieltagId,
+            SpielerID = objNR.SpielerId,
+            Neuner = objNR.Neuner,
+            Ratten = objNR.Ratten
+        };
+
+        return objResult;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diesen Spieltag für diesen Spieler gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> Check9erRattenExistingAsync(int SpieltagID, int SpielerID)
+    {
+        var check9erRatten = await DbContext.Tbl9erRattens
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId == SpielerID)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return check9erRatten?.Id;
     }
 }
