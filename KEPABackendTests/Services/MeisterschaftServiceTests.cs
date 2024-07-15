@@ -259,7 +259,7 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID_For_UpdateMEisterschaft()
+    public void MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID_For_UpdateMeisterschaft()
     {
         //Arrange
         var lstMeisterschaftstypen = new List<Meisterschaftstypen>()

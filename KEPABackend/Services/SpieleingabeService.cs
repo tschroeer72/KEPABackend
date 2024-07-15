@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using KEPABackend.DBServices;
 using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
+using KEPABackend.Validations;
 
 namespace KEPABackend.Services;
 
@@ -16,16 +18,22 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly ISpieleingabeDBService SpieleingabeDBService;
     private readonly IMeisterschaftDBService MeisterschaftDBService;
 
-    public IMapper Mapper { get; }
+    private readonly IMapper Mapper;
+    private readonly SpieltagCreateValidator SpieltagCreateValidator;
 
     /// <summary>
     /// Contructor
     /// </summary>
-    public SpieleingabeService(ISpieleingabeDBService spieleingabeDBService, IMapper mapper, IMeisterschaftDBService meisterschaftDBService)
+    public SpieleingabeService(
+        ISpieleingabeDBService spieleingabeDBService, 
+        IMapper mapper, 
+        IMeisterschaftDBService meisterschaftDBService,
+        SpieltagCreateValidator spieltagCreateValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
-        Mapper = mapper;
+        this.Mapper = mapper;
         this.MeisterschaftDBService = meisterschaftDBService;
+        this.SpieltagCreateValidator = spieltagCreateValidator;
     }
 
 
@@ -36,6 +44,16 @@ public class SpieleingabeService : ISpieleingabeService
     /// <returns>ID des neuen Spieltages</returns>
     public async Task<EntityID> CreateSpieltagAsync(SpieltagCreate spieltagCreate)
     {
+        try
+        {
+            await SpieltagCreateValidator.ValidateAndThrowAsync(spieltagCreate);
+        }
+        catch (ValidationException ex)
+        {
+            string message = ex.Message;
+            throw;
+        }
+
         TblMeisterschaften? meisterschaft = await MeisterschaftDBService.GetMeisterschaftByIDAsync(spieltagCreate.MeisterschaftsID) ?? throw new MeisterschaftNotFoundException();
 
         DateTime dtSpieltag = Convert.ToDateTime(spieltagCreate.Spieltag.ToShortDateString());
