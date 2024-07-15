@@ -14,7 +14,21 @@ public class DtoEntityMapperProfile : Profile
     /// </summary>
     public DtoEntityMapperProfile()
     {
-        CreateMap<MitgliedCreate, TblMitglieder>().ForMember(dest => dest.Id, opt => opt.Ignore());
+        CreateMap<MitgliedCreate, TblMitglieder>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.AusgeschiedenAm, opt => opt.Ignore())
+            .ForMember(dest => dest.Ehemaliger, opt => opt.Ignore())
+            .ForMember(dest => dest.HolzGes, opt => opt.Ignore())
+            .ForMember(dest => dest.HolzMax, opt => opt.Ignore())
+            .ForMember(dest => dest.HolzMin, opt => opt.Ignore())
+            .ForMember(dest => dest.PassivSeit, opt => opt.Ignore())
+            .ForMember(dest => dest.Platz, opt => opt.Ignore())
+            .ForMember(dest => dest.Punkte, opt => opt.Ignore())
+            .ForMember(dest => dest.SpAnz, opt => opt.Ignore())
+            .ForMember(dest => dest.SpGew, opt => opt.Ignore())
+            .ForMember(dest => dest.SpUn, opt => opt.Ignore())
+            .ForMember(dest => dest.SpVerl, opt => opt.Ignore())
+            .ForMember(dest => dest.TurboDbnummer, opt => opt.Ignore());
         CreateMap<MitgliedUpdate, TblMitglieder>().ForMember(dest => dest.Id, opt => opt.Ignore());
 
         CreateMap<MeisterschaftCreate, TblMeisterschaften>().ForMember(dest => dest.Id, opt => opt.Ignore());

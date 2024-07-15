@@ -369,7 +369,7 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("TelefonPrivat"));
     }
-
+    /*
     [Fact]
     public void Validation_Error_For_Too_Long_Platz()
     {
@@ -390,7 +390,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("Platz"));
     }
+    */
 
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_SpAnz()
     {
@@ -411,7 +413,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("SpAnz"));
     }
-
+    */
+    
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_SpGew()
     {
@@ -432,7 +436,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("SpGew"));
     }
-
+    */
+    
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_SpUn()
     {
@@ -453,7 +459,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("SpUn"));
     }
-
+    */
+   
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_SpVerl()
     {
@@ -474,7 +482,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("SpVerl"));
     }
-
+    */
+    
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_HolzGes()
     {
@@ -495,7 +505,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("HolzGes"));
     }
+    */
 
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_HolzMax()
     {
@@ -516,7 +528,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("HolzMax"));
     }
-
+    */
+    
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_HolzMin()
     {
@@ -537,7 +551,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("HolzMin"));
     }
+    */
 
+    /*
     [Fact]
     public void Validation_Error_For_Greater_Than_Or_Equal_0_Punkte()
     {
@@ -558,6 +574,7 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanOrEqualValidator") && err.PropertyName.Equals("Punkte"));
     }
+    */
 
     [Fact]
     public void Validation_Error_For_MitgliedSeit_In_Future()
@@ -602,6 +619,7 @@ public class MitgliederCreateValidationTests
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("LessThanValidator") && err.PropertyName.Equals("Geburtsdatum"));
     }
 
+    /*
     [Fact]
     public void Validation_Error_For_PassivSeit_Greather_Than_MitgliedSeit_And_Geburtsdatum()
     {
@@ -612,7 +630,7 @@ public class MitgliederCreateValidationTests
             Vorname = "Test",
             Nachname = "Test",
             Geburtsdatum = dtTestDatum20240101_090000,
-            PassivSeit = Convert.ToDateTime("2024-05-01 09:00:00"),
+            //PassivSeit = Convert.ToDateTime("2024-05-01 09:00:00"),
             MitgliedSeit = Convert.ToDateTime("2024-06-01 09:00:00")
         };
 
@@ -624,7 +642,9 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanValidator") && err.PropertyName.Equals("PassivSeit"));
     }
-
+    */
+    
+    /*
     [Fact]
     public void Validation_Error_For_AusgeschiedenAm_Greather_Than_MitgliedSeit_And_Geburtsdatum()
     {
@@ -647,4 +667,5 @@ public class MitgliederCreateValidationTests
         Assert.Single(result.Errors);
         Assert.Contains(result.Errors, err => err.ErrorCode.Equals("GreaterThanValidator") && err.PropertyName.Equals("AusgeschiedenAm"));
     }
+    */
 }
