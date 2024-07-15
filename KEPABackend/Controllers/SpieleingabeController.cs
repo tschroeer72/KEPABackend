@@ -41,11 +41,14 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">Spieltag existiert nicht</response>    
     [HttpPut]
     [Route("CloseSpieltag")]
     public async Task<ActionResult> CloseSpieltag(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.CloseSpieltagAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

@@ -60,4 +60,38 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         await DbContext.SaveChangesAsync();
         return spieltag.Id;
     }
+
+    /// <summary>
+    /// Spieltag abschließen
+    /// (keine weitere Eingabe möglich)
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task CloseSpieltagAsync(int SpieltagID)
+    {
+        var spieltag = await DbContext.TblSpieltags
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        if (spieltag != null)
+        {
+            spieltag.InBearbeitung = 0;
+            await DbContext.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Hole den Spieltag der ID
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <returns>NULL oder Spieltag</returns>
+    public async Task<TblSpieltag?> GetSpieltagByIDAsync(int SpieltagID)
+    {
+        var spieltag = await DbContext.TblSpieltags
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spieltag;
+    }
 }

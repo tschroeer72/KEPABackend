@@ -36,7 +36,6 @@ public class SpieleingabeService : ISpieleingabeService
         this.SpieltagCreateValidator = spieltagCreateValidator;
     }
 
-
     /// <summary>
     /// Erstelle einen Spieltag
     /// </summary>
@@ -48,9 +47,8 @@ public class SpieleingabeService : ISpieleingabeService
         {
             await SpieltagCreateValidator.ValidateAndThrowAsync(spieltagCreate);
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            string message = ex.Message;
             throw;
         }
 
@@ -68,7 +66,17 @@ public class SpieleingabeService : ISpieleingabeService
         var spieltag = Mapper.Map<TblSpieltag>(spieltagCreate);
         int intSpieltagID = await SpieleingabeDBService.CreateSpieltagAsync(spieltag);
         EntityID entityID = new() { ID = intSpieltagID };
-        return entityID;
-        
+        return entityID;        
+    }
+
+    /// <summary>
+    /// Spieltag abschließen
+    /// (keine weitere Eingabe möglich)
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task CloseSpieltagAsync(int SpieltagID)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(SpieltagID) ?? throw new SpieltagNotFoundException();
+        await SpieleingabeDBService.CloseSpieltagAsync(SpieltagID);
     }
 }

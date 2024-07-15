@@ -82,4 +82,45 @@ public class SpieleingabeServiceTests
         //Assert
         Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task CloseSpieltag_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        spieleingabeDBServiceMock.Setup(mock => mock.CloseSpieltagAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator);
+
+        //Act
+        await spieleingabeService.CloseSpieltagAsync(1);
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.CloseSpieltagAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_CloseSpieltag()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.CloseSpieltagAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CloseSpieltagAsync(1);
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
 }
