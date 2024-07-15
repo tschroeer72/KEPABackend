@@ -41,7 +41,7 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
-    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="200">Beenden erfolgreich</response>
     /// <response code="404">Spieltag existiert nicht</response>    
     [HttpPut]
     [Route("CloseSpieltag")]
@@ -56,11 +56,15 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">Spieltag existiert nicht</response>  
+    /// <response code="409">Spieltag in Verwendung</response>  
     [HttpDelete]
     [Route("DeleteSpieltag")]
     public async Task<ActionResult> DeleteSpieltag(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpieltagAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>
@@ -68,10 +72,11 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <returns>ID und Datum des Spieltages</returns>
     [HttpGet]
-    [Route("GetAktuellerSpieltag")]
-    public async Task<ActionResult> GetAktuellerSpieltag()
+    [Route("GetSpieltagInBearbeitung")]
+    public async Task<ActionResult> GetSpieltagInBearbeitung()
     {
-        return Ok(1);
+        var result = await SpieleingabeService.GetSpieltagInBearbeitung();
+        return Ok(result);
     }
 
     /// <summary>

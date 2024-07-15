@@ -1,4 +1,6 @@
-﻿using KEPABackend.Interfaces.DBServices;
+﻿using KEPABackend.DTOs.Get;
+using KEPABackend.Exceptions;
+using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
 using Microsoft.EntityFrameworkCore;
 
@@ -93,5 +95,59 @@ public class SpieleingabeDBService : ISpieleingabeDBService
             .SingleOrDefaultAsync();
 
         return spieltag;
+    }
+
+    /// <summary>
+    /// Spieltag löschen
+    /// (keine weitere Eingabe möglich)
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpieltagAsync(int SpieltagID)
+    {
+        var spieltag = await DbContext.TblSpieltags
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        if (spieltag != null)
+        {
+            try
+            {
+                DbContext.TblSpieltags.Remove(spieltag);
+                await DbContext.SaveChangesAsync();
+            }
+            catch(DbUpdateException ex)
+            {
+                throw new SpieltagInUseException();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Hole den Spieltag der in Bearbeitung ist
+    /// </summary>
+    /// <returns>ID und Datum des Spieltag</returns>
+    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitung()
+    {
+        AktuellerSpieltag objSpieltag = new();
+
+        var spieltag = await DbContext.TblSpieltags
+                                    .Where(w => w.InBearbeitung == 1)
+                                    .Select(s => new AktuellerSpieltag()
+                                    {
+                                        ID = s.Id,
+                                        Spieltag = s.Spieltag
+                                    })
+                                    .SingleOrDefaultAsync();
+
+        if (spieltag != null)
+        {
+            objSpieltag = spieltag;
+        }
+        else
+        {
+            objSpieltag.ID = -1;
+        }
+        return objSpieltag;
     }
 }

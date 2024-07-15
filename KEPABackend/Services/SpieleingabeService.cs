@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using KEPABackend.DBServices;
+using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
@@ -78,5 +79,25 @@ public class SpieleingabeService : ISpieleingabeService
     {
         TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(SpieltagID) ?? throw new SpieltagNotFoundException();
         await SpieleingabeDBService.CloseSpieltagAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Spieltag löschen
+    /// (keine weitere Eingabe möglich)
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpieltagAsync(int SpieltagID)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(SpieltagID) ?? throw new SpieltagNotFoundException();
+        await SpieleingabeDBService.DeleteSpieltagAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Hole den Spieltag der in Bearbeitung ist
+    /// </summary>
+    /// <returns>ID und Datum des Spieltag</returns>
+    public async Task<AktuellerSpieltag> GetSpieltagInBearbeitung()
+    {
+        return await SpieleingabeDBService.GetSpieltagInBearbeitung();
     }
 }

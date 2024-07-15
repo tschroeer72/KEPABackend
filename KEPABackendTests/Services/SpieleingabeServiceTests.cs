@@ -123,4 +123,29 @@ public class SpieleingabeServiceTests
         //Assert
         Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task GetSpieltagInBearbeitung_Success()
+    {
+        //Arrange
+        var aktuellerSpieltag = new AktuellerSpieltag()
+        {
+            ID = 1,
+            Spieltag = DateTime.Now
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagInBearbeitung()).ReturnsAsync(aktuellerSpieltag);
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator);
+
+        //Act
+        var result = await spieleingabeService.GetSpieltagInBearbeitung();
+
+        //Assert
+        Assert.Equal(aktuellerSpieltag.ID, result.ID);
+    }
 }

@@ -1,4 +1,5 @@
-﻿using KEPABackend.DTOs.Post;
+﻿using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Post;
 
 namespace KEPABackend.Interfaces.ControllerServices;
 
@@ -20,4 +21,17 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task CloseSpieltagAsync(int SpieltagID);
+
+    /// <summary>
+    /// Spieltag löschen
+    /// (keine weitere Eingabe möglich)
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpieltagAsync(int SpieltagID);
+
+    /// <summary>
+    /// Hole den Spieltag der in Bearbeitung ist
+    /// </summary>
+    /// <returns>ID und Datum des Spieltag</returns>
+    Task<AktuellerSpieltag> GetSpieltagInBearbeitung();
 }
