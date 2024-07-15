@@ -1,4 +1,5 @@
-﻿using KEPABackend.Services;
+﻿using KEPABackend.Interfaces.ControllerServices;
+using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
@@ -10,13 +11,13 @@ namespace KEPABackend.Controllers;
 [Route("api/[controller]")]
 public class MeisterschaftstypController : ControllerBase
 {
-    private MeisterschaftstypenService MeisterschaftstypService { get; }
+    private IMeisterschaftstypenService MeisterschaftstypService { get; }
 
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="meisterschaftService"></param>
-    public MeisterschaftstypController(MeisterschaftstypenService meisterschaftService)
+    public MeisterschaftstypController(IMeisterschaftstypenService meisterschaftService)
     {
         MeisterschaftstypService = meisterschaftService;
     }

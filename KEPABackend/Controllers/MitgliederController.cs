@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Post;
+using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,13 +12,13 @@ namespace KEPABackend.Controllers;
 [Route("api/[controller]")]
 public class MitgliederController : ControllerBase
 {
-    private MitgliederService MitgliederService { get; }
+    private IMitgliederService MitgliederService { get; }
 
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="mitgliederCreateService"></param>
-    public MitgliederController(MitgliederService mitgliederCreateService)
+    public MitgliederController(IMitgliederService mitgliederCreateService)
     {
         MitgliederService = mitgliederCreateService;
     }
