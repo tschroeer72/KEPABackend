@@ -209,7 +209,7 @@ public class SpieleingabeService : ISpieleingabeService
             throw;
         }
 
-        TblSpiel6TageRennen? spiel6TageRennen = await SpieleingabeDBService.GetSpiel6TagreRennenByID(spiel6TageRennenUpdate.ID) ?? throw new Spiel6TageRennenNotFoundException();
+        TblSpiel6TageRennen? spiel6TageRennen = await SpieleingabeDBService.GetSpiel6TageRennenByID(spiel6TageRennenUpdate.ID) ?? throw new Spiel6TageRennenNotFoundException();
         TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spiel6TageRennenUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
         TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenUpdate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
         TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenUpdate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
@@ -228,5 +228,15 @@ public class SpieleingabeService : ISpieleingabeService
         };
 
         return updatedSpiel6TageRennen;
+    }
+
+    /// <summary>
+    /// Mannschaft auf 6-Tage-Rennen löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpiel6TageRennenAsync(int SpieltagID)
+    {
+        TblSpiel6TageRennen? spiel6TageRennen = await SpieleingabeDBService.GetSpiel6TageRennenByID(SpieltagID) ?? throw new Spiel6TageRennenNotFoundException();
+        await SpieleingabeDBService.DeleteSpiel6TageRennenAsync(SpieltagID);
     }
 }

@@ -269,7 +269,7 @@ public class SpieleingabeDBService : ISpieleingabeDBService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>NULL oder Spiel6TageRennen-Entität</returns>
-    public async Task<TblSpiel6TageRennen?> GetSpiel6TagreRennenByID(int ID)
+    public async Task<TblSpiel6TageRennen?> GetSpiel6TageRennenByID(int ID)
     {
         var spiel6TageRennen = await DbContext.TblSpiel6TageRennens
             .Where(w => w.Id == ID)
@@ -277,5 +277,20 @@ public class SpieleingabeDBService : ISpieleingabeDBService
             .SingleOrDefaultAsync();
 
         return spiel6TageRennen;
+    }
+
+    /// <summary>
+    /// Mannschaft auf 6-Tage-Rennen löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpiel6TageRennenAsync(int SpieltagID)
+    {
+        var spiel6TageRennen = await DbContext.TblSpiel6TageRennens
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.TblSpiel6TageRennens.Remove(spiel6TageRennen);
+        await DbContext.SaveChangesAsync();
     }
 }

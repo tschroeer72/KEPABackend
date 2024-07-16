@@ -35,6 +35,7 @@ public record MeisterschaftUpdate
     /// <summary>
     /// MeisterschaftstypID
     /// </summary>
+    [Required] 
     public int MeisterschaftstypID { get; set; }
 
     /// <summary>

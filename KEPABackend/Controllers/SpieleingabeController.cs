@@ -165,7 +165,8 @@ public class SpieleingabeController : ControllerBase
     [Route("Delete6TageRennen")]
     public async Task<ActionResult> Delete6TageRennen(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpiel6TageRennenAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

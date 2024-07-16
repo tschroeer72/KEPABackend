@@ -29,6 +29,7 @@ public record MeisterschaftCreate
     /// <summary>
     /// MeisterschaftstypID
     /// </summary>
+    [Required]
     public int MeisterschaftstypID { get; set; }
 
     /// <summary>

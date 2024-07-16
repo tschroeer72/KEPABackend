@@ -674,7 +674,7 @@ public class SpieleingabeServiceTests
             Punkte = 1
         };
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
-        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TagreRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
         spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
@@ -709,7 +709,7 @@ public class SpieleingabeServiceTests
             Punkte = 1
         };
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
-        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TagreRennenByID(It.IsAny<int>()));
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>()));
         spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
@@ -744,7 +744,7 @@ public class SpieleingabeServiceTests
             Punkte = 1
         };
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
-        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TagreRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
         spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
@@ -779,7 +779,7 @@ public class SpieleingabeServiceTests
             Punkte = 1
         };
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
-        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TagreRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
         spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
@@ -798,5 +798,53 @@ public class SpieleingabeServiceTests
 
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
+
+    [Fact]
+    public async Task DeleteSpiel6TageRennen_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>())).ReturnsAsync(new TblSpiel6TageRennen());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteSpiel6TageRennenAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void Spiel6TageRennenNotFoundException_For_Non_Existing_Spiel6TageRennenID_For_DeleteSpiel6TageRennen()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpiel6TageRennenByID(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<Spiel6TageRennenNotFoundException>(func);
     }
 }

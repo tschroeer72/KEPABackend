@@ -112,5 +112,11 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>NULL oder Spiel6TageRennen-Entität</returns>
-    Task<TblSpiel6TageRennen?> GetSpiel6TagreRennenByID(int ID);
+    Task<TblSpiel6TageRennen?> GetSpiel6TageRennenByID(int ID);
+
+    /// <summary>
+    /// Mannschaft auf 6-Tage-Rennen löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpiel6TageRennenAsync(int SpieltagID);
 }
