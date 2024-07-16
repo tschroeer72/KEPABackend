@@ -82,32 +82,32 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er/Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="neunerRattenCreate"></param>
     /// <returns></returns>
     /// <response code="200">Anlegen erfolgreich</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("Create9erRatten")]
-    public async Task<ActionResult> Create9erRatten(int SpieltagID, int SpielerID)
+    public async Task<ActionResult> Create9erRatten(NeunerRattenCreate neunerRattenCreate)
     {
-        var result = await SpieleingabeService.Create9erRattenAsync(SpieltagID, SpielerID);
+        var result = await SpieleingabeService.Create9erRattenAsync(neunerRattenCreate);
         return Ok(result);
     }
 
     /// <summary>
     /// Speichere die 9er und Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Neuer"></param>
-    /// <param name="Ratten"></param>
+    /// <param name="neunerRattenUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">9ner/Ratten-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("Update9erRatten")]
-    public async Task<ActionResult> Update9erRatten(int SpieltagID, int Neuer, int Ratten)
+    public async Task<ActionResult> Update9erRatten(NeunerRattenUpdate neunerRattenUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
+        return Ok(result);
     }
 
     /// <summary>

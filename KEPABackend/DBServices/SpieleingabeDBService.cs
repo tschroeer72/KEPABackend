@@ -117,7 +117,7 @@ public class SpieleingabeDBService : ISpieleingabeDBService
                 DbContext.TblSpieltags.Remove(spieltag);
                 await DbContext.SaveChangesAsync();
             }
-            catch(DbUpdateException ex)
+            catch(DbUpdateException)
             {
                 throw new SpieltagInUseException();
             }
@@ -155,30 +155,17 @@ public class SpieleingabeDBService : ISpieleingabeDBService
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="neunerRatten"></param>
     /// <returns></returns>
-    public async Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID)
+    public async Task<int> Create9erRattenAsync(Tbl9erRatten neunerRatten)
     {
-        Tbl9erRatten objNR = new();
-        objNR.SpieltagId = SpieltagID;
-        objNR.SpielerId = SpielerID;
-        objNR.Neuner = 0;
-        objNR.Ratten = 0;
+        neunerRatten.Neuner = 0;
+        neunerRatten.Ratten = 0;
 
-        await DbContext.Tbl9erRattens.AddAsync(objNR);
+        await DbContext.Tbl9erRattens.AddAsync(neunerRatten);
         await DbContext.SaveChangesAsync();
 
-        NeunerRatten objResult = new()
-        {
-            ID = objNR.Id,
-            SpieltagID = objNR.SpieltagId,
-            SpielerID = objNR.SpielerId,
-            Neuner = objNR.Neuner,
-            Ratten = objNR.Ratten
-        };
-
-        return objResult;
+        return neunerRatten.Id;
     }
 
     /// <summary>
@@ -195,5 +182,29 @@ public class SpieleingabeDBService : ISpieleingabeDBService
                                     .SingleOrDefaultAsync();
 
         return check9erRatten?.Id;
+    }
+
+    /// <summary>
+    /// Aktualisiere NeunerRatten Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task Update9erRattenAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die NeunerRatten-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>9ner/Ratten-Entität</returns>
+    public async Task<Tbl9erRatten?> Get9erRattenByID(int ID)
+    {
+        var neunerRatten = await DbContext.Tbl9erRattens
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return neunerRatten;
     }
 }

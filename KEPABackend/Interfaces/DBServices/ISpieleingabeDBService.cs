@@ -49,15 +49,14 @@ public interface ISpieleingabeDBService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    Task<AktuellerSpieltag> GetSpieltagInBearbeitung();
+    Task<AktuellerSpieltag?> GetSpieltagInBearbeitung();
 
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="neunerRatten"></param>
     /// <returns></returns>
-    Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID);
+    Task<int> Create9erRattenAsync(Tbl9erRatten neunerRatten);
 
     /// <summary>
     /// Überprüfe, ob es bereits einen Eintrag für diesen Spieltag für diesen Spieler gibt
@@ -66,4 +65,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> Check9erRattenExistingAsync(int SpieltagID, int SpielerID);
+
+    /// <summary>
+    /// Aktualisiere NeunerRatten Entität
+    /// </summary>
+    /// <returns></returns>
+    Task Update9erRattenAsync();
+
+    /// <summary>
+    /// Hole die NeunerRatten-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>9ner/Ratten-Entität</returns>
+    Task<Tbl9erRatten?> Get9erRattenByID(int ID);
 }

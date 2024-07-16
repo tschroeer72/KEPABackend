@@ -74,9 +74,8 @@ public class MitgliederService : IMitgliederService
         {
             await MitgliederUpdateValidator.ValidateAndThrowAsync(mitgliedUpdate);
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            string message = ex.Message;
             throw;
         }
 

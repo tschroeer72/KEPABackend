@@ -33,13 +33,19 @@ public interface ISpieleingabeService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    Task<AktuellerSpieltag> GetSpieltagInBearbeitung();
+    Task<AktuellerSpieltag?> GetSpieltagInBearbeitung();
 
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="neunerRattenCreate"></param>
     /// <returns></returns>
-    Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID);
+    Task<EntityID> Create9erRattenAsync(NeunerRattenCreate neunerRattenCreate);
+
+    /// <summary>
+    /// Aktualisiere NeunerRatten Eintität
+    /// </summary>
+    /// <param name="neunerRattenUpdate"></param>
+    /// <returns></returns>
+    Task<NeunerRatten> Update9erRattenAsync(NeunerRattenUpdate neunerRattenUpdate);
 }

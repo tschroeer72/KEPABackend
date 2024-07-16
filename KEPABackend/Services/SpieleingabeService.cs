@@ -22,6 +22,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly IMapper Mapper;
     private readonly SpieltagCreateValidator SpieltagCreateValidator;
     private readonly IMitgliederDBService mitgliederDBService;
+    private readonly NeunerRattenUpdateValidator neunerRattenUpdateValidator;
 
     /// <summary>
     /// Contructor
@@ -31,13 +32,15 @@ public class SpieleingabeService : ISpieleingabeService
         IMapper mapper, 
         IMeisterschaftDBService meisterschaftDBService,
         SpieltagCreateValidator spieltagCreateValidator,
-        IMitgliederDBService mitgliederDBService)
+        IMitgliederDBService mitgliederDBService,
+        NeunerRattenUpdateValidator neunerRattenUpdateValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
         this.MeisterschaftDBService = meisterschaftDBService;
         this.SpieltagCreateValidator = spieltagCreateValidator;
         this.mitgliederDBService = mitgliederDBService;
+        this.neunerRattenUpdateValidator = neunerRattenUpdateValidator;
     }
 
     /// <summary>
@@ -99,7 +102,7 @@ public class SpieleingabeService : ISpieleingabeService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    public async Task<AktuellerSpieltag> GetSpieltagInBearbeitung()
+    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitung()
     {
         return await SpieleingabeDBService.GetSpieltagInBearbeitung();
     }
@@ -107,18 +110,53 @@ public class SpieleingabeService : ISpieleingabeService
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="neunerRattenCreate"></param>
     /// <returns></returns>
-    public async Task<NeunerRatten> Create9erRattenAsync(int SpieltagID, int SpielerID)
+    public async Task<EntityID> Create9erRattenAsync(NeunerRattenCreate neunerRattenCreate)
     {
-        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(SpieltagID) ?? throw new SpieltagNotFoundException();
-        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(SpielerID) ?? throw new MitgliedNotFoundException();
-        int? neunerRattenID = await SpieleingabeDBService.Check9erRattenExistingAsync(SpieltagID, SpielerID);        
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(neunerRattenCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(neunerRattenCreate.SpielerID) ?? throw new MitgliedNotFoundException();
+        int? neunerRattenID = await SpieleingabeDBService.Check9erRattenExistingAsync(neunerRattenCreate.SpieltagID, neunerRattenCreate.SpielerID);        
         if(neunerRattenID != null) throw new NeunerRattenAlreadyExistsException();
 
-        var result = await SpieleingabeDBService.Create9erRattenAsync(SpieltagID, SpielerID);
+        var neunerRatten = Mapper.Map<Tbl9erRatten>(neunerRattenCreate);
+        var result = await SpieleingabeDBService.Create9erRattenAsync(neunerRatten);
 
-        return result;
+        EntityID entityID = new() { ID = result };
+        return entityID;
+    }
+
+    /// <summary>
+    /// Aktualisiere NeunerRatten Eintität
+    /// </summary>
+    /// <param name="neunerRattenUpdate"></param>
+    /// <returns></returns>
+    public async Task<NeunerRatten> Update9erRattenAsync(NeunerRattenUpdate neunerRattenUpdate)
+    {
+        try
+        {
+            await neunerRattenUpdateValidator.ValidateAndThrowAsync(neunerRattenUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        Tbl9erRatten? neunerRatten = await SpieleingabeDBService.Get9erRattenByID(neunerRattenUpdate.ID) ?? throw new NeunerRattenNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(neunerRattenUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(neunerRattenUpdate.SpielerID) ?? throw new MitgliedNotFoundException();
+        Mapper.Map(neunerRattenUpdate, neunerRatten);
+        await SpieleingabeDBService.Update9erRattenAsync();
+
+        var updatedNeunerRatten = new NeunerRatten()
+        {
+            ID = neunerRatten.Id,
+            SpieltagID = neunerRatten.SpieltagId,
+            SpielerID = neunerRatten.SpielerId,
+            Neuner = neunerRatten.Neuner,
+            Ratten = neunerRatten.Ratten
+        };
+
+        return updatedNeunerRatten;
     }
 }
