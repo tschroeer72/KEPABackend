@@ -35,6 +35,7 @@ public static class DIConfigurations
         services.AddTransient<ISpieleingabeService, SpieleingabeService>();
         services.AddTransient<SpieltagCreateValidator>();
         services.AddTransient<NeunerRattenUpdateValidator>();
+        services.AddTransient<Spiel6TageRennenUpdateValidator>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }

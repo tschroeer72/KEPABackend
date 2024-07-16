@@ -76,7 +76,7 @@ public interface ISpieleingabeDBService
     /// Hole die NeunerRatten-Entität
     /// </summary>
     /// <param name="ID"></param>
-    /// <returns>9ner/Ratten-Entität</returns>
+    /// <returns>NULL oder Neuner/Ratten-Entität</returns>
     Task<Tbl9erRatten?> Get9erRattenByID(int ID);
 
     /// <summary>
@@ -100,4 +100,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID2"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpiel6TageRennenExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2);
+
+    /// <summary>
+    /// Aktualisiere Spiel6TagreRennen Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpiel6TageRennenAsync();
+
+    /// <summary>
+    /// Hole die Spiel6TageRennen-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder Spiel6TageRennen-Entität</returns>
+    Task<TblSpiel6TageRennen?> GetSpiel6TagreRennenByID(int ID);
 }

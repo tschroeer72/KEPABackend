@@ -23,6 +23,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly SpieltagCreateValidator SpieltagCreateValidator;
     private readonly IMitgliederDBService mitgliederDBService;
     private readonly NeunerRattenUpdateValidator neunerRattenUpdateValidator;
+    private readonly Spiel6TageRennenUpdateValidator spiel6TageRennenValidator;
 
     /// <summary>
     /// Contructor
@@ -33,7 +34,8 @@ public class SpieleingabeService : ISpieleingabeService
         IMeisterschaftDBService meisterschaftDBService,
         SpieltagCreateValidator spieltagCreateValidator,
         IMitgliederDBService mitgliederDBService,
-        NeunerRattenUpdateValidator neunerRattenUpdateValidator)
+        NeunerRattenUpdateValidator neunerRattenUpdateValidator,
+        Spiel6TageRennenUpdateValidator spiel6TagreRennenValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
@@ -41,6 +43,7 @@ public class SpieleingabeService : ISpieleingabeService
         this.SpieltagCreateValidator = spieltagCreateValidator;
         this.mitgliederDBService = mitgliederDBService;
         this.neunerRattenUpdateValidator = neunerRattenUpdateValidator;
+        this.spiel6TageRennenValidator = spiel6TagreRennenValidator;
     }
 
     /// <summary>
@@ -188,5 +191,42 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spiel6TageRennenUpdate"></param>
+    /// <returns></returns>
+    public async Task<Spiel6TageRennen> UpdateSpiel6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate)
+    {
+        try
+        {
+            await spiel6TageRennenValidator.ValidateAndThrowAsync(spiel6TageRennenUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpiel6TageRennen? spiel6TageRennen = await SpieleingabeDBService.GetSpiel6TagreRennenByID(spiel6TageRennenUpdate.ID) ?? throw new Spiel6TageRennenNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spiel6TageRennenUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenUpdate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenUpdate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+
+        Mapper.Map(spiel6TageRennenUpdate, spiel6TageRennen);
+        await SpieleingabeDBService.UpdateSpiel6TageRennenAsync();
+
+        var updatedSpiel6TageRennen = new Spiel6TageRennen()
+        {
+            ID = spiel6TageRennen.Id,
+            SpieltagID = spiel6TageRennen.SpieltagId,
+            SpielerID1 = spiel6TageRennen.SpielerId1,
+            SpielerID2 = spiel6TageRennen.SpielerId2,
+            Runden = spiel6TageRennen.Runden,
+            Punkte = spiel6TageRennen.Punkte
+        };
+
+        return updatedSpiel6TageRennen;
     }
 }

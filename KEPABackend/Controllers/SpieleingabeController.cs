@@ -144,15 +144,16 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Speichere die Runden/Punkte der Mannschaft beim 6-Tage-Rennen
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Runden"></param>
-    /// <param name="Punkte"></param>
+    /// <param name="spiel6TageRennenUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">Spiel6TageRennen-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("Update6TageRennen")]
-    public async Task<ActionResult> Update6TageRennen(int SpieltagID, int Runden, int Punkte)
+    public async Task<ActionResult> Update6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpiel6TageRennen(spiel6TageRennenUpdate);
+        return Ok(result);
     }
 
     /// <summary>

@@ -14,8 +14,7 @@ public class SpieltagCreateValidator : AbstractValidator<SpieltagCreate>
     /// </summary>
     public SpieltagCreateValidator()
     {
-        RuleFor(spieltag => spieltag.Spieltag).GreaterThan(new DateTime(1, 1, 1, 0, 0, 0));
-        
+        RuleFor(spieltag => spieltag.Spieltag).GreaterThan(new DateTime(1, 1, 1, 0, 0, 0));        
     }
 }
 

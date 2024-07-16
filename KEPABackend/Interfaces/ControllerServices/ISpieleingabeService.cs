@@ -60,4 +60,11 @@ public interface ISpieleingabeService
     /// <param name="spiel6TageRennenCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpiel6TageRennenAsync(Spiel6TageRennenCreate spiel6TageRennenCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spiel6TageRennenUpdate"></param>
+    /// <returns></returns>
+    Task<Spiel6TageRennen> UpdateSpiel6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate);
 }

@@ -1,10 +1,15 @@
 ﻿namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO Post Spiel6TageRennenCreate 
+/// DTO Post Spiel6TageRennenUpdate 
 /// </summary>
-public record Spiel6TageRennenCreate
+public record Spiel6TageRennenUpdate
 {
+    /// <summary>
+    /// ID der Entität
+    /// </summary>
+    public int ID { get; set; } = default!;
+
     /// <summary>
     /// SpieltagID
     /// </summary>
@@ -19,4 +24,14 @@ public record Spiel6TageRennenCreate
     /// SpielerID2
     /// </summary>
     public int SpielerID2 { get; set; }
+
+    /// <summary>
+    /// Runden
+    /// </summary>
+    public int Runden { get; set; }
+
+    /// <summary>
+    /// Punkte
+    /// </summary>
+    public int Punkte { get; set; }
 }

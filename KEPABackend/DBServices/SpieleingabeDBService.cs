@@ -254,4 +254,28 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return check6TageRenne?.Id;
     }
+
+    /// <summary>
+    /// Aktualisiere Spiel6TagreRennen Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpiel6TageRennenAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die Spiel6TageRennen-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder Spiel6TageRennen-Entität</returns>
+    public async Task<TblSpiel6TageRennen?> GetSpiel6TagreRennenByID(int ID)
+    {
+        var spiel6TageRennen = await DbContext.TblSpiel6TageRennens
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spiel6TageRennen;
+    }
 }
