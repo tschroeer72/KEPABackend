@@ -32,7 +32,7 @@ namespace KEPABackend.DTOs.Post;
 //    string? TurboDbnummer);
 
 /// <summary>
-/// DTO PUSH MitgliedUpdate
+/// DTO Post MitgliedUpdate
 /// </summary>
 public record MitgliedUpdate
 {

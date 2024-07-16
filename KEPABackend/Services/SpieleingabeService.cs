@@ -169,4 +169,24 @@ public class SpieleingabeService : ISpieleingabeService
         Tbl9erRatten? neuerRatten = await SpieleingabeDBService.Get9erRattenByID(SpieltagID) ?? throw new NeunerRattenNotFoundException();
         await SpieleingabeDBService.DeleteNeunerRattenAsync(SpieltagID);
     }
+
+    /// <summary>
+    /// Erzeuge Mannschaft für das 6-Tage-Rennen
+    /// </summary>
+    /// <param name="spiel6TageRennenCreate"></param>
+    /// <returns></returns>
+    public async Task<EntityID> CreateSpiel6TageRennenAsync(Spiel6TageRennenCreate spiel6TageRennenCreate)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spiel6TageRennenCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenCreate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spiel6TageRennenCreate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+        int? spiel6TageRennenCheck = await SpieleingabeDBService.CheckSpiel6TageRennenExistingAsync(spiel6TageRennenCreate.SpieltagID, spiel6TageRennenCreate.SpielerID1, spiel6TageRennenCreate.SpielerID2);
+        if (spiel6TageRennenCheck != null) throw new Spiel6TageRennenAlreadyExistsException();
+
+        var spiel6TageRennen = Mapper.Map<TblSpiel6TageRennen>(spiel6TageRennenCreate);
+        int intID = await SpieleingabeDBService.CreateSpiel6TageRennenAsync(spiel6TageRennen);
+
+        EntityID entityID = new() { ID = intID };
+        return entityID;
+    }
 }

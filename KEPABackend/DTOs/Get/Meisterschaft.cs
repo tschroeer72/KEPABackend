@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Get;
 
 /// <summary>
-/// DTO GET Meisterschaft
+/// DTO Get Meisterschaft
 /// 
 /// </summary>
 public class Meisterschaft

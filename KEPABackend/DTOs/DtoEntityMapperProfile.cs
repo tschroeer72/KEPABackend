@@ -35,7 +35,10 @@ public class DtoEntityMapperProfile : Profile
         CreateMap<MeisterschaftUpdate, TblMeisterschaften>().ForMember(dest => dest.Id, opt => opt.Ignore());
 
         CreateMap<SpieltagCreate, TblSpieltag>().ForMember(dest => dest.Id, opt => opt.Ignore());
+
         CreateMap<NeunerRattenCreate, Tbl9erRatten>().ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<NeunerRattenUpdate, Tbl9erRatten>().ForMember(dest => dest.Id, opt => opt.Ignore());
+
+        CreateMap<Spiel6TageRennenCreate, TblSpiel6TageRennen>().ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }

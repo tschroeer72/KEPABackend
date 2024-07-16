@@ -222,4 +222,36 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         DbContext.Tbl9erRattens.Remove(neunerRatten);
         await DbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Erzeuge Mannschaft für das 6-Tage-Rennen
+    /// </summary>
+    /// <param name="spiel6TageRennen"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpiel6TageRennenAsync(TblSpiel6TageRennen spiel6TageRennen)
+    {
+        spiel6TageRennen.Runden = 0;
+        spiel6TageRennen.Punkte = 0;
+
+        await DbContext.TblSpiel6TageRennens.AddAsync(spiel6TageRennen);
+        await DbContext.SaveChangesAsync();
+        return spiel6TageRennen.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits diese Mannschaft für diesen Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpiel6TageRennenExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2)
+    {
+        var check6TageRenne = await DbContext.TblSpiel6TageRennens
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return check6TageRenne?.Id;
+    }
 }

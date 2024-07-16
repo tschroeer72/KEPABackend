@@ -32,7 +32,7 @@ public class ExceptionMiddleware
         {
             await Next(context);
         }
-        catch (MitgliedNotFoundException)
+        catch (MitgliedNotFoundException ex)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
@@ -40,7 +40,7 @@ public class ExceptionMiddleware
             var problemDetails = new ProblemDetails()
             {
                 Status = StatusCodes.Status404NotFound,
-                Detail = "",
+                Detail = ex.Message,
                 Instance = "",
                 Title = "Mitglied nicht gefunden !",
                 Type = ""
@@ -162,6 +162,23 @@ public class ExceptionMiddleware
                 Detail = "",
                 Instance = "",
                 Title = "9er/Ratten Eintrag nicht gefunden !",
+                Type = ""
+            };
+
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
+        catch (Spiel6TageRennenAlreadyExistsException)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = 409;
+
+            var problemDetails = new ProblemDetails()
+            {
+                Status = 409,
+                Detail = "",
+                Instance = "",
+                Title = "Spiel6TageRennen Eintrag existiert bereits !",
                 Type = ""
             };
 

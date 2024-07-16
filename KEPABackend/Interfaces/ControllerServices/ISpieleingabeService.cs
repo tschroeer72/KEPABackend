@@ -53,4 +53,11 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteNeunerRattenAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Mannschaft für das 6-Tage-Rennen
+    /// </summary>
+    /// <param name="spiel6TageRennenCreate"></param>
+    /// <returns></returns>
+    Task<EntityID> CreateSpiel6TageRennenAsync(Spiel6TageRennenCreate spiel6TageRennenCreate);
 }

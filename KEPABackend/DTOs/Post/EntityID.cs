@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO PUSH EntityID
+/// DTO Post EntityID
 /// </summary>
 public record EntityID
 {

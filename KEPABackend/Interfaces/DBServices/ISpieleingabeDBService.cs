@@ -84,4 +84,20 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteNeunerRattenAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Mannschaft für das 6-Tage-Rennen
+    /// </summary>
+    /// <param name="spiel6TageRennen"></param>
+    /// <returns></returns>
+    Task<int> CreateSpiel6TageRennenAsync(TblSpiel6TageRennen spiel6TageRennen);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits diese Mannschaft für diesen Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> CheckSpiel6TageRennenExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2);
 }

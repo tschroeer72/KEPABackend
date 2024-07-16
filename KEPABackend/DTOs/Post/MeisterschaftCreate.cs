@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO PUSH MeisterschaftCreate
+/// DTO Post MeisterschaftCreate
 /// </summary>
 public record MeisterschaftCreate
 {

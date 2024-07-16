@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Get;
 
 /// <summary>
-/// DTO GET Mitgliederliste
+/// DTO Get Mitgliederliste
 /// </summary>
 public class Mitgliederliste
 {

@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO POST NeunerRatten
+/// DTO Post NeunerRatten
 /// </summary>
 public record NeunerRattenUpdate
 {

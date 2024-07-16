@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO PUSH SpieltagCreate
+/// DTO Post SpieltagCreate
 /// </summary>
 public record SpieltagCreate
 {

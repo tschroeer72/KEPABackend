@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Get;
 
 /// <summary>
-/// DTO GET AktuellerSpieltag
+/// DTO Get AktuellerSpieltag
 /// </summary>
 public class AktuellerSpieltag
 {

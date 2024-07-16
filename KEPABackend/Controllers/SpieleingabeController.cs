@@ -101,7 +101,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="neunerRattenUpdate"></param>
     /// <returns></returns>
     /// <response code="200">Update erfolgreich</response>
-    /// <response code="404">9ner/Ratten-Eintrag, Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="404">Neuner/Ratten-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("Update9erRatten")]
     public async Task<ActionResult> Update9erRatten(NeunerRattenUpdate neunerRattenUpdate)
@@ -115,6 +115,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">Neuner/Ratten-Eintrag</response>  
     [HttpDelete]
     [Route("Delete9erRatten")]
     public async Task<ActionResult> Delete9erRatten(int SpieltagID)
@@ -126,15 +128,17 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge eine Mannschaft für das 6-Tage-Rennen
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Spieler1ID"></param>
-    /// <param name="Spieler2ID"></param>
+    /// <param name="spiel6TageRennenCreate"></param>
     /// <returns></returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("Create6TageRennen")]
-    public async Task<ActionResult> Create6TageRennen(int SpieltagID, int Spieler1ID, int Spieler2ID)
+    public async Task<ActionResult> Create6TageRennen(Spiel6TageRennenCreate spiel6TageRennenCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
+        return Ok(result);
     }
 
     /// <summary>
