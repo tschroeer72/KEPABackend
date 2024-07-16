@@ -207,4 +207,19 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return neunerRatten;
     }
+
+    /// <summary>
+    /// Neuner/Ratten löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteNeunerRattenAsync(int SpieltagID)
+    {
+        var neunerRatten = await DbContext.Tbl9erRattens
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.Tbl9erRattens.Remove(neunerRatten);
+        await DbContext.SaveChangesAsync();
+    }
 }

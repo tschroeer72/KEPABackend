@@ -120,9 +120,9 @@ public class SpieleingabeService : ISpieleingabeService
         if(neunerRattenID != null) throw new NeunerRattenAlreadyExistsException();
 
         var neunerRatten = Mapper.Map<Tbl9erRatten>(neunerRattenCreate);
-        var result = await SpieleingabeDBService.Create9erRattenAsync(neunerRatten);
+        int intID = await SpieleingabeDBService.Create9erRattenAsync(neunerRatten);
 
-        EntityID entityID = new() { ID = result };
+        EntityID entityID = new() { ID = intID };
         return entityID;
     }
 
@@ -158,5 +158,15 @@ public class SpieleingabeService : ISpieleingabeService
         };
 
         return updatedNeunerRatten;
+    }
+
+    /// <summary>
+    /// Neuner/Ratten löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteNeunerRattenAsync(int SpieltagID)
+    {
+        Tbl9erRatten? neuerRatten = await SpieleingabeDBService.Get9erRattenByID(SpieltagID) ?? throw new NeunerRattenNotFoundException();
+        await SpieleingabeDBService.DeleteNeunerRattenAsync(SpieltagID);
     }
 }

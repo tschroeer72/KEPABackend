@@ -24,7 +24,6 @@ public interface ISpieleingabeService
 
     /// <summary>
     /// Spieltag löschen
-    /// (keine weitere Eingabe möglich)
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpieltagAsync(int SpieltagID);
@@ -48,4 +47,10 @@ public interface ISpieleingabeService
     /// <param name="neunerRattenUpdate"></param>
     /// <returns></returns>
     Task<NeunerRatten> Update9erRattenAsync(NeunerRattenUpdate neunerRattenUpdate);
+    
+    /// <summary>
+    /// Neuner/Ratten löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteNeunerRattenAsync(int SpieltagID);
 }

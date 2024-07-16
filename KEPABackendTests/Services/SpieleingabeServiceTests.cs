@@ -109,6 +109,52 @@ public class SpieleingabeServiceTests
         spieleingabeDBServiceMock.Verify(mock => mock.CloseSpieltagAsync(It.IsAny<int>()), Times.Once);
     }
 
+
+    [Fact]
+    public async Task DeleteSpieltag_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteSpieltagAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_DeleteSpieltag()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
+
     [Fact]
     public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_CloseSpieltag()
     {
@@ -372,7 +418,6 @@ public class SpieleingabeServiceTests
             NeunerRattenUpdateValidator);
 
         //Act
-        //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
 
         //Assert
@@ -411,5 +456,51 @@ public class SpieleingabeServiceTests
 
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
+
+    [Fact]
+    public async Task DeleteNeunerRatten_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.Get9erRattenByID(It.IsAny<int>())).ReturnsAsync(new Tbl9erRatten());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteNeunerRattenAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void NeunerRattenNotFoundException_For_Non_Existing_NeunerRattenID_For_DeleteNeunerRatten()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.Get9erRattenByID(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<NeunerRattenNotFoundException>(func);
     }
 }

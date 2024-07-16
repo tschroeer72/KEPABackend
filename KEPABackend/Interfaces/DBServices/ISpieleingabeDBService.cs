@@ -78,4 +78,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>9ner/Ratten-Entität</returns>
     Task<Tbl9erRatten?> Get9erRattenByID(int ID);
+
+    /// <summary>
+    /// Neuner/Ratten löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteNeunerRattenAsync(int SpieltagID);
 }
