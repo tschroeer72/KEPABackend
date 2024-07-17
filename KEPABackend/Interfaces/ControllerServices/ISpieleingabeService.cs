@@ -73,4 +73,12 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpiel6TageRennenAsync(int SpieltagID);
+
+
+    /// <summary>
+    /// Erzeuge Eintrag für Blitztunier
+    /// </summary>
+    /// <param name="spielBlitztunierCreate"></param>
+    /// <returns></returns>
+    Task<EntityID> CreateSpielBlitztunierAsync(SpielBlitztunierCreate spielBlitztunierCreate);
 }

@@ -247,12 +247,12 @@ public class SpieleingabeDBService : ISpieleingabeDBService
     /// <returns>NULL oder ID der Entität</returns>
     public async Task<int?> CheckSpiel6TageRennenExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2)
     {
-        var check6TageRenne = await DbContext.TblSpiel6TageRennens
+        var check6TageRennen = await DbContext.TblSpiel6TageRennens
                                     .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2)
                                     .Select(s => s)
                                     .SingleOrDefaultAsync();
 
-        return check6TageRenne?.Id;
+        return check6TageRennen?.Id;
     }
 
     /// <summary>
@@ -292,5 +292,37 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         DbContext.TblSpiel6TageRennens.Remove(spiel6TageRennen);
         await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Erzeuge Eintrag für Blitztunier
+    /// </summary>
+    /// <param name="spielBlitztunier"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpielBlitztunierAsync(TblSpielBlitztunier spielBlitztunier)
+    {
+        spielBlitztunier.PunkteSpieler1 = 0;
+        spielBlitztunier.PunkteSpieler2 = 0;
+
+        await DbContext.TblSpielBlitztuniers.AddAsync(spielBlitztunier);
+        await DbContext.SaveChangesAsync();
+        return spielBlitztunier.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Partie an diesem Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpielBlitztunierExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2)
+    {
+        var checkBlitztunier = await DbContext.TblSpielBlitztuniers
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return checkBlitztunier?.Id;
     }
 }

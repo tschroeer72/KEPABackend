@@ -129,7 +129,7 @@ public class SpieleingabeController : ControllerBase
     /// Erzeuge eine Mannschaft für das 6-Tage-Rennen
     /// </summary>
     /// <param name="spiel6TageRennenCreate"></param>
-    /// <returns></returns>
+    /// <returns>ID der Entity</returns>
     /// <response code="200">Anlegen erfolgreich</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
@@ -172,15 +172,17 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge eine Spielerpaarung für Blitztunier
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Spieler1ID"></param>
-    /// <param name="Spieler2ID"></param>
-    /// <returns></returns>
+    /// <param name="spielBlitztunierCreate"></param>
+    /// <returns>ID der Entity</returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("CreateBlitztunier")]
-    public async Task<ActionResult> CreateBlitztunier(int SpieltagID, int Spieler1ID, int Spieler2ID)
+    public async Task<ActionResult> CreateBlitztunier(SpielBlitztunierCreate spielBlitztunierCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
+        return Ok(result);
     }
 
     /// <summary>

@@ -239,4 +239,24 @@ public class SpieleingabeService : ISpieleingabeService
         TblSpiel6TageRennen? spiel6TageRennen = await SpieleingabeDBService.GetSpiel6TageRennenByID(SpieltagID) ?? throw new Spiel6TageRennenNotFoundException();
         await SpieleingabeDBService.DeleteSpiel6TageRennenAsync(SpieltagID);
     }
+
+    /// <summary>
+    /// Erzeuge Eintrag für Blitztunier
+    /// </summary>
+    /// <param name="spielBlitztunier"></param>
+    /// <returns></returns>
+    public async Task<EntityID> CreateSpielBlitztunierAsync(SpielBlitztunierCreate spielBlitztunierCreate)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielBlitztunierCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spielBlitztunierCreate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spielBlitztunierCreate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+        int? spielBlitztunierCheck = await SpieleingabeDBService.CheckSpielBlitztunierExistingAsync(spielBlitztunierCreate.SpieltagID, spielBlitztunierCreate.SpielerID1, spielBlitztunierCreate.SpielerID2);
+        if (spielBlitztunierCheck != null) throw new SpielBlitztunierAlreadyExistsException();
+
+        var spielBlitztunier = Mapper.Map<TblSpielBlitztunier>(spielBlitztunierCreate);
+        int intID = await SpieleingabeDBService.CreateSpielBlitztunierAsync(spielBlitztunier);
+
+        EntityID entityID = new() { ID = intID };
+        return entityID;
+    }
 }
