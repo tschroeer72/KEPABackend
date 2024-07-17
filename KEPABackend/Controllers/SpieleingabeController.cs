@@ -220,15 +220,17 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge Spielerpaarung für Meisterschaft
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Spieler1ID"></param>
-    /// <param name="Spieler2ID"></param>
-    /// <returns></returns>
+    /// <param name="spielMeisterschaftCreate"></param>
+    /// <returns>ID der Entity</returns>
+    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("CreateMeisterschaft")]
-    public async Task<ActionResult> CreateMeisterschaft(int SpieltagID, int Spieler1ID, int Spieler2ID)
+    public async Task<ActionResult> CreateMeisterschaft(SpielMeisterschaftCreate spielMeisterschaftCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
+        return Ok(result);
     }
 
     /// <summary>

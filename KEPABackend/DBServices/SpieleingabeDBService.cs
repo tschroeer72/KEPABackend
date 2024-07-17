@@ -364,4 +364,36 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         DbContext.TblSpielBlitztuniers.Remove(spielBlitztunier);
         await DbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Erzeuge Eintrag für Meisterschaft
+    /// </summary>
+    /// <param name="spielMeisterschaft"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpielMeisterschaftAsync(TblSpielMeisterschaft spielMeisterschaft)
+    {
+        spielMeisterschaft.HolzSpieler1 = 0;
+        spielMeisterschaft.HolzSpieler2 = 0;
+
+        await DbContext.TblSpielMeisterschafts.AddAsync(spielMeisterschaft);
+        await DbContext.SaveChangesAsync();
+        return spielMeisterschaft.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Partie an diesem Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpielMeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2)
+    {
+        var checkMeisterschaft = await DbContext.TblSpielMeisterschafts
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return checkMeisterschaft?.Id;
+    }
 }

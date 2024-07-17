@@ -120,7 +120,6 @@ public interface ISpieleingabeDBService
     /// <param name="SpieltagID"></param>
     Task DeleteSpiel6TageRennenAsync(int SpieltagID);
 
-
     /// <summary>
     /// Erzeuge Eintrag für Blitztunier
     /// </summary>
@@ -155,4 +154,20 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielBlitztunierAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Eintrag für Meisterschaft
+    /// </summary>
+    /// <param name="spielMeisterschaft"></param>
+    /// <returns></returns>
+    Task<int> CreateSpielMeisterschaftAsync(TblSpielMeisterschaft spielMeisterschaft);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Partie an diesem Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> CheckSpielMeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2);
 }
