@@ -107,4 +107,10 @@ public interface ISpieleingabeService
     /// <param name="spielMeisterschaftUpdate"></param>
     /// <returns></returns>
     Task<SpielMeisterschaft> UpdateSpielMeisterschaftAsync(SpielMeisterschaftUpdate spielMeisterschaftUpdate);
+
+    /// <summary>
+    /// Paarung aus Meisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielMeisterschaftAsync(int SpieltagID);
 }

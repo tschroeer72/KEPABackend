@@ -419,4 +419,19 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return spielMeisterschaft;
     }
+
+    /// <summary>
+    /// Paarung aus Meisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielMeisterschaftAsync(int SpieltagID)
+    {
+        var spielMeisterschaft = await DbContext.TblSpielMeisterschafts
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.TblSpielMeisterschafts.Remove(spielMeisterschaft);
+        await DbContext.SaveChangesAsync();
+    }
 }

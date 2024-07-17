@@ -183,4 +183,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>NULL oder SpielBlitztunier-Entität</returns>
     Task<TblSpielMeisterschaft?> GetSpielMeisterschaftByID(int ID);
+
+    /// <summary>
+    /// Paarung aus Meisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielMeisterschaftAsync(int SpieltagID);
 }

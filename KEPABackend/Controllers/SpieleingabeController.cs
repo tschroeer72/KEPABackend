@@ -244,7 +244,8 @@ public class SpieleingabeController : ControllerBase
     [Route("UpdateMeisterschaft")]
     public async Task<ActionResult> UpdateMeisterschaft(SpielMeisterschaftUpdate spielMeisterschaftUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
+        return Ok(result);
     }
 
     /// <summary>
@@ -256,7 +257,8 @@ public class SpieleingabeController : ControllerBase
     [Route("DeleteMeisterschaft")]
     public async Task<ActionResult> DeleteMeisterschaft(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpielMeisterschaftAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

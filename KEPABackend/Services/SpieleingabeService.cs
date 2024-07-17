@@ -369,4 +369,14 @@ public class SpieleingabeService : ISpieleingabeService
 
         return updatedSpielMeisterschaft;
     }
+
+    /// <summary>
+    /// Paarung aus Meisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielMeisterschaftAsync(int SpieltagID)
+    {
+        TblSpielMeisterschaft? spielMeisterschaft = await SpieleingabeDBService.GetSpielMeisterschaftByID(SpieltagID) ?? throw new SpielMeisterschaftNotFoundException();
+        await SpieleingabeDBService.DeleteSpielMeisterschaftAsync(SpieltagID);
+    }
 }
