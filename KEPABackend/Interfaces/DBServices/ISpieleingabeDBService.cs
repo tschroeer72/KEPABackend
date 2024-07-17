@@ -170,4 +170,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID2"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpielMeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2);
+
+    /// <summary>
+    /// Aktualisiere SpielMeisterschaft Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpielMeisterschaftAsync();
+
+    /// <summary>
+    /// Hole die SpielMeisterschaft-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder SpielBlitztunier-Entität</returns>
+    Task<TblSpielMeisterschaft?> GetSpielMeisterschaftByID(int ID);
 }

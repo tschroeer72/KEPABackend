@@ -21,6 +21,7 @@ public class SpieleingabeServiceTests
     private NeunerRattenUpdateValidator NeunerRattenUpdateValidator { get; }
     private Spiel6TageRennenUpdateValidator Spiel6TageRennenUpdateValidator { get; }
     private SpielBlitztunierUpdateValidator SpielBlitztunierUpdateValidator { get; }
+    private SpielMeisterschaftUpdateValidator SpielMeisterschaftUpdateValidator { get; }
 
     public SpieleingabeServiceTests()
     {
@@ -29,6 +30,7 @@ public class SpieleingabeServiceTests
         NeunerRattenUpdateValidator = new NeunerRattenUpdateValidator();
         Spiel6TageRennenUpdateValidator = new Spiel6TageRennenUpdateValidator();
         SpielBlitztunierUpdateValidator = new SpielBlitztunierUpdateValidator();
+        SpielMeisterschaftUpdateValidator = new SpielMeisterschaftUpdateValidator();
     }
 
     // ************
@@ -57,7 +59,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpieltagAsync(spieltagCreate);
@@ -87,7 +90,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpieltagAsync(spieltagCreate);
@@ -113,7 +117,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         await spieleingabeService.CloseSpieltagAsync(1);
@@ -139,7 +144,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
@@ -163,7 +169,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
@@ -188,7 +195,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CloseSpieltagAsync(1);
@@ -218,7 +226,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.GetSpieltagInBearbeitungAsync();
@@ -254,7 +263,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -286,7 +296,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -317,7 +328,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object, 
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -349,7 +361,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -384,7 +397,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -419,7 +433,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -454,7 +469,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -489,7 +505,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -514,7 +531,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
@@ -539,7 +557,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
@@ -576,7 +595,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -609,7 +629,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -641,7 +662,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -674,7 +696,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -710,7 +733,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -746,7 +770,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -782,7 +807,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -818,7 +844,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -843,7 +870,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
@@ -868,7 +896,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
@@ -905,7 +934,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -938,7 +968,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -970,7 +1001,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1003,7 +1035,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1039,7 +1072,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1075,7 +1109,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1111,7 +1146,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1147,7 +1183,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1172,7 +1209,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpielBlitztunierAsync(It.IsAny<int>());
@@ -1197,7 +1235,7 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator, SpielMeisterschaftUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpielBlitztunierAsync(It.IsAny<int>());
@@ -1234,7 +1272,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1267,7 +1306,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1299,7 +1339,8 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1332,12 +1373,161 @@ public class SpieleingabeServiceTests
             mitgliederDBServiceMock.Object,
             NeunerRattenUpdateValidator,
             Spiel6TageRennenUpdateValidator,
-            SpielBlitztunierUpdateValidator);
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
 
         //Assert
         Assert.ThrowsAsync<SpielMeisterschaftAlreadyExistsException>(func);
+    }
+
+    [Fact]
+    public async Task UpdateSpielMeisterschaft_Success()
+    {
+        //Arrange
+        SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = 1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HolzSpieler1 = 1,
+            HolzSpieler2 = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielMeisterschaftByID(It.IsAny<int>())).ReturnsAsync(new TblSpielMeisterschaft());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        var result = await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.UpdateSpielMeisterschaftAsync(), Times.Once);
+    }
+
+    [Fact]
+    public void SpielMeisterschaftNotFoundException_For_Non_Existing_SpielMeisterschaftID_for_UpdateSpielMeisterschaft()
+    {
+        //Arrange
+        SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
+        {
+            ID = -1,
+            SpieltagID = 1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HolzSpieler1 = 1,
+            HolzSpieler2 = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielMeisterschaftByID(It.IsAny<int>()));
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<SpielMeisterschaftNotFoundException>(func);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielMeisterschaft()
+    {
+        //Arrange
+        SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = -1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HolzSpieler1 = 1,
+            HolzSpieler2 = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielMeisterschaftByID(It.IsAny<int>())).ReturnsAsync(new TblSpielMeisterschaft());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
+
+    [Fact]
+    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielMeisterschaft()
+    {
+        //Arrange
+        SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = 1,
+            SpielerID1 = -1,
+            SpielerID2 = 1,
+            HolzSpieler1 = 1,
+            HolzSpieler2 = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielMeisterschaftByID(It.IsAny<int>())).ReturnsAsync(new TblSpielMeisterschaft());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>()));
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 }

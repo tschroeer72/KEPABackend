@@ -100,4 +100,11 @@ public interface ISpieleingabeService
     /// <param name="spielMeisterschaftCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpielMeisterschaftAsync(SpielMeisterschaftCreate spielMeisterschaftCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielMeisterschaftUpdate"></param>
+    /// <returns></returns>
+    Task<SpielMeisterschaft> UpdateSpielMeisterschaftAsync(SpielMeisterschaftUpdate spielMeisterschaftUpdate);
 }

@@ -236,13 +236,13 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Speichere die Holzzahlen der Spielerpaarung
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="HolzSpieler1"></param>
-    /// <param name="HolzSpieler2"></param>
+    /// <param name="spielMeisterschaftUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">SpielMeisterschaft-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateMeisterschaft")]
-    public async Task<ActionResult> UpdateMeisterschaft(int SpieltagID, int HolzSpieler1, int HolzSpieler2)
+    public async Task<ActionResult> UpdateMeisterschaft(SpielMeisterschaftUpdate spielMeisterschaftUpdate)
     {
         return Ok(1);
     }

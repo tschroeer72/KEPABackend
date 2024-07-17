@@ -3,7 +3,7 @@
 namespace KEPABackend.DTOs.Get;
 
 /// <summary>
-/// DTO Post SpielBlitztunier 
+/// DTO Get SpielBlitztunier 
 /// </summary>
 public record SpielBlitztunier
 {
@@ -32,13 +32,13 @@ public record SpielBlitztunier
     public int SpielerID2 { get; set; }
 
     /// <summary>
-    /// Runden
+    /// Punkte Spieler 1
     /// </summary>
     [Required]
     public int PunkteSpieler1 { get; set; }
 
     /// <summary>
-    /// Punkte
+    /// Punkte Spieler 2
     /// </summary>
     [Required]
     public int PunkteSpieler2 { get; set; }

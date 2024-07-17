@@ -25,6 +25,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly NeunerRattenUpdateValidator neunerRattenUpdateValidator;
     private readonly Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator;
     private readonly SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator;
+    private readonly SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator;
 
     /// <summary>
     /// Contructor
@@ -36,8 +37,9 @@ public class SpieleingabeService : ISpieleingabeService
         SpieltagCreateValidator spieltagCreateValidator,
         IMitgliederDBService mitgliederDBService,
         NeunerRattenUpdateValidator neunerRattenUpdateValidator,
-        Spiel6TageRennenUpdateValidator spiel6TagreRennenValidator,
-        SpielBlitztunierUpdateValidator spielBlitztunierValidator)
+        Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator,
+        SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator,
+        SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
@@ -45,8 +47,9 @@ public class SpieleingabeService : ISpieleingabeService
         this.SpieltagCreateValidator = spieltagCreateValidator;
         this.mitgliederDBService = mitgliederDBService;
         this.neunerRattenUpdateValidator = neunerRattenUpdateValidator;
-        this.spiel6TageRennenUpdateValidator = spiel6TagreRennenValidator;
-        this.spielBlitztunierUpdateValidator = spielBlitztunierValidator;
+        this.spiel6TageRennenUpdateValidator = spiel6TageRennenUpdateValidator;
+        this.spielBlitztunierUpdateValidator = spielBlitztunierUpdateValidator;
+        this.spielMeisterschaftUpdateValidator = spielMeisterschaftUpdateValidator;
     }
 
     /// <summary>
@@ -328,5 +331,42 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielMeisterschaftUpdate"></param>
+    /// <returns></returns>
+    public async Task<SpielMeisterschaft> UpdateSpielMeisterschaftAsync(SpielMeisterschaftUpdate spielMeisterschaftUpdate)
+    {
+        try
+        {
+            await spielMeisterschaftUpdateValidator.ValidateAndThrowAsync(spielMeisterschaftUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpielMeisterschaft? spielMeisterschaft = await SpieleingabeDBService.GetSpielMeisterschaftByID(spielMeisterschaftUpdate.ID) ?? throw new SpielMeisterschaftNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielMeisterschaftUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spielMeisterschaftUpdate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spielMeisterschaftUpdate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+
+        Mapper.Map(spielMeisterschaftUpdate, spielMeisterschaft);
+        await SpieleingabeDBService.UpdateSpielMeisterschaftAsync();
+
+        var updatedSpielMeisterschaft = new SpielMeisterschaft()
+        {
+            ID = spielMeisterschaft.Id,
+            SpieltagID = spielMeisterschaft.SpieltagId,
+            SpielerID1 = spielMeisterschaft.SpielerId1,
+            SpielerID2 = spielMeisterschaft.SpielerId2,
+            HolzSpieler1 = spielMeisterschaft.HolzSpieler1,
+            HolzSpieler2 = spielMeisterschaft.HolzSpieler2
+        };
+
+        return updatedSpielMeisterschaft;
     }
 }

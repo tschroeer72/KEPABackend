@@ -396,4 +396,27 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return checkMeisterschaft?.Id;
     }
+
+    /// <summary>
+    /// Aktualisiere SpielMeisterschaft Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpielMeisterschaftAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die SpielMeisterschaft-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    public async Task<TblSpielMeisterschaft?> GetSpielMeisterschaftByID(int ID)
+    {
+        var spielMeisterschaft = await DbContext.TblSpielMeisterschafts
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spielMeisterschaft;
+    }
 }

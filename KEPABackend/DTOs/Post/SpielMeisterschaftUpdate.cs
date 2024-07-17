@@ -3,9 +3,9 @@
 namespace KEPABackend.DTOs.Post;
 
 /// <summary>
-/// DTO Post SpielBlitztunierUpdate 
+/// DTO Post SpielMeisterschaftUpdate 
 /// </summary>
-public record SpielBlitztunierUpdate
+public record SpielMeisterschaftUpdate
 {
     /// <summary>
     /// ID der Entität
@@ -32,14 +32,14 @@ public record SpielBlitztunierUpdate
     public int SpielerID2 { get; set; }
 
     /// <summary>
-    /// Punkte Spieler 1
+    /// Holz Spieler 1
     /// </summary>
     [Required] 
-    public int PunkteSpieler1 { get; set; }
+    public int HolzSpieler1 { get; set; }
 
     /// <summary>
-    /// Punkte Spieler 2
+    /// Holz Spieler 2
     /// </summary>
     [Required] 
-    public int PunkteSpieler2 { get; set; }
+    public int HolzSpieler2 { get; set; }
 }
