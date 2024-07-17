@@ -116,7 +116,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="200">Löschen erfolgreich</response>
-    /// <response code="404">Neuner/Ratten-Eintrag</response>  
+    /// <response code="404">Neuner/Ratten-Eintrag nicht gefunden</response>  
     [HttpDelete]
     [Route("Delete9erRatten")]
     public async Task<ActionResult> Delete9erRatten(int SpieltagID)
@@ -161,6 +161,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">Spiel6TageRennen nicht gefunden</response>  
     [HttpDelete]
     [Route("Delete6TageRennen")]
     public async Task<ActionResult> Delete6TageRennen(int SpieltagID)
@@ -205,11 +207,14 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">SpielBlitztunier nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteBlitztunier")]
     public async Task<ActionResult> DeleteBlitztunier(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpielBlitztunierAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

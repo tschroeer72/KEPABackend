@@ -299,4 +299,14 @@ public class SpieleingabeService : ISpieleingabeService
 
         return updatedSpielBlitztunier;
     }
+
+    /// <summary>
+    /// Paarung aus Blitztunier löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielBlitztunierAsync(int SpieltagID)
+    {
+        TblSpielBlitztunier? spielBlitztunier = await SpieleingabeDBService.GetSpielBlitztunierByID(SpieltagID) ?? throw new SpielBlitztunierNotFoundException();
+        await SpieleingabeDBService.DeleteSpielBlitztunierAsync(SpieltagID);
+    }
 }

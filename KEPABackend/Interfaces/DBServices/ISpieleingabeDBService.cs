@@ -149,4 +149,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>NULL oder SpielBlitztunier-Entität</returns>
     Task<TblSpielBlitztunier?> GetSpielBlitztunierByID(int ID);
+
+    /// <summary>
+    /// Paarung aus Blitztunier löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielBlitztunierAsync(int SpieltagID);
 }

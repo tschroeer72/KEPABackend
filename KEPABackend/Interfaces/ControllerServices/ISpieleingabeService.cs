@@ -88,4 +88,10 @@ public interface ISpieleingabeService
     /// <param name="spielBlitztunierUpdate"></param>
     /// <returns></returns>
     Task<SpielBlitztunier> UpdateSpielBlitztunierAsync(SpielBlitztunierUpdate spielBlitztunierUpdate);
+
+    /// <summary>
+    /// Paarung aus Blitztunier löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielBlitztunierAsync(int SpieltagID);
 }
