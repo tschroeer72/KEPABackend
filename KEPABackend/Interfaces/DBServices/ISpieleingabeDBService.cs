@@ -49,7 +49,7 @@ public interface ISpieleingabeDBService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    Task<AktuellerSpieltag?> GetSpieltagInBearbeitung();
+    Task<AktuellerSpieltag?> GetSpieltagInBearbeitungAsync();
 
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
@@ -136,4 +136,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID2"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpielBlitztunierExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2);
+
+    /// <summary>
+    /// Aktualisiere SpielBlitztunier Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpielBlitztunierAsync();
+
+    /// <summary>
+    /// Hole die SpielBlitztunier-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder SpielBlitztunier-Entität</returns>
+    Task<TblSpielBlitztunier?> GetSpielBlitztunierByID(int ID);
 }

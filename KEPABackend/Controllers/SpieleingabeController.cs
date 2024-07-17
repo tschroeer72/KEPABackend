@@ -72,10 +72,10 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <returns>ID und Datum des Spieltages</returns>
     [HttpGet]
-    [Route("GetSpieltagInBearbeitung")]
+    [Route("GetSpieltagInBearbeitungAsync")]
     public async Task<ActionResult> GetSpieltagInBearbeitung()
     {
-        var result = await SpieleingabeService.GetSpieltagInBearbeitung();
+        var result = await SpieleingabeService.GetSpieltagInBearbeitungAsync();
         return Ok(result);
     }
 
@@ -152,7 +152,7 @@ public class SpieleingabeController : ControllerBase
     [Route("Update6TageRennen")]
     public async Task<ActionResult> Update6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate)
     {
-        var result = await SpieleingabeService.UpdateSpiel6TageRennen(spiel6TageRennenUpdate);
+        var result = await SpieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
         return Ok(result);
     }
 
@@ -188,15 +188,16 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Speichere die Punkte der Spieler
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="PunkteSpieler1"></param>
-    /// <param name="PunkteSpieler2"></param>
+    /// <param name="spielBlitztunierUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">SpielBlitztunier-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateBlitztunier")]
-    public async Task<ActionResult> UpdateBlitztunier(int SpieltagID, int PunkteSpieler1, int PunkteSpieler2)
+    public async Task<ActionResult> UpdateBlitztunier(SpielBlitztunierUpdate spielBlitztunierUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
+        return Ok(result);
     }
 
     /// <summary>

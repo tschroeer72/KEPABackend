@@ -219,6 +219,23 @@ public class ExceptionMiddleware
             var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
             await context.Response.WriteAsync(problemDetailsJson);
         }
+        catch (SpielBlitztunierNotFoundException)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+            var problemDetails = new ProblemDetails()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Detail = "",
+                Instance = "",
+                Title = "SpielBlitztunier Eintrag nicht gefunden !",
+                Type = ""
+            };
+
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
         catch (ValidationException ex)
         {
             context.Response.ContentType = "application/problem+json";

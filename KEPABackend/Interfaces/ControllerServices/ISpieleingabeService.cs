@@ -32,7 +32,7 @@ public interface ISpieleingabeService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    Task<AktuellerSpieltag?> GetSpieltagInBearbeitung();
+    Task<AktuellerSpieltag?> GetSpieltagInBearbeitungAsync();
 
     /// <summary>
     /// Erzeuge Tabelleneintrag für 9er und Ratten
@@ -66,7 +66,7 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="spiel6TageRennenUpdate"></param>
     /// <returns></returns>
-    Task<Spiel6TageRennen> UpdateSpiel6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate);
+    Task<Spiel6TageRennen> UpdateSpiel6TageRennenAsync(Spiel6TageRennenUpdate spiel6TageRennenUpdate);
 
     /// <summary>
     /// Mannschaft auf 6-Tage-Rennen löschen
@@ -81,4 +81,11 @@ public interface ISpieleingabeService
     /// <param name="spielBlitztunierCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpielBlitztunierAsync(SpielBlitztunierCreate spielBlitztunierCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielBlitztunierUpdate"></param>
+    /// <returns></returns>
+    Task<SpielBlitztunier> UpdateSpielBlitztunierAsync(SpielBlitztunierUpdate spielBlitztunierUpdate);
 }

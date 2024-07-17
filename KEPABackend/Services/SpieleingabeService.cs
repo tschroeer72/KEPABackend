@@ -23,7 +23,8 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly SpieltagCreateValidator SpieltagCreateValidator;
     private readonly IMitgliederDBService mitgliederDBService;
     private readonly NeunerRattenUpdateValidator neunerRattenUpdateValidator;
-    private readonly Spiel6TageRennenUpdateValidator spiel6TageRennenValidator;
+    private readonly Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator;
+    private readonly SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator;
 
     /// <summary>
     /// Contructor
@@ -35,7 +36,8 @@ public class SpieleingabeService : ISpieleingabeService
         SpieltagCreateValidator spieltagCreateValidator,
         IMitgliederDBService mitgliederDBService,
         NeunerRattenUpdateValidator neunerRattenUpdateValidator,
-        Spiel6TageRennenUpdateValidator spiel6TagreRennenValidator)
+        Spiel6TageRennenUpdateValidator spiel6TagreRennenValidator,
+        SpielBlitztunierUpdateValidator spielBlitztunierValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
@@ -43,7 +45,8 @@ public class SpieleingabeService : ISpieleingabeService
         this.SpieltagCreateValidator = spieltagCreateValidator;
         this.mitgliederDBService = mitgliederDBService;
         this.neunerRattenUpdateValidator = neunerRattenUpdateValidator;
-        this.spiel6TageRennenValidator = spiel6TagreRennenValidator;
+        this.spiel6TageRennenUpdateValidator = spiel6TagreRennenValidator;
+        this.spielBlitztunierUpdateValidator = spielBlitztunierValidator;
     }
 
     /// <summary>
@@ -105,9 +108,9 @@ public class SpieleingabeService : ISpieleingabeService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitung()
+    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitungAsync()
     {
-        return await SpieleingabeDBService.GetSpieltagInBearbeitung();
+        return await SpieleingabeDBService.GetSpieltagInBearbeitungAsync();
     }
 
     /// <summary>
@@ -198,11 +201,11 @@ public class SpieleingabeService : ISpieleingabeService
     /// </summary>
     /// <param name="spiel6TageRennenUpdate"></param>
     /// <returns></returns>
-    public async Task<Spiel6TageRennen> UpdateSpiel6TageRennen(Spiel6TageRennenUpdate spiel6TageRennenUpdate)
+    public async Task<Spiel6TageRennen> UpdateSpiel6TageRennenAsync(Spiel6TageRennenUpdate spiel6TageRennenUpdate)
     {
         try
         {
-            await spiel6TageRennenValidator.ValidateAndThrowAsync(spiel6TageRennenUpdate);
+            await spiel6TageRennenUpdateValidator.ValidateAndThrowAsync(spiel6TageRennenUpdate);
         }
         catch (ValidationException)
         {
@@ -258,5 +261,42 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielBlitztunierUpdate"></param>
+    /// <returns></returns>
+    public async Task<SpielBlitztunier> UpdateSpielBlitztunierAsync(SpielBlitztunierUpdate spielBlitztunierUpdate)
+    {
+        try
+        {
+            await spielBlitztunierUpdateValidator.ValidateAndThrowAsync(spielBlitztunierUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpielBlitztunier? spielBlitztunier = await SpieleingabeDBService.GetSpielBlitztunierByID(spielBlitztunierUpdate.ID) ?? throw new SpielBlitztunierNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielBlitztunierUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spielBlitztunierUpdate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spielBlitztunierUpdate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+
+        Mapper.Map(spielBlitztunierUpdate, spielBlitztunier);
+        await SpieleingabeDBService.UpdateSpielBlitztunierAsync();
+
+        var updatedSpielBlitztunier = new SpielBlitztunier()
+        {
+            ID = spielBlitztunier.Id,
+            SpieltagID = spielBlitztunier.SpieltagId,
+            SpielerID1 = spielBlitztunier.SpielerId1,
+            SpielerID2 = spielBlitztunier.SpielerId2,
+            PunkteSpieler1 = spielBlitztunier.PunkteSpieler1,
+            PunkteSpieler2 = spielBlitztunier.PunkteSpieler2
+        };
+
+        return updatedSpielBlitztunier;
     }
 }

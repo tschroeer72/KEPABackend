@@ -128,7 +128,7 @@ public class SpieleingabeDBService : ISpieleingabeDBService
     /// Hole den Spieltag der in Bearbeitung ist
     /// </summary>
     /// <returns>ID und Datum des Spieltag</returns>
-    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitung()
+    public async Task<AktuellerSpieltag?> GetSpieltagInBearbeitungAsync()
     {
         AktuellerSpieltag objSpieltag = new();
 
@@ -324,5 +324,29 @@ public class SpieleingabeDBService : ISpieleingabeDBService
                                     .SingleOrDefaultAsync();
 
         return checkBlitztunier?.Id;
+    }
+
+    /// <summary>
+    /// Aktualisiere SpielBlitztunier Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpielBlitztunierAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die SpielBlitztunier-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder SpielBlitztunier-Entität</returns>
+    public async Task<TblSpielBlitztunier?> GetSpielBlitztunierByID(int ID)
+    {
+        var spielBlitztunier = await DbContext.TblSpielBlitztuniers
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spielBlitztunier;
     }
 }
