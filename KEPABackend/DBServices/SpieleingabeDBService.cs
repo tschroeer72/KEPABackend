@@ -1,5 +1,6 @@
 ﻿using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
+using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Modell;
@@ -433,5 +434,40 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         DbContext.TblSpielMeisterschafts.Remove(spielMeisterschaft);
         await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Erzeuge Eintrag für Kombimeisterschaft
+    /// </summary>
+    /// <param name="spielKombimeisterschaft"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpielKombimeisterschaftAsync(TblSpielKombimeisterschaft spielKombimeisterschaft)
+    {
+        spielKombimeisterschaft.Spieler1Punkte3bis8 = 0;
+        spielKombimeisterschaft.Spieler1Punkte5Kugeln = 0;
+        spielKombimeisterschaft.Spieler2Punkte3bis8 = 0;
+        spielKombimeisterschaft.Spieler2Punkte5Kugeln = 0;
+
+        await DbContext.TblSpielKombimeisterschafts.AddAsync(spielKombimeisterschaft);
+        await DbContext.SaveChangesAsync();
+        return spielKombimeisterschaft.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Partie an diesem Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <param name="HinRückrunde"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpielKombimeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2, HinRückrunde HinRückrunde)
+    {
+        var checkKOmbimeisterschaft = await DbContext.TblSpielKombimeisterschafts
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2 && w.HinRückrunde == (int)HinRückrunde)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return checkKOmbimeisterschaft?.Id;
     }
 }

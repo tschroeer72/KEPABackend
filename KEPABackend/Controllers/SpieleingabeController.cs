@@ -264,16 +264,14 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge Tabelleneintrag für Kombimeisterschaft
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Spieler1ID"></param>
-    /// <param name="Spieler2ID"></param>
-    /// <param name="HinRückrunde"></param>
+    /// <param name="spielKombimeisterschaftCreate"></param>
     /// <returns></returns>
     [HttpPost]
     [Route("CreateKombimeisterschaft")]
-    public async Task<ActionResult> CreateKombimeisterschaft(int SpieltagID, int Spieler1ID, int Spieler2ID, int HinRückrunde)
+    public async Task<ActionResult> CreateKombimeisterschaft(SpielKombimeisterschaftCreate spielKombimeisterschaftCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
+        return Ok(result);
     }
 
     /// <summary>

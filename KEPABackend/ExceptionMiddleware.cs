@@ -270,6 +270,23 @@ public class ExceptionMiddleware
             var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
             await context.Response.WriteAsync(problemDetailsJson);
         }
+        catch (SpielKombimeisterschaftAlreadyExistsException)
+        {
+            context.Response.ContentType = "application/problem+json";
+            context.Response.StatusCode = 409;
+
+            var problemDetails = new ProblemDetails()
+            {
+                Status = 409,
+                Detail = "",
+                Instance = "",
+                Title = "SpielKombimeisterschaft Eintrag existiert bereits !",
+                Type = ""
+            };
+
+            var problemDetailsJson = JsonConvert.SerializeObject(problemDetails);
+            await context.Response.WriteAsync(problemDetailsJson);
+        }
         catch (ValidationException ex)
         {
             context.Response.ContentType = "application/problem+json";

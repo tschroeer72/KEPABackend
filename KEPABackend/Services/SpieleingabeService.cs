@@ -249,7 +249,7 @@ public class SpieleingabeService : ISpieleingabeService
     /// <summary>
     /// Erzeuge Eintrag für Blitztunier
     /// </summary>
-    /// <param name="spielBlitztunier"></param>
+    /// <param name="spielBlitztunierCreate"></param>
     /// <returns></returns>
     public async Task<EntityID> CreateSpielBlitztunierAsync(SpielBlitztunierCreate spielBlitztunierCreate)
     {
@@ -378,5 +378,25 @@ public class SpieleingabeService : ISpieleingabeService
     {
         TblSpielMeisterschaft? spielMeisterschaft = await SpieleingabeDBService.GetSpielMeisterschaftByID(SpieltagID) ?? throw new SpielMeisterschaftNotFoundException();
         await SpieleingabeDBService.DeleteSpielMeisterschaftAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Erzeuge Eintrag für Kombimeisterschaft
+    /// </summary>
+    /// <param name="spielKombimeisterschaftCreate"></param>
+    /// <returns></returns>
+    public async Task<EntityID> CreateSpielKombimeisterschaftAsync(SpielKombimeisterschaftCreate spielKombimeisterschaftCreate)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielKombimeisterschaftCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spielKombimeisterschaftCreate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spielKombimeisterschaftCreate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+        int? spielKombimeisterschaftCheck = await SpieleingabeDBService.CheckSpielKombimeisterschaftExistingAsync(spielKombimeisterschaftCreate.SpieltagID, spielKombimeisterschaftCreate.SpielerID1, spielKombimeisterschaftCreate.SpielerID2, spielKombimeisterschaftCreate.HinRückrunde);
+        if (spielKombimeisterschaftCheck != null) throw new SpielKombimeisterschaftAlreadyExistsException();
+
+        var spielKombimeisterschaft = Mapper.Map<TblSpielKombimeisterschaft>(spielKombimeisterschaftCreate);
+        int intID = await SpieleingabeDBService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaft);
+
+        EntityID entityID = new() { ID = intID };
+        return entityID;
     }
 }

@@ -4,6 +4,7 @@ using KEPABackend.DBServices;
 using KEPABackend.DTOs;
 using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
+using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;
@@ -1350,7 +1351,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielBlitztunierAlreadyExistsException_For_CreateSpielMeisterschaft()
+    public void SpielMeisterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftCreate spielMeisterschaftCreate = new()
@@ -1585,4 +1586,143 @@ public class SpieleingabeServiceTests
     // **********************
     // * Kombimeisterschaft *
     // **********************
+
+    [Fact]
+    public async Task CreateSpielKombimeisterschaft_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HinRückrunde = HinRückrunde.Hinrunde
+        };
+        spieleingabeDBServiceMock.Setup(mock => mock.CreateSpielKombimeisterschaftAsync(It.IsAny<TblSpielKombimeisterschaft>())).ReturnsAsync(1);
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        var result = await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.CreateSpielKombimeisterschaftAsync(It.IsAny<TblSpielKombimeisterschaft>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielKombimeisterschaft()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
+        {
+            SpieltagID = -1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HinRückrunde = HinRückrunde.Hinrunde
+        };
+        spieleingabeDBServiceMock.Setup(mock => mock.CheckSpielKombimeisterschaftExistingAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<HinRückrunde>())).ReturnsAsync(1);
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
+
+    [Fact]
+    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielKombimeisterschaft()
+    {
+        //Arrange
+        SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID1 = -1,
+            SpielerID2 = 1,
+            HinRückrunde = HinRückrunde.Hinrunde
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
+
+    [Fact]
+    public void SpielKombimeinsterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
+    {
+        //Arrange
+        SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID1 = 1,
+            SpielerID2 = 1,
+            HinRückrunde = HinRückrunde.Hinrunde
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        spieleingabeDBServiceMock.Setup(mock => mock.CheckSpielKombimeisterschaftExistingAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<HinRückrunde>())).ReturnsAsync(1);
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
+
+        //Assert
+        Assert.ThrowsAsync<SpielKombimeisterschaftAlreadyExistsException>(func);
+    }
 }

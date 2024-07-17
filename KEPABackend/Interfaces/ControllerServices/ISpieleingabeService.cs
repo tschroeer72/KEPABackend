@@ -113,4 +113,11 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielMeisterschaftAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Eintrag für Kombimeisterschaft
+    /// </summary>
+    /// <param name="spielKombimeisterschaftCreate"></param>
+    /// <returns></returns>
+    Task<EntityID> CreateSpielKombimeisterschaftAsync(SpielKombimeisterschaftCreate spielKombimeisterschaftCreate);
 }

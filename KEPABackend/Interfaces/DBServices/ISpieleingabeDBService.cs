@@ -1,5 +1,6 @@
 ﻿using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Post;
+using KEPABackend.Enums;
 using KEPABackend.Modell;
 
 namespace KEPABackend.Interfaces.DBServices;
@@ -189,4 +190,21 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielMeisterschaftAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Eintrag für Kombimeisterschaft
+    /// </summary>
+    /// <param name="spielKombimeisterschaft"></param>
+    /// <returns></returns>
+    Task<int> CreateSpielKombimeisterschaftAsync(TblSpielKombimeisterschaft spielKombimeisterschaft);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Partie an diesem Spieltag gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID1"></param>
+    /// <param name="SpielerID2"></param>
+    /// <param name="HinRückrunde"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> CheckSpielKombimeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2, HinRückrunde HinRückrunde);
 }
