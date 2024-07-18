@@ -241,4 +241,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpielPokalExistingAsync(int SpieltagID, int SpielerID);
+
+    /// <summary>
+    /// Aktualisiere SpielPokal Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpielPokalAsync();
+
+    /// <summary>
+    /// Hole die GetSpielPokaltByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder }-Entität</returns>
+    Task<TblSpielPokal?> GetSpielPokalByID(int ID);
 }

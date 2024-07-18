@@ -324,14 +324,16 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Speichere die Platzierung im Pokal
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Platzierung"></param>
+    /// <param name="spielPokalUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">SpielPokal-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdatePokal")]
-    public async Task<ActionResult> UpdatePokal(int SpieltagID, int Platzierung)
+    public async Task<ActionResult> UpdatePokal(SpielPokalUpdate spielPokalUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
+        return Ok(result);
     }
 
     /// <summary>
@@ -343,7 +345,8 @@ public class SpieleingabeController : ControllerBase
     [Route("DeletePokal")]
     public async Task<ActionResult> DeletePokal(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpielPokalAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

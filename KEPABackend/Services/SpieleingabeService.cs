@@ -27,6 +27,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator;
     private readonly SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator;
     private readonly SpielKombimeisterschaftUpdateValidator spielKombiMeisterschaftValidator;
+    private readonly SpielPokalUpdateValidator spielPokalUpdateValidator;
 
     /// <summary>
     /// Contructor
@@ -41,7 +42,9 @@ public class SpieleingabeService : ISpieleingabeService
         Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator,
         SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator,
         SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator,
-        SpielKombimeisterschaftUpdateValidator spielKombiMeisterschaftValidator)
+        SpielKombimeisterschaftUpdateValidator spielKombimeisterschaftUpdateValidator,
+        SpielPokalUpdateValidator spielPokalUpdateValidator
+        )
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
@@ -52,7 +55,8 @@ public class SpieleingabeService : ISpieleingabeService
         this.spiel6TageRennenUpdateValidator = spiel6TageRennenUpdateValidator;
         this.spielBlitztunierUpdateValidator = spielBlitztunierUpdateValidator;
         this.spielMeisterschaftUpdateValidator = spielMeisterschaftUpdateValidator;
-        this.spielKombiMeisterschaftValidator = spielKombiMeisterschaftValidator;
+        this.spielKombiMeisterschaftValidator = spielKombimeisterschaftUpdateValidator;
+        this.spielPokalUpdateValidator = spielPokalUpdateValidator;
     }
 
     /// <summary>
@@ -469,5 +473,39 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielPokalUpdate"></param>
+    /// <returns></returns>
+    public async Task<SpielPokal> UpdateSpielPokalAsync(SpielPokalUpdate spielPokalUpdate)
+    {
+        try
+        {
+            await spielPokalUpdateValidator.ValidateAndThrowAsync(spielPokalUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpielPokal? spielPokal = await SpieleingabeDBService.GetSpielPokalByID(spielPokalUpdate.ID) ?? throw new SpielPokalNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielPokalUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(spielPokalUpdate.SpielerID) ?? throw new MitgliedNotFoundException();
+
+        Mapper.Map(spielPokalUpdate, spielPokal);
+        await SpieleingabeDBService.UpdateSpielPokalAsync();
+
+        var updatedSpielPokal = new SpielPokal()
+        {
+            ID = spielPokal.Id,
+            SpieltagID = spielPokal.SpieltagId,
+            SpielerID = spielPokal.SpielerId,
+            Platzierung = spielPokal.Platzierung
+        };
+
+        return updatedSpielPokal;
     }
 }

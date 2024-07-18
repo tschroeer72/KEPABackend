@@ -539,4 +539,28 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return checkPokal?.Id;
     }
+
+    /// <summary>
+    /// Aktualisiere SpielPokal Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpielPokalAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die GetSpielPokaltByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder }-Entität</returns>
+    public async Task<TblSpielPokal?> GetSpielPokalByID(int ID)
+    {
+        var spielPokal = await DbContext.TblSpielPokals
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spielPokal;
+    }
 }

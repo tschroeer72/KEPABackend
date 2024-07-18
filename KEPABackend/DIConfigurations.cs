@@ -40,6 +40,7 @@ public static class DIConfigurations
         services.AddTransient<SpielMeisterschaftUpdateValidator>();
         services.AddTransient<SpielKombimeisterschaftCreateValidator>();
         services.AddTransient<SpielKombimeisterschaftUpdateValidator>();
+        services.AddTransient<SpielPokalUpdateValidator>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }

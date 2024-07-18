@@ -24,6 +24,7 @@ public class SpieleingabeServiceTests
     private SpielBlitztunierUpdateValidator SpielBlitztunierUpdateValidator { get; }
     private SpielMeisterschaftUpdateValidator SpielMeisterschaftUpdateValidator { get; }
     private SpielKombimeisterschaftUpdateValidator SpielKombimeisterschaftUpdateValidator { get; }
+    private SpielPokalUpdateValidator SpielPokalUpdateValidator { get; }
 
     public SpieleingabeServiceTests()
     {
@@ -34,6 +35,7 @@ public class SpieleingabeServiceTests
         SpielBlitztunierUpdateValidator = new SpielBlitztunierUpdateValidator();
         SpielMeisterschaftUpdateValidator = new SpielMeisterschaftUpdateValidator();
         SpielKombimeisterschaftUpdateValidator = new SpielKombimeisterschaftUpdateValidator();
+        SpielPokalUpdateValidator = new SpielPokalUpdateValidator();
     }
 
     // ************
@@ -64,7 +66,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpieltagAsync(spieltagCreate);
@@ -96,7 +99,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpieltagAsync(spieltagCreate);
@@ -124,7 +128,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.CloseSpieltagAsync(1);
@@ -152,7 +157,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
@@ -178,7 +184,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
@@ -205,7 +212,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CloseSpieltagAsync(1);
@@ -237,7 +245,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.GetSpieltagInBearbeitungAsync();
@@ -275,7 +284,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -309,7 +319,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -342,7 +353,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -376,7 +388,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
@@ -413,7 +426,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -450,7 +464,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -487,7 +502,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -524,7 +540,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
@@ -551,7 +568,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
@@ -578,7 +596,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
@@ -617,7 +636,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -652,7 +672,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -686,7 +707,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -721,7 +743,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
@@ -759,7 +782,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -797,7 +821,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -835,7 +860,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -873,7 +899,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
@@ -900,7 +927,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator, 
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
@@ -927,7 +955,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
@@ -966,7 +995,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1001,7 +1031,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1035,7 +1066,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1070,7 +1102,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
@@ -1108,7 +1141,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1146,7 +1180,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1184,7 +1219,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1222,7 +1258,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
@@ -1249,7 +1286,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpielBlitztunierAsync(It.IsAny<int>());
@@ -1276,7 +1314,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator, 
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpielBlitztunierAsync(It.IsAny<int>());
@@ -1315,7 +1354,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1350,7 +1390,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1384,7 +1425,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1419,7 +1461,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
@@ -1457,7 +1500,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
@@ -1495,7 +1539,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
@@ -1533,7 +1578,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
@@ -1571,7 +1617,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
@@ -1598,7 +1645,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpielMeisterschaftAsync(It.IsAny<int>());
@@ -1625,7 +1673,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator, 
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpielMeisterschaftAsync(It.IsAny<int>());
@@ -1665,7 +1714,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
@@ -1701,7 +1751,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
@@ -1736,7 +1787,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
@@ -1772,7 +1824,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
@@ -1813,7 +1866,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
@@ -1854,7 +1908,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
@@ -1895,7 +1950,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
@@ -1936,7 +1992,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
@@ -1963,7 +2020,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         await spieleingabeService.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>());
@@ -1990,7 +2048,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         Func<Task> func = async () => await spieleingabeService.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>());
@@ -2028,7 +2087,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         var result = await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
@@ -2062,7 +2122,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
@@ -2095,7 +2156,8 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
@@ -2129,12 +2191,161 @@ public class SpieleingabeServiceTests
             Spiel6TageRennenUpdateValidator,
             SpielBlitztunierUpdateValidator,
             SpielMeisterschaftUpdateValidator,
-            SpielKombimeisterschaftUpdateValidator);
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
         //Act
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
 
         //Assert
         Assert.ThrowsAsync<SpielPokalAlreadyExistsException>(func);
+    }
+
+    [Fact]
+    public async Task UpdateSpielPokal_Success()
+    {
+        //Arrange
+        SpielPokalUpdate spielPokalUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = 1,
+            SpielerID = 1,
+            Platzierung = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>())).ReturnsAsync(new TblSpielPokal());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        var result = await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.UpdateSpielPokalAsync(), Times.Once);
+    }
+
+    [Fact]
+    public void SpielPokaltNotFoundException_For_Non_Existing_SpielPokalID_for_UpdateSpielPokal()
+    {
+        //Arrange
+        SpielPokalUpdate spielPokalUpdate = new()
+        {
+            ID = -1,
+            SpieltagID = 1,
+            SpielerID = 1,
+            Platzierung = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>()));
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielPokal()
+    {
+        //Arrange
+        SpielPokalUpdate spielPokalUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = -1,
+            SpielerID = 1,
+            Platzierung = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>())).ReturnsAsync(new TblSpielPokal());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
+
+    [Fact]
+    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielPokal()
+    {
+        //Arrange
+        SpielPokalUpdate spielPokalUpdate = new()
+        {
+            ID = 1,
+            SpieltagID = 1,
+            SpielerID = -1,
+            Platzierung = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>())).ReturnsAsync(new TblSpielPokal());
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>()));
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 }

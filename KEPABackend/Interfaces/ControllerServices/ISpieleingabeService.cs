@@ -140,4 +140,11 @@ public interface ISpieleingabeService
     /// <param name="spielPokalCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpielPokalAsync(SpielPokalCreate spielPokalCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielPokalUpdate"></param>
+    /// <returns></returns>
+    Task<SpielPokal> UpdateSpielPokalAsync(SpielPokalUpdate spielPokalUpdate);
 }
