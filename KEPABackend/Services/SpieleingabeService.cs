@@ -574,4 +574,14 @@ public class SpieleingabeService : ISpieleingabeService
 
         return updatedSpielSargkegeln;
     }
+
+    /// <summary>
+    /// Sargkegeln löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielSargkegelnAsync(int SpieltagID)
+    {
+        TblSpielSargKegeln? spielSargkegeln = await SpieleingabeDBService.GetSpielSargkegelnByID(SpieltagID) ?? throw new SpielSargkegelnNotFoundException();
+        await SpieleingabeDBService.DeleteSpielSargkegelnAsync(SpieltagID);
+    }
 }

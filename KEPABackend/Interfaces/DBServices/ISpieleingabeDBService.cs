@@ -288,4 +288,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>NULL oder }-Entität</returns>
     Task<TblSpielSargKegeln?> GetSpielSargkegelnByID(int ID);
+
+    /// <summary>
+    /// Sargkegeln löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielSargkegelnAsync(int SpieltagID);
 }

@@ -632,4 +632,19 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return spielSargkegeln;
     }
+
+    /// <summary>
+    /// Sargkegeln löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielSargkegelnAsync(int SpieltagID)
+    {
+        var spielSargkegeln = await DbContext.TblSpielSargKegelns
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.TblSpielSargKegelns.Remove(spielSargkegeln);
+        await DbContext.SaveChangesAsync();
+    }
 }

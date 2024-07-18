@@ -167,4 +167,10 @@ public interface ISpieleingabeService
     /// <param name="spielSargkegelnUpdate"></param>
     /// <returns></returns>
     Task<SpielSargkegeln> UpdateSpielSargkegelnAsync(SpielSargkegelnUpdate spielSargkegelnUpdate);
+
+    /// <summary>
+    /// Sargkegeln löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielSargkegelnAsync(int SpieltagID);
 }

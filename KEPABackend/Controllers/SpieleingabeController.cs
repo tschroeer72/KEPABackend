@@ -345,7 +345,7 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
-    ///  <response code="200">Löschen erfolgreich</response>
+    /// <response code="200">Löschen erfolgreich</response>
     /// <response code="404">SpielPokal nicht gefunden</response>  
     [HttpDelete]
     [Route("DeletePokal")]
@@ -388,10 +388,13 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">SpielSargkegeln nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteSargkegeln")]
     public async Task<ActionResult> DeleteSargkegeln(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpielSargkegelnAsync(SpieltagID);
+        return Ok();
     }
 }

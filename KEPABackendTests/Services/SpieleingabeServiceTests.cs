@@ -2696,4 +2696,60 @@ public class SpieleingabeServiceTests
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task DeleteSpielSargkegeln_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielSargkegelnByID(It.IsAny<int>())).ReturnsAsync(new TblSpielSargKegeln());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator, SpielSargkegelnUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteSpielSargkegelnAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteSpielSargkegelnAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpielSargkegelnNotFoundException_For_Non_Existing_SpielSargkegelnID_For_DeleteSpielSargkegeln()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielSargkegelnByID(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator, SpielSargkegelnUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteSpielSargkegelnAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<SpielSargkegelnNotFoundException>(func);
+    }
 }
