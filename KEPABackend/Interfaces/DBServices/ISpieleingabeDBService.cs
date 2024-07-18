@@ -182,7 +182,7 @@ public interface ISpieleingabeDBService
     /// Hole die SpielMeisterschaft-Entität
     /// </summary>
     /// <param name="ID"></param>
-    /// <returns>NULL oder SpielBlitztunier-Entität</returns>
+    /// <returns>NULL oder GetSpielMeisterschaftByID-Entität</returns>
     Task<TblSpielMeisterschaft?> GetSpielMeisterschaftByID(int ID);
 
     /// <summary>
@@ -207,4 +207,17 @@ public interface ISpieleingabeDBService
     /// <param name="HinRückrunde"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpielKombimeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2, HinRückrunde HinRückrunde);
+
+    /// <summary>
+    /// Aktualisiere SpielKombimeisterschaft Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpielKombimeisterschaftAsync();
+
+    /// <summary>
+    /// Hole die GetSpielKombimeisterschaftByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder GetSpielKombimeisterschaftByID-Entität</returns>
+    Task<TblSpielKombimeisterschaft?> GetSpielKombimeisterschaftByID(int ID);
 }

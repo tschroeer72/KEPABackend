@@ -266,27 +266,30 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="spielKombimeisterschaftCreate"></param>
     /// <returns></returns>
+    /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("CreateKombimeisterschaft")]
     public async Task<ActionResult> CreateKombimeisterschaft(SpielKombimeisterschaftCreate spielKombimeisterschaftCreate)
     {
         var result = await SpieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
-        return Ok(result);
+        return Created("/", result);
     }
 
     /// <summary>
     /// Speichere die Punkte der Spielerpaarung der Kombimeisterschaft
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Punkte3bis8"></param>
-    /// <param name="Punkte5Kugeln"></param>
-    /// <param name="HinRückrunde"></param>
+    /// <param name="spielKombimeisterschaftUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">SpielKombimeisterschaft-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateKombimeisterschaft")]
-    public async Task<ActionResult> UpdateKombimeisterschaft(int SpieltagID, int Punkte3bis8, int Punkte5Kugeln, int HinRückrunde)
+    public async Task<ActionResult> UpdateKombimeisterschaft(SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
+        return Ok(result);
     }
 
     /// <summary>

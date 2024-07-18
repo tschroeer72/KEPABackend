@@ -26,6 +26,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator;
     private readonly SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator;
     private readonly SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator;
+    private readonly SpielKombimeisterschaftUpdateValidator spielKombiMeisterschaftValidator;
 
     /// <summary>
     /// Contructor
@@ -39,7 +40,8 @@ public class SpieleingabeService : ISpieleingabeService
         NeunerRattenUpdateValidator neunerRattenUpdateValidator,
         Spiel6TageRennenUpdateValidator spiel6TageRennenUpdateValidator,
         SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator,
-        SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator)
+        SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator,
+        SpielKombimeisterschaftUpdateValidator spielKombiMeisterschaftValidator)
     {
         this.SpieleingabeDBService = spieleingabeDBService;
         this.Mapper = mapper;
@@ -50,6 +52,7 @@ public class SpieleingabeService : ISpieleingabeService
         this.spiel6TageRennenUpdateValidator = spiel6TageRennenUpdateValidator;
         this.spielBlitztunierUpdateValidator = spielBlitztunierUpdateValidator;
         this.spielMeisterschaftUpdateValidator = spielMeisterschaftUpdateValidator;
+        this.spielKombiMeisterschaftValidator = spielKombiMeisterschaftValidator;
     }
 
     /// <summary>
@@ -398,5 +401,44 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielKombimeisterschaftUpdate"></param>
+    /// <returns></returns>
+    public async Task<SpielKombimeisterschaft> UpdateSpielKombimeisterschaftAsync(SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate)
+    {
+        try
+        {
+            await spielKombiMeisterschaftValidator.ValidateAndThrowAsync(spielKombimeisterschaftUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpielKombimeisterschaft? spielKombimeisterschaft = await SpieleingabeDBService.GetSpielKombimeisterschaftByID(spielKombimeisterschaftUpdate.ID) ?? throw new SpielKombimeisterschaftNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielKombimeisterschaftUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied1 = await mitgliederDBService.GetMitgliedByIDAsync(spielKombimeisterschaftUpdate.SpielerID1) ?? throw new MitgliedNotFoundException("Spieler 1 nicht gefunden");
+        TblMitglieder? mitglied2 = await mitgliederDBService.GetMitgliedByIDAsync(spielKombimeisterschaftUpdate.SpielerID2) ?? throw new MitgliedNotFoundException("Spieler 2 nicht gefunden");
+
+        Mapper.Map(spielKombimeisterschaftUpdate, spielKombimeisterschaft);
+        await SpieleingabeDBService.UpdateSpielKombimeisterschaftAsync();
+
+        var updatedSpielKombimeisterschaft = new SpielKombimeisterschaft()
+        {
+            ID = spielKombimeisterschaft.Id,
+            SpieltagID = spielKombimeisterschaft.SpieltagId,
+            SpielerID1 = spielKombimeisterschaft.SpielerId1,
+            SpielerID2 = spielKombimeisterschaft.SpielerId2,
+            Spieler1Punkte3bis8 = spielKombimeisterschaft.Spieler1Punkte3bis8,
+            Spieler1Punkte5Kugeln = spielKombimeisterschaft.Spieler1Punkte5Kugeln,
+            Spieler2Punkte3bis8 = spielKombimeisterschaft.Spieler2Punkte3bis8,
+            Spieler2Punkte5Kugeln = spielKombimeisterschaft.Spieler2Punkte5Kugeln
+        };
+
+        return updatedSpielKombimeisterschaft;
     }
 }

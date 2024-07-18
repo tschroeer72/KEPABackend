@@ -470,4 +470,28 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return checkKOmbimeisterschaft?.Id;
     }
+
+    /// <summary>
+    /// Aktualisiere SpielKombimeisterschaft Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpielKombimeisterschaftAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die GetSpielKombimeisterschaftByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder GetSpielKombimeisterschaftByID-Entität</returns>
+    public async Task<TblSpielKombimeisterschaft?> GetSpielKombimeisterschaftByID(int ID)
+    {
+        var spielKombimeisterschaft = await DbContext.TblSpielKombimeisterschafts
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spielKombimeisterschaft;
+    }
 }

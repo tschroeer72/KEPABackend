@@ -120,4 +120,11 @@ public interface ISpieleingabeService
     /// <param name="spielKombimeisterschaftCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpielKombimeisterschaftAsync(SpielKombimeisterschaftCreate spielKombimeisterschaftCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielKombimeisterschaftUpdate"></param>
+    /// <returns></returns>
+    Task<SpielKombimeisterschaft> UpdateSpielKombimeisterschaftAsync(SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate);
 }
