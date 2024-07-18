@@ -253,6 +253,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    ///  <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">SpielMeister nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteMeisterschaft")]
     public async Task<ActionResult> DeleteMeisterschaft(int SpieltagID)
@@ -297,6 +299,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    ///  <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">SpielKombimeisterschaft nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteKombimeisterschaft")]
     public async Task<ActionResult> DeleteKombimeisterschaft(int SpieltagID)
@@ -341,6 +345,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
+    ///  <response code="200">Löschen erfolgreich</response>
+    /// <response code="404">SpielPokal nicht gefunden</response>  
     [HttpDelete]
     [Route("DeletePokal")]
     public async Task<ActionResult> DeletePokal(int SpieltagID)

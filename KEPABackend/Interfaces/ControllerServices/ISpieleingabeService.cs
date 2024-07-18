@@ -147,4 +147,10 @@ public interface ISpieleingabeService
     /// <param name="spielPokalUpdate"></param>
     /// <returns></returns>
     Task<SpielPokal> UpdateSpielPokalAsync(SpielPokalUpdate spielPokalUpdate);
+
+    /// <summary>
+    /// Pokal löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielPokalAsync(int SpieltagID);
 }

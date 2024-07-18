@@ -563,4 +563,19 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return spielPokal;
     }
+
+    /// <summary>
+    /// Pokal löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielPokalAsync(int SpieltagID)
+    {
+        var spielPokal = await DbContext.TblSpielPokals
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.TblSpielPokals.Remove(spielPokal);
+        await DbContext.SaveChangesAsync();
+    }
 }

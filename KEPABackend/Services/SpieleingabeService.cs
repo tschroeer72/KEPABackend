@@ -508,4 +508,14 @@ public class SpieleingabeService : ISpieleingabeService
 
         return updatedSpielPokal;
     }
+
+    /// <summary>
+    /// Pokal löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielPokalAsync(int SpieltagID)
+    {
+        TblSpielPokal? spielPokal = await SpieleingabeDBService.GetSpielPokalByID(SpieltagID) ?? throw new SpielPokalNotFoundException();
+        await SpieleingabeDBService.DeleteSpielPokalAsync(SpieltagID);
+    }
 }

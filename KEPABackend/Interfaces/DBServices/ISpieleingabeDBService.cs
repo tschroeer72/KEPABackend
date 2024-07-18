@@ -254,4 +254,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>NULL oder }-Entität</returns>
     Task<TblSpielPokal?> GetSpielPokalByID(int ID);
+
+    /// <summary>
+    /// Pokal löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielPokalAsync(int SpieltagID);
 }

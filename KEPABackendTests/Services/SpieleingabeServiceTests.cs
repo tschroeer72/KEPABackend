@@ -2239,7 +2239,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielPokaltNotFoundException_For_Non_Existing_SpielPokalID_for_UpdateSpielPokal()
+    public void SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_for_UpdateSpielPokal()
     {
         //Arrange
         SpielPokalUpdate spielPokalUpdate = new()
@@ -2348,4 +2348,65 @@ public class SpieleingabeServiceTests
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task DeleteSpiePokal_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>())).ReturnsAsync(new TblSpielPokal());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteSpielPokalAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteSpielPokalAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_For_DeleteSpielPokal()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielPokalByID(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteSpielPokalAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
+    }
+
+    // **************
+    // * Sargkegeln *
+    // **************
+
 }
