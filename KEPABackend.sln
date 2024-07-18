@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEPABackend", "KEPABackend\KEPABackend.csproj", "{5E5CECFE-01FB-487F-8D3E-DD9F3D3FEFC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEPABackendUnitTests", "KEPABackendTests\KEPABackendUnitTests.csproj", "{6EBD411B-9CF0-441D-919A-5783D2ED536F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEPABackendUnitTests", "KEPABackendTests\KEPABackendUnitTests.csproj", "{6EBD411B-9CF0-441D-919A-5783D2ED536F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3E50D4F6-2DB8-4367-A207-518FE50EF3CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6EBD411B-9CF0-441D-919A-5783D2ED536F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EBD411B-9CF0-441D-919A-5783D2ED536F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EBD411B-9CF0-441D-919A-5783D2ED536F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E50D4F6-2DB8-4367-A207-518FE50EF3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E50D4F6-2DB8-4367-A207-518FE50EF3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E50D4F6-2DB8-4367-A207-518FE50EF3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E50D4F6-2DB8-4367-A207-518FE50EF3CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

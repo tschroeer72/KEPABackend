@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  kepabackend:
+    image: ${DOCKER_REGISTRY-}kepabackend
+    build:
+      context: .
+      dockerfile: KEPABackend/Dockerfile
+  
+  kepabackend-swagger:
+    image: ${DOCKER_REGISTRY-}kepabackend
+    build:
+      context: .
+      dockerfile: KEPABackend/Dockerfile_swagger
