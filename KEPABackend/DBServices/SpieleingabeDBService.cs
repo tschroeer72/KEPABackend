@@ -463,12 +463,12 @@ public class SpieleingabeDBService : ISpieleingabeDBService
     /// <returns>NULL oder ID der Entität</returns>
     public async Task<int?> CheckSpielKombimeisterschaftExistingAsync(int SpieltagID, int SpielerID1, int SpielerID2, HinRückrunde HinRückrunde)
     {
-        var checkKOmbimeisterschaft = await DbContext.TblSpielKombimeisterschafts
+        var checkKombimeisterschaft = await DbContext.TblSpielKombimeisterschafts
                                     .Where(w => w.SpieltagId == SpieltagID && w.SpielerId1 == SpielerID1 && w.SpielerId2 == SpielerID2 && w.HinRückrunde == (int)HinRückrunde)
                                     .Select(s => s)
                                     .SingleOrDefaultAsync();
 
-        return checkKOmbimeisterschaft?.Id;
+        return checkKombimeisterschaft?.Id;
     }
 
     /// <summary>
@@ -493,5 +493,20 @@ public class SpieleingabeDBService : ISpieleingabeDBService
             .SingleOrDefaultAsync();
 
         return spielKombimeisterschaft;
+    }
+
+    /// <summary>
+    /// Paarung aus Kombimeisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielKombimeisterschaftAsync(int SpieltagID)
+    {
+        var spielKombimeisterschaft = await DbContext.TblSpielKombimeisterschafts
+            .Where(w => w.Id == SpieltagID)
+            .Select(s => s)
+            .SingleAsync();
+
+        DbContext.TblSpielKombimeisterschafts.Remove(spielKombimeisterschaft);
+        await DbContext.SaveChangesAsync();
     }
 }

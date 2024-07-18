@@ -220,4 +220,10 @@ public interface ISpieleingabeDBService
     /// <param name="ID"></param>
     /// <returns>NULL oder GetSpielKombimeisterschaftByID-Entität</returns>
     Task<TblSpielKombimeisterschaft?> GetSpielKombimeisterschaftByID(int ID);
+
+    /// <summary>
+    /// Paarung aus Kombimeisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    Task DeleteSpielKombimeisterschaftAsync(int SpieltagID);
 }

@@ -441,4 +441,14 @@ public class SpieleingabeService : ISpieleingabeService
 
         return updatedSpielKombimeisterschaft;
     }
+
+    /// <summary>
+    /// Paarung aus Kombimeisterschaft löschen
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    public async Task DeleteSpielKombimeisterschaftAsync(int SpieltagID)
+    {
+        TblSpielKombimeisterschaft? spielKombimeisterschaft = await SpieleingabeDBService.GetSpielKombimeisterschaftByID(SpieltagID) ?? throw new SpielKombimeisterschaftNotFoundException();
+        await SpieleingabeDBService.DeleteSpielKombimeisterschaftAsync(SpieltagID);
+    }
 }

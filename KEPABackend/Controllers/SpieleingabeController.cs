@@ -301,7 +301,8 @@ public class SpieleingabeController : ControllerBase
     [Route("DeleteKombimeisterschaft")]
     public async Task<ActionResult> DeleteKombimeisterschaft(int SpieltagID)
     {
-        return Ok(1);
+        await SpieleingabeService.DeleteSpielKombimeisterschaftAsync(SpieltagID);
+        return Ok();
     }
 
     /// <summary>

@@ -1944,4 +1944,63 @@ public class SpieleingabeServiceTests
         //Assert
         Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
+
+    [Fact]
+    public async Task DeleteSpielKombimeisterschaft_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielKombimeisterschaftByID(It.IsAny<int>())).ReturnsAsync(new TblSpielKombimeisterschaft());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator);
+
+        //Act
+        await spieleingabeService.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>());
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpielMeisterschaftNotFoundException_For_Non_Existing_SpielKombimeisterschaftID_For_DeleteSpielKombimeisterschaft()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpielKombimeisterschaftByID(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator);
+
+        //Act
+        Func<Task> func = async () => await spieleingabeService.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>());
+
+        //Assert
+        Assert.ThrowsAsync<SpielKombimeisterschaftNotFoundException>(func);
+    }
+
+    // **********************
+    // * Kombimeisterschaft *
+    // **********************
+
 }
