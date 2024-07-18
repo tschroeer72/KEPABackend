@@ -28,6 +28,7 @@ public class SpieleingabeService : ISpieleingabeService
     private readonly SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator;
     private readonly SpielKombimeisterschaftUpdateValidator spielKombiMeisterschaftValidator;
     private readonly SpielPokalUpdateValidator spielPokalUpdateValidator;
+    private readonly SpielSargkegelnUpdateValidator spielSargkegelnUpdateValidator;
 
     /// <summary>
     /// Contructor
@@ -43,7 +44,8 @@ public class SpieleingabeService : ISpieleingabeService
         SpielBlitztunierUpdateValidator spielBlitztunierUpdateValidator,
         SpielMeisterschaftUpdateValidator spielMeisterschaftUpdateValidator,
         SpielKombimeisterschaftUpdateValidator spielKombimeisterschaftUpdateValidator,
-        SpielPokalUpdateValidator spielPokalUpdateValidator
+        SpielPokalUpdateValidator spielPokalUpdateValidator,
+        SpielSargkegelnUpdateValidator spielSargkegelnUpdateValidator
         )
     {
         this.SpieleingabeDBService = spieleingabeDBService;
@@ -57,6 +59,7 @@ public class SpieleingabeService : ISpieleingabeService
         this.spielMeisterschaftUpdateValidator = spielMeisterschaftUpdateValidator;
         this.spielKombiMeisterschaftValidator = spielKombimeisterschaftUpdateValidator;
         this.spielPokalUpdateValidator = spielPokalUpdateValidator;
+        this.spielSargkegelnUpdateValidator = spielSargkegelnUpdateValidator;
     }
 
     /// <summary>
@@ -536,5 +539,39 @@ public class SpieleingabeService : ISpieleingabeService
 
         EntityID entityID = new() { ID = intID };
         return entityID;
+    }
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielSargkegelnUpdate"></param>
+    /// <returns></returns>
+    public async Task<SpielSargkegeln> UpdateSpielSargkegelnAsync(SpielSargkegelnUpdate spielSargkegelnUpdate)
+    {
+        try
+        {
+            await spielSargkegelnUpdateValidator.ValidateAndThrowAsync(spielSargkegelnUpdate);
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+
+        TblSpielSargKegeln? spielSargkegeln = await SpieleingabeDBService.GetSpielSargkegelnByID(spielSargkegelnUpdate.ID) ?? throw new SpielSargkegelnNotFoundException();
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielSargkegelnUpdate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(spielSargkegelnUpdate.SpielerID) ?? throw new MitgliedNotFoundException();
+
+        Mapper.Map(spielSargkegelnUpdate, spielSargkegeln);
+        await SpieleingabeDBService.UpdateSpielSargkegelnAsync();
+
+        var updatedSpielSargkegeln = new SpielSargkegeln()
+        {
+            ID = spielSargkegeln.Id,
+            SpieltagID = spielSargkegeln.SpieltagId,
+            SpielerID = spielSargkegeln.SpielerId,
+            Platzierung = spielSargkegeln.Platzierung
+        };
+
+        return updatedSpielSargkegeln;
     }
 }

@@ -160,4 +160,11 @@ public interface ISpieleingabeService
     /// <param name="spielSargkegelnCreate"></param>
     /// <returns></returns>
     Task<EntityID> CreateSpielSargkegelnAsync(SpielSargkegelnCreate spielSargkegelnCreate);
+
+    /// <summary>
+    /// Ergebnisse eintragen
+    /// </summary>
+    /// <param name="spielSargkegelnUpdate"></param>
+    /// <returns></returns>
+    Task<SpielSargkegeln> UpdateSpielSargkegelnAsync(SpielSargkegelnUpdate spielSargkegelnUpdate);
 }

@@ -55,5 +55,6 @@ public class DtoEntityMapperProfile : Profile
         CreateMap<SpielPokalUpdate, TblSpielPokal>().ForMember(dest => dest.Id, opt => opt.Ignore());
 
         CreateMap<SpielSargkegelnCreate, TblSpielSargKegeln>().ForMember(dest => dest.Id, opt => opt.Ignore());
+        CreateMap<SpielSargkegelnUpdate, TblSpielSargKegeln>().ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }

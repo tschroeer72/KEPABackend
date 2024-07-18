@@ -371,14 +371,16 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Speichere die Platzierung des Spielers beim Sargkegeln
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="Platzierung"></param>
+    /// <param name="spielSargkegelnUpdate"></param>
     /// <returns></returns>
+    /// <response code="200">Update erfolgreich</response>
+    /// <response code="404">SpielPokal-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateSargkegeln")]
-    public async Task<ActionResult> UpdateSargkegeln(int SpieltagID, int Platzierung)
+    public async Task<ActionResult> UpdateSargkegeln(SpielSargkegelnUpdate spielSargkegelnUpdate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.UpdateSpielSargkegelnAsync(spielSargkegelnUpdate);
+        return Ok(result);
     }
 
     /// <summary>

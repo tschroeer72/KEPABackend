@@ -608,4 +608,28 @@ public class SpieleingabeDBService : ISpieleingabeDBService
 
         return checkSargkegeln?.Id;
     }
+
+    /// <summary>
+    /// Aktualisiere SpielSargkegeln Entität
+    /// </summary>
+    /// <returns></returns>
+    public async Task UpdateSpielSargkegelnAsync()
+    {
+        await DbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Hole die GetSpielSargkegelnByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder }-Entität</returns>
+    public async Task<TblSpielSargKegeln?> GetSpielSargkegelnByID(int ID)
+    {
+        var spielSargkegeln = await DbContext.TblSpielSargKegelns
+            .Where(w => w.Id == ID)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return spielSargkegeln;
+    }
 }

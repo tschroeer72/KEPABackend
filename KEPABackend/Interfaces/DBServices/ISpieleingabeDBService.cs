@@ -249,7 +249,7 @@ public interface ISpieleingabeDBService
     Task UpdateSpielPokalAsync();
 
     /// <summary>
-    /// Hole die GetSpielPokaltByID-Entität
+    /// Hole die GetSpielPokalByID-Entität
     /// </summary>
     /// <param name="ID"></param>
     /// <returns>NULL oder }-Entität</returns>
@@ -275,4 +275,17 @@ public interface ISpieleingabeDBService
     /// <param name="SpielerID"></param>
     /// <returns>NULL oder ID der Entität</returns>
     Task<int?> CheckSpielSargkegelnExistingAsync(int SpieltagID, int SpielerID);
+
+    /// <summary>
+    /// Aktualisiere SpielSargkegeln Entität
+    /// </summary>
+    /// <returns></returns>
+    Task UpdateSpielSargkegelnAsync();
+
+    /// <summary>
+    /// Hole die GetSpielSargkegelnByID-Entität
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns>NULL oder }-Entität</returns>
+    Task<TblSpielSargKegeln?> GetSpielSargkegelnByID(int ID);
 }
