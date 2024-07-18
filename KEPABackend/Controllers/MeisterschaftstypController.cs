@@ -26,6 +26,7 @@ public class MeisterschaftstypController : ControllerBase
     /// Liste aller Meisterschaftstypen
     /// </summary>
     /// <returns>Liste aller Meisterschaftstypen</returns>
+    /// <response code="200">Meisterschaftstypen gefunden</response>
     [HttpGet]
     [Route("GetAllMeisterschaftstypen")]
     public async Task<ActionResult> GetAllMeisterschaftstypen()

@@ -28,14 +28,14 @@ public class MitgliederController : ControllerBase
     /// </summary>
     /// <param name="mitgliedCreate"></param>
     /// <returns>die geänderte Entität</returns>
-    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="201">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
     [HttpPost]
     [Route("Create")]
     public async Task<ActionResult> CreateMitglieder(MitgliedCreate mitgliedCreate)
     {
         var result = await MitgliederService.CreateMitgliederAsync(mitgliedCreate);
-        return Ok(result);
+        return Created("/", result);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class MitgliederController : ControllerBase
     /// </summary>
     /// <param name="mitgliedUpdate"></param>
     /// <returns></returns>
-    /// <response code="200">Update erfolgreich</response>
+    /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
     /// <response code="404">Mitglied nicht gefunden</response>
     [HttpPut]
@@ -51,7 +51,8 @@ public class MitgliederController : ControllerBase
     public async Task<ActionResult> UpdateMitglieder(MitgliedUpdate mitgliedUpdate)
     {
         var result = await MitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
-        return Ok(result);
+        //return Ok(result);
+        return StatusCode(StatusCodes.Status205ResetContent, result);
     }
 
     /// <summary>
@@ -59,6 +60,7 @@ public class MitgliederController : ControllerBase
     /// </summary>
     /// <param name="Aktiv"></param>
     /// <returns></returns>
+    /// <response code="200">Mitglieder gefunden</response>
     [HttpGet]
     [Route("GetAllMitglieder")]
     public async Task<ActionResult> GetAllMitglieder(bool Aktiv = true)

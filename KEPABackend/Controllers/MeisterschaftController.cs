@@ -28,7 +28,7 @@ public class MeisterschaftController : ControllerBase
     /// </summary>
     /// <param name="meisterschaftCreate"></param>
     /// <returns>MeisterschaftsID</returns>
-    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="201">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
     /// <response code="404">MeisterschaftstypNotFoundException</response>
     [HttpPost]
@@ -36,7 +36,7 @@ public class MeisterschaftController : ControllerBase
     public async Task<ActionResult> CreateMeisterschaft(MeisterschaftCreate meisterschaftCreate)
     {
         var result = await MeisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
-        return Ok(result);
+        return Created("/", result);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class MeisterschaftController : ControllerBase
     /// </summary>
     /// <param name="meisterschaftUpdate"></param>
     /// <returns>die geänderte Entität</returns>
-    /// <response code="200">Anlegen erfolgreich</response>
+    /// <response code="205">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
     /// <response code="404">[MeisterschaftNotFoundException | MeisterschaftstypNotFoundException]</response>
     [HttpPut]
@@ -52,13 +52,15 @@ public class MeisterschaftController : ControllerBase
     public async Task<ActionResult> UpdateMeisterschaft(MeisterschaftUpdate meisterschaftUpdate)
     {
         var result = await MeisterschaftService.UpdateMeisterschaftAsync(meisterschaftUpdate);
-        return Ok(result);
+        //return Ok(result);
+        return StatusCode(StatusCodes.Status205ResetContent, result);
     }
 
     /// <summary>
     /// Liste aller Meisterschaften
     /// </summary>
     /// <returns>Liste aller Meisterschaften</returns>
+    /// <response code="200">Meisterschaften gefunden</response>
     [HttpGet]
     [Route("GetAllMeisterschaften")]
     public async Task<ActionResult> GetAllMeisterschaften()
@@ -88,14 +90,14 @@ public class MeisterschaftController : ControllerBase
     /// <param name="MeisterschaftsID"></param>
     /// <param name="TeilnehmerID"></param>
     /// <returns></returns>
-    /// /// <response code="200">Hinzufügen erfolgreich</response>
+    /// <response code="201">Hinzufügen erfolgreich</response>
     /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
     [HttpPost]
     [Route("AddTeilnehmer")]
     public async Task<ActionResult> AddTeilnehmer(int MeisterschaftsID, int TeilnehmerID)
     {
         await MeisterschaftService.AddTeilnehmerAsync(MeisterschaftsID, TeilnehmerID);
-        return Ok();
+        return Created("/", "");
     }
 
     /// <summary>
@@ -104,13 +106,14 @@ public class MeisterschaftController : ControllerBase
     /// <param name="MeisterschaftsID"></param>
     /// <param name="TeilnehmerID"></param>
     /// <returns></returns>
-    /// /// <response code="200">Löschen erfolgreich</response>
+    /// <response code="204">Löschen erfolgreich</response>
     /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
     [HttpDelete]
     [Route("DeleteTeilnehmer")]
     public async Task<ActionResult> DeleteTeilnehmer(int MeisterschaftsID, int TeilnehmerID)
     {
         await MeisterschaftService.DeleteTeilnehmerAsync(MeisterschaftsID, TeilnehmerID);
-        return Ok();
+        //return Ok();
+        return NoContent();
     }
 }
