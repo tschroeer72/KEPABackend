@@ -358,14 +358,14 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge Tabelleneintrag für Sargkegeln
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="spielSargkegelnCreate"></param>
     /// <returns></returns>
     [HttpPost]
     [Route("CreateSargkegeln")]
-    public async Task<ActionResult> CreateSargkegeln(int SpieltagID, int SpielerID)
+    public async Task<ActionResult> CreateSargkegeln(SpielSargkegelnCreate spielSargkegelnCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
+        return Created("/", result);
     }
 
     /// <summary>

@@ -2098,13 +2098,13 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielPokalt()
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielPokal()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
         SpielPokalCreate spielPokalCreate = new()
         {
-            SpieltagID = 1,
+            SpieltagID = -1,
             SpielerID = 1
         };
         spieleingabeDBServiceMock.Setup(mock => mock.CheckSpielPokalExistingAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(1);
@@ -2139,7 +2139,7 @@ public class SpieleingabeServiceTests
         SpielPokalCreate spielPokalCreate = new()
         {
             SpieltagID = 1,
-            SpielerID = 1
+            SpielerID = -1
         };
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
         spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
@@ -2408,5 +2408,142 @@ public class SpieleingabeServiceTests
     // **************
     // * Sargkegeln *
     // **************
+    [Fact]
+    public async Task CreateSpielSargkegeln_Success()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        SpielSargkegelnCreate spielSargkegelnCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID = 1
+        };
+        spieleingabeDBServiceMock.Setup(mock => mock.CreateSpielSargkegelnAsync(It.IsAny<TblSpielSargKegeln>())).ReturnsAsync(1);
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblSpieltag());
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
 
+        //Act
+        var result = await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
+
+        //Assert
+        spieleingabeDBServiceMock.Verify(mock => mock.CreateSpielSargkegelnAsync(It.IsAny<TblSpielSargKegeln>()), Times.Once);
+    }
+
+    [Fact]
+    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielSargkegeln()
+    {
+        //Arrange
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        SpielSargkegelnCreate spielSargkegelnCreate = new()
+        {
+            SpieltagID = -1,
+            SpielerID = 1
+        };
+        spieleingabeDBServiceMock.Setup(mock => mock.CheckSpielSargkegelnExistingAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(1);
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
+
+        //Assert
+        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+    }
+
+    [Fact]
+    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielSargkegeln()
+    {
+        //Arrange
+        SpielSargkegelnCreate spielSargkegelnCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID = -1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
+
+        //Assert
+        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+    }
+
+    [Fact]
+    public void SpielPokalAlreadyExistsException_For_CreateSpielSargkegeln()
+    {
+        //Arrange
+        SpielSargkegelnCreate spielSargkegelnCreate = new()
+        {
+            SpieltagID = 1,
+            SpielerID = 1
+        };
+        var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
+        spieleingabeDBServiceMock.Setup(mock => mock.GetSpieltagByIDAsync(It.IsAny<int>()));
+        spieleingabeDBServiceMock.Setup(mock => mock.CheckSpielSargkegelnExistingAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(1);
+        var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
+        var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
+        mitgliederDBServiceMock.Setup(mock => mock.GetMitgliedByIDAsync(It.IsAny<int>())).ReturnsAsync(new TblMitglieder());
+        var spieleingabeService = new SpieleingabeService(
+            spieleingabeDBServiceMock.Object,
+            Mapper,
+            meisterschaftDBServiceMock.Object,
+            SpieltagCreateValidator,
+            mitgliederDBServiceMock.Object,
+            NeunerRattenUpdateValidator,
+            Spiel6TageRennenUpdateValidator,
+            SpielBlitztunierUpdateValidator,
+            SpielMeisterschaftUpdateValidator,
+            SpielKombimeisterschaftUpdateValidator,
+            SpielPokalUpdateValidator);
+
+        //Act
+        async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
+
+        //Assert
+        Assert.ThrowsAsync<SpielSargkegelnAlreadyExistsException>(func);
+    }
 }

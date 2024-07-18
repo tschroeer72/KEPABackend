@@ -260,4 +260,19 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielPokalAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Sargkegeln
+    /// </summary>
+    /// <param name="spielSargkegeln"></param>
+    /// <returns></returns>
+    Task<int> CreateSpielSargkegelnAsync(TblSpielSargKegeln spielSargkegeln);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Entity gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> CheckSpielSargkegelnExistingAsync(int SpieltagID, int SpielerID);
 }

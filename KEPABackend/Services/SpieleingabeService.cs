@@ -518,4 +518,23 @@ public class SpieleingabeService : ISpieleingabeService
         TblSpielPokal? spielPokal = await SpieleingabeDBService.GetSpielPokalByID(SpieltagID) ?? throw new SpielPokalNotFoundException();
         await SpieleingabeDBService.DeleteSpielPokalAsync(SpieltagID);
     }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Sargkegeln
+    /// </summary>
+    /// <param name="spielSargkegelnCreate"></param>
+    /// <returns></returns>
+    public async  Task<EntityID> CreateSpielSargkegelnAsync(SpielSargkegelnCreate spielSargkegelnCreate)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielSargkegelnCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(spielSargkegelnCreate.SpielerID) ?? throw new MitgliedNotFoundException();
+        int? spielSargkegelnCheck = await SpieleingabeDBService.CheckSpielSargkegelnExistingAsync(spielSargkegelnCreate.SpieltagID, spielSargkegelnCreate.SpielerID);
+        if (spielSargkegelnCheck != null) throw new SpielSargkegelnAlreadyExistsException();
+
+        var spielSargkegeln = Mapper.Map<TblSpielSargKegeln>(spielSargkegelnCreate);
+        int intID = await SpieleingabeDBService.CreateSpielSargkegelnAsync(spielSargkegeln);
+
+        EntityID entityID = new() { ID = intID };
+        return entityID;
+    }
 }

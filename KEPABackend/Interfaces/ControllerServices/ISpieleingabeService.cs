@@ -153,4 +153,11 @@ public interface ISpieleingabeService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielPokalAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Sargkegeln
+    /// </summary>
+    /// <param name="spielSargkegelnCreate"></param>
+    /// <returns></returns>
+    Task<EntityID> CreateSpielSargkegelnAsync(SpielSargkegelnCreate spielSargkegelnCreate);
 }

@@ -578,4 +578,34 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         DbContext.TblSpielPokals.Remove(spielPokal);
         await DbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Sargkegeln
+    /// </summary>
+    /// <param name="spielSargkegeln"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpielSargkegelnAsync(TblSpielSargKegeln spielSargkegeln)
+    {
+        spielSargkegeln.Platzierung = 0;
+
+        await DbContext.TblSpielSargKegelns.AddAsync(spielSargkegeln);
+        await DbContext.SaveChangesAsync();
+        return spielSargkegeln.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Entity gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpielSargkegelnExistingAsync(int SpieltagID, int SpielerID)
+    {
+        var checkSargkegeln = await DbContext.TblSpielSargKegelns
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId == SpielerID)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return checkSargkegeln?.Id;
+    }
 }
