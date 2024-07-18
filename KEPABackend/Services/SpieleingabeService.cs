@@ -451,4 +451,23 @@ public class SpieleingabeService : ISpieleingabeService
         TblSpielKombimeisterschaft? spielKombimeisterschaft = await SpieleingabeDBService.GetSpielKombimeisterschaftByID(SpieltagID) ?? throw new SpielKombimeisterschaftNotFoundException();
         await SpieleingabeDBService.DeleteSpielKombimeisterschaftAsync(SpieltagID);
     }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Pokalspiel
+    /// </summary>
+    /// <param name="spielPokalCreate"></param>
+    /// <returns></returns>
+    public async Task<EntityID> CreateSpielPokalAsync(SpielPokalCreate spielPokalCreate)
+    {
+        TblSpieltag? spieltag = await SpieleingabeDBService.GetSpieltagByIDAsync(spielPokalCreate.SpieltagID) ?? throw new SpieltagNotFoundException();
+        TblMitglieder? mitglied = await mitgliederDBService.GetMitgliedByIDAsync(spielPokalCreate.SpielerID) ?? throw new MitgliedNotFoundException();
+        int? spielPokalCheck = await SpieleingabeDBService.CheckSpielPokalExistingAsync(spielPokalCreate.SpieltagID, spielPokalCreate.SpielerID);
+        if (spielPokalCheck != null) throw new SpielPokalAlreadyExistsException();
+
+        var spielPokal = Mapper.Map<TblSpielPokal>(spielPokalCreate);
+        int intID = await SpieleingabeDBService.CreateSpielPokalAsync(spielPokal);
+
+        EntityID entityID = new() { ID = intID };
+        return entityID;
+    }
 }

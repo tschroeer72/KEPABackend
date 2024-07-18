@@ -226,4 +226,19 @@ public interface ISpieleingabeDBService
     /// </summary>
     /// <param name="SpieltagID"></param>
     Task DeleteSpielKombimeisterschaftAsync(int SpieltagID);
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Pokalspiel
+    /// </summary>
+    /// <param name="spielPokal"></param>
+    /// <returns></returns>
+    Task<int> CreateSpielPokalAsync(TblSpielPokal spielPokal);
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Entity gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    Task<int?> CheckSpielPokalExistingAsync(int SpieltagID, int SpielerID);
 }

@@ -509,4 +509,34 @@ public class SpieleingabeDBService : ISpieleingabeDBService
         DbContext.TblSpielKombimeisterschafts.Remove(spielKombimeisterschaft);
         await DbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Erzeuge Tabelleneintrag für Pokalspiel
+    /// </summary>
+    /// <param name="spielPokal"></param>
+    /// <returns></returns>
+    public async Task<int> CreateSpielPokalAsync(TblSpielPokal spielPokal)
+    {
+        spielPokal.Platzierung = 0;        
+
+        await DbContext.TblSpielPokals.AddAsync(spielPokal);
+        await DbContext.SaveChangesAsync();
+        return spielPokal.Id;
+    }
+
+    /// <summary>
+    /// Überprüfe, ob es bereits einen Eintrag für diese Entity gibt
+    /// </summary>
+    /// <param name="SpieltagID"></param>
+    /// <param name="SpielerID"></param>
+    /// <returns>NULL oder ID der Entität</returns>
+    public async Task<int?> CheckSpielPokalExistingAsync(int SpieltagID, int SpielerID)
+    {
+        var checkPokal = await DbContext.TblSpielPokals
+                                    .Where(w => w.SpieltagId == SpieltagID && w.SpielerId == SpielerID)
+                                    .Select(s => s)
+                                    .SingleOrDefaultAsync();
+
+        return checkPokal?.Id;
+    }
 }

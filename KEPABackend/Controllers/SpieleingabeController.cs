@@ -308,14 +308,17 @@ public class SpieleingabeController : ControllerBase
     /// <summary>
     /// Erzeuge Tabelleneintrag für Pokal
     /// </summary>
-    /// <param name="SpieltagID"></param>
-    /// <param name="SpielerID"></param>
+    /// <param name="spielPokalCreate"></param>
     /// <returns></returns>
+    /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
+    /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
     [Route("CreatePokal")]
-    public async Task<ActionResult> CreatePokal(int SpieltagID, int SpielerID)
+    public async Task<ActionResult> CreatePokal(SpielPokalCreate spielPokalCreate)
     {
-        return Ok(1);
+        var result = await SpieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
+        return Created("/", result);
     }
 
     /// <summary>
