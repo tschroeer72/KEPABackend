@@ -6,9 +6,15 @@ services:
     build:
       context: .
       dockerfile: KEPABackend/Dockerfile
-  
+    container_name: 'KEPABackend'
+    ports: 
+     - "8888:80"
+
   kepabackend-swagger:
-    image: ${DOCKER_REGISTRY-}kepabackend
+    image: ${DOCKER_REGISTRY-}kepabackend_swagger
     build:
       context: .
       dockerfile: KEPABackend/Dockerfile_swagger
+    container_name: 'KEPABackendSwagger'
+    ports: 
+     - "9999:80"

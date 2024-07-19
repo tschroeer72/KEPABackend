@@ -24,7 +24,7 @@ public class SpielergebnisseDBService : ISpielergebnisseDBService
     /// Liefere alle Ergebnisse zu 6-Tage-Rennen
     /// </summary>
     /// <returns>Liste aller 6-Tage-Rennen</returns>
-    public async Task<List<vwSpiel6TageRennen>> GetAllErgebnisse6TageRennenAsync(int SpieltagID = -1)
+    public async Task<List<vwSpiel6TageRennen>> GetErgebnisse6TageRennenAsync(int SpieltagID = -1)
     {
         if (SpieltagID == -1)
         {
@@ -106,7 +106,7 @@ public class SpielergebnisseDBService : ISpielergebnisseDBService
     /// Liefere alle Ergebnisse zu Neuner/Ratten
     /// </summary>
     /// <returns>Liste aller Neuner/Ratten</returns>
-    public async Task<List<vwNeunerRatten>> GetAllErgebnisseNeunerRattenAsync(int SpieltagID = -1)
+    public async Task<List<vwNeunerRatten>> GetErgebnisseNeunerRattenAsync(int SpieltagID = -1)
     {
         if (SpieltagID == -1)
         {

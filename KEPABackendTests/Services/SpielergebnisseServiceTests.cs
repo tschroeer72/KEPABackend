@@ -14,7 +14,7 @@ namespace KEPABackendUnitTests.Services;
 public class SpielergebnisseServiceTests
 {
     [Fact]
-    public async Task GetAllErgebnisseNeunerRatten_Success()
+    public async Task GetErgebnisseNeunerRatten_Success()
     {
         //Arrange
         var lstNeunerRatten = new List<vwNeunerRatten>()
@@ -47,19 +47,19 @@ public class SpielergebnisseServiceTests
             }
         };
         var spielergebnisseDBMock = new Mock<ISpielergebnisseDBService>();
-        spielergebnisseDBMock.Setup(mock => mock.GetAllErgebnisseNeunerRattenAsync(-1)).ReturnsAsync(lstNeunerRatten);
+        spielergebnisseDBMock.Setup(mock => mock.GetErgebnisseNeunerRattenAsync(-1)).ReturnsAsync(lstNeunerRatten);
         var spielergebnisseService = new SpielergebnisseService(spielergebnisseDBMock.Object);
 
         //Act
-        var result = await spielergebnisseService.GetAllErgebnisseNeunerRattenAsync();
+        var result = await spielergebnisseService.GetErgebnisseNeunerRattenAsync();
 
         //Assert
-        spielergebnisseDBMock.Verify(mock => mock.GetAllErgebnisseNeunerRattenAsync(It.IsAny<int>()), Times.Once);
+        spielergebnisseDBMock.Verify(mock => mock.GetErgebnisseNeunerRattenAsync(It.IsAny<int>()), Times.Once);
         Assert.Equal(2, result.Count);
     }
 
     [Fact]
-    public async Task GetAllErgebnisse6TageRennen_Success()
+    public async Task GetErgebnisse6TageRennen_Success()
     {
         //Arrange
         var lst6TR = new List<vwSpiel6TageRennen>()
@@ -100,14 +100,14 @@ public class SpielergebnisseServiceTests
             }
         };
         var spielergebnisseDBMock = new Mock<ISpielergebnisseDBService>();
-        spielergebnisseDBMock.Setup(mock => mock.GetAllErgebnisse6TageRennenAsync(-1)).ReturnsAsync(lst6TR);
+        spielergebnisseDBMock.Setup(mock => mock.GetErgebnisse6TageRennenAsync(-1)).ReturnsAsync(lst6TR);
         var spielergebnisseService = new SpielergebnisseService(spielergebnisseDBMock.Object);
 
         //Act
-        var result = await spielergebnisseService.GetAllErgebnisse6TageRennenAsync();
+        var result = await spielergebnisseService.GetErgebnisse6TageRennenAsync();
 
         //Assert
-        spielergebnisseDBMock.Verify(mock => mock.GetAllErgebnisse6TageRennenAsync(It.IsAny<int>()), Times.Once);
+        spielergebnisseDBMock.Verify(mock => mock.GetErgebnisse6TageRennenAsync(It.IsAny<int>()), Times.Once);
         Assert.Equal(2, result.Count);
     }
 }

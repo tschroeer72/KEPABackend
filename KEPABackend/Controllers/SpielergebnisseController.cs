@@ -30,10 +30,10 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Neuner/Ratten</returns>
     /// <response code="200">Neuner/Ratten gefunden</response>
     [HttpGet]
-    [Route("GetAllMeisterschaften")]
-    public async Task<ActionResult> GetAllMeisterschaften(int SpieltagID = -1)
+    [Route("GetMeisterschaften")]
+    public async Task<ActionResult> GetMeisterschaften(int SpieltagID = -1)
     {
-        var result = await spielergebnisseService.GetAllErgebnisseNeunerRattenAsync(SpieltagID);
+        var result = await spielergebnisseService.GetErgebnisseNeunerRattenAsync(SpieltagID);
         return Ok(result);
     }
 
@@ -44,10 +44,10 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller 6-Tage-Rennen</returns>
     /// <response code="200">6-Tage-Rennen gefunden</response>
     [HttpGet]
-    [Route("GetAll6TageRennen")]
-    public async Task<ActionResult> GetAllErgebnisse6TageRennen(int SpieltagID = -1)
+    [Route("Get6TageRennen")]
+    public async Task<ActionResult> GetErgebnisse6TageRennen(int SpieltagID = -1)
     {
-        var result = await spielergebnisseService.GetAllErgebnisse6TageRennenAsync(SpieltagID);
+        var result = await spielergebnisseService.GetErgebnisse6TageRennenAsync(SpieltagID);
         return Ok(result);
     }
 }

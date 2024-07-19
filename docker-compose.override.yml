@@ -3,6 +3,12 @@ version: '3.4'
 services:
   kepabackend:
     environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "80"
+ 
+  kepabackend-swagger:
+    environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
