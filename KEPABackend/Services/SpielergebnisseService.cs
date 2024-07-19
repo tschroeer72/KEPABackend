@@ -21,6 +21,15 @@ public class SpielergebnisseService : ISpielergebnisseService
     }
 
     /// <summary>
+    /// Liefere alle Ergebnisse zu 6-Tage-Rennen
+    /// </summary>
+    /// <returns>Liste aller 6-Tage-Rennen</returns>
+    public async Task<List<vwSpiel6TageRennen>> GetAllErgebnisse6TageRennenAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetAllErgebnisse6TageRennenAsync(SpieltagID);
+    }
+
+    /// <summary>
     /// Liefere alle Ergebnisse zu Neuner/Ratten
     /// </summary>
     /// <returns>Liste aller Neuner/Ratten</returns>
