@@ -1,4 +1,6 @@
 ﻿using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.DTOs.Post;
 using Microsoft.AspNetCore.Mvc;
 

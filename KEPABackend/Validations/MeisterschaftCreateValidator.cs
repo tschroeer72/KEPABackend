@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
 
 namespace KEPABackend.Validations;
 

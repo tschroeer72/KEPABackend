@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Output;
 using KEPABackend.DTOs.Post;
 
 namespace KEPABackend.Interfaces.ControllerServices;

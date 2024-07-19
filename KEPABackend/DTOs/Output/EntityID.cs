@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs.Post;
+namespace KEPABackend.DTOs.Output;
 
 /// <summary>
 /// DTO Post EntityID

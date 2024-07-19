@@ -43,6 +43,9 @@ public static class DIConfigurations
         services.AddTransient<SpielPokalUpdateValidator>();
         services.AddTransient<SpielSargkegelnUpdateValidator>();
 
+        services.AddTransient<ISpielergebnisseDBService, SpielergebnisseDBService>();
+        services.AddTransient<ISpielergebnisseService, SpielergebnisseService>();
+
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }
 }
