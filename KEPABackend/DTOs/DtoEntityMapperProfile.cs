@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using KEPABackend.DTOs.Input;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Modell;
 
 namespace KEPABackend.DTOs;

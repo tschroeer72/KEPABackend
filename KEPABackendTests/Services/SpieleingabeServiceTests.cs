@@ -2,8 +2,8 @@
 using FluentValidation;
 using KEPABackend.DBServices;
 using KEPABackend.DTOs;
-using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;

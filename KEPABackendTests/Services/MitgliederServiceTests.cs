@@ -7,8 +7,8 @@ using Moq;
 using Xunit;
 using FluentValidation;
 using KEPABackend.Exceptions;
-using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.DBServices;
 
 namespace KEPABackendUnitTests.Services;

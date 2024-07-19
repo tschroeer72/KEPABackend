@@ -1,7 +1,7 @@
 ﻿using KEPABackend.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs.Post;
+namespace KEPABackend.DTOs.Input;
 
 /// <summary>
 /// DTO Post SpielKombimeisterschaftUpdate 

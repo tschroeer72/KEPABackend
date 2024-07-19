@@ -1,5 +1,5 @@
-﻿using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+﻿using KEPABackend.DTOs.Output;
+using KEPABackend.DTOs.Input;
 using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.DBServices;

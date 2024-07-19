@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using KEPABackend.DBServices;
-using KEPABackend.DTOs.Get;
 using KEPABackend.DTOs.Input;
 using KEPABackend.DTOs.Output;
-using KEPABackend.DTOs.Post;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;

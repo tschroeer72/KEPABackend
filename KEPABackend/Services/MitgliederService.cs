@@ -6,11 +6,10 @@ using KEPABackend.DBServices;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization;
-using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Interfaces.ControllerServices;
-using KEPABackend.DTOs.Output;
 
 namespace KEPABackend.Services;
 

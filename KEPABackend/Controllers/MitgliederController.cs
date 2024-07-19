@@ -1,4 +1,4 @@
-﻿using KEPABackend.DTOs.Post;
+﻿using KEPABackend.DTOs.Input;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;

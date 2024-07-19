@@ -1,5 +1,5 @@
 using FluentValidation;
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
 using KEPABackend.Validations;
 
 namespace KEPABackendUnitTests.Validation;

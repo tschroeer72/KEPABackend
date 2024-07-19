@@ -1,4 +1,5 @@
-﻿using KEPABackend.DTOs.Get;
+﻿using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;

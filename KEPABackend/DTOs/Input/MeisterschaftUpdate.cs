@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs.Post;
+namespace KEPABackend.DTOs.Input;
 
 /// <summary>
 /// DTO Post MeisterschaftUpdate
@@ -35,7 +35,7 @@ public record MeisterschaftUpdate
     /// <summary>
     /// MeisterschaftstypID
     /// </summary>
-    [Required] 
+    [Required]
     public int MeisterschaftstypID { get; set; }
 
     /// <summary>

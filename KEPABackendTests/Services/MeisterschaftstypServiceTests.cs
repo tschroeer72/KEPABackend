@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KEPABackend.DTOs.Get;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Services;

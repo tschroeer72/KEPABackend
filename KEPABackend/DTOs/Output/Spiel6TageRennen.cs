@@ -1,4 +1,4 @@
-﻿namespace KEPABackend.DTOs.Get;
+﻿namespace KEPABackend.DTOs.Output;
 /// <summary>
 /// DTO Get Spiel6TageRennen 
 /// </summary>

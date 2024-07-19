@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.DTOs.Get;
+namespace KEPABackend.DTOs.Output;
 
 /// <summary>
 /// DTO Get Spiel Pokal (Änderungen)

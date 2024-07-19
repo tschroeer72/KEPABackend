@@ -1,4 +1,4 @@
-using KEPABackend.DTOs.Post;
+using KEPABackend.DTOs.Input;
 using KEPABackend.Validations;
 using KEPABackend.Enums;
 using FluentValidation;

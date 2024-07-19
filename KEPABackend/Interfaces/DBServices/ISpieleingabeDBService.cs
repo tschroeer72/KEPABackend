@@ -1,5 +1,4 @@
-﻿using KEPABackend.DTOs.Get;
-using KEPABackend.DTOs.Post;
+﻿using KEPABackend.DTOs.Output;
 using KEPABackend.Enums;
 using KEPABackend.Modell;
 
