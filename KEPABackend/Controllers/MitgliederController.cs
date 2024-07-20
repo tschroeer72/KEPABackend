@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,7 @@ public class MitgliederController : ControllerBase
     /// <returns></returns>
     /// <response code="200">Mitglieder gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(Mitgliederliste), 200)]
     [Route("GetAllMitglieder")]
     public async Task<ActionResult> GetAllMitglieder(bool Aktiv = true)
     {
@@ -77,6 +79,7 @@ public class MitgliederController : ControllerBase
     /// <response code="200">Mitglied gefunden</response>
     /// <response code="404">Mitglied nicht gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(Mitgliederliste), 200)]
     [Route("GetMitgliedByID")]
     public async Task<ActionResult> GetMitgliedByID(int ID)
     {

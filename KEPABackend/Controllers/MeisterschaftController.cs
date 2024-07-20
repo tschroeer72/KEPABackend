@@ -1,4 +1,5 @@
 ﻿using KEPABackend.DTOs.Input;
+using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,7 @@ public class MeisterschaftController : ControllerBase
     /// <returns>Liste aller Meisterschaften</returns>
     /// <response code="200">Meisterschaften gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(Meisterschaft), 200)]
     [Route("GetAllMeisterschaften")]
     public async Task<ActionResult> GetAllMeisterschaften()
     {
@@ -77,6 +79,7 @@ public class MeisterschaftController : ControllerBase
     /// <response code="200">Meisterschaft gefunden</response>
     /// <response code="404">Meisterschaft nicht gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(Meisterschaft), 200)]
     [Route("GetMeisterschaftByID")]
     public async Task<ActionResult> GetMeisterschaftdByID(int ID)
     {

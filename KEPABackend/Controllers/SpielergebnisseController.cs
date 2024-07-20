@@ -1,4 +1,5 @@
-﻿using KEPABackend.Interfaces.ControllerServices;
+﻿using KEPABackend.DTOs.Output;
+using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Neuner/Ratten</returns>
     /// <response code="200">Neuner/Ratten gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwNeunerRatten), 200)]
     [Route("GetNeunerRatten")]
     public async Task<ActionResult> GetMeisterschaften(int SpieltagID = -1)
     {
@@ -44,6 +46,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller 6-Tage-Rennen</returns>
     /// <response code="200">6-Tage-Rennen gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpiel6TageRennen), 200)]
     [Route("Get6TageRennen")]
     public async Task<ActionResult> GetErgebnisse6TageRennen(int SpieltagID = -1)
     {
@@ -58,6 +61,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Pokalspiele</returns>
     /// <response code="200">Pokalspiele gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpielPokal), 200)]
     [Route("GetPokal")]
     public async Task<ActionResult> GetErgebnissePokal(int SpieltagID = -1)
     {
@@ -72,6 +76,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Sargkegeln</returns>
     /// <response code="200">Sargkegeln gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpielSargkegeln), 200)]
     [Route("GetSargkegeln")]
     public async Task<ActionResult> GetErgebnisseSargkegeln(int SpieltagID = -1)
     {
@@ -86,6 +91,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Blitztuniere</returns>
     /// <response code="200">Blitztuniere gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpielBlitztunier), 200)]
     [Route("GetBlitztunier")]
     public async Task<ActionResult> GetErgebnisseBlitztunier(int SpieltagID = -1)
     {
@@ -100,6 +106,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Meisterschaft</returns>
     /// <response code="200">Meisterschaft gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpielMeisterschaft), 200)]
     [Route("GetMeisterschaft")]
     public async Task<ActionResult> GetErgebnisseMeisterschaft(int SpieltagID = -1)
     {
@@ -114,6 +121,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Kombimeisterschaft</returns>
     /// <response code="200">Kombimeisterschaft gefunden</response>
     [HttpGet]
+    [ProducesResponseType(typeof(vwSpielKombimeisterschaft), 200)]
     [Route("GetKombimeisterschaft")]
     public async Task<ActionResult> GetErgebnisseKombimeisterschaft(int SpieltagID = -1)
     {
