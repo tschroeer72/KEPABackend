@@ -30,7 +30,7 @@ public class SpielergebnisseController : ControllerBase
     /// <returns>Liste aller Neuner/Ratten</returns>
     /// <response code="200">Neuner/Ratten gefunden</response>
     [HttpGet]
-    [Route("GetMeisterschaften")]
+    [Route("GetNeunerRatten")]
     public async Task<ActionResult> GetMeisterschaften(int SpieltagID = -1)
     {
         var result = await spielergebnisseService.GetErgebnisseNeunerRattenAsync(SpieltagID);
@@ -48,6 +48,76 @@ public class SpielergebnisseController : ControllerBase
     public async Task<ActionResult> GetErgebnisse6TageRennen(int SpieltagID = -1)
     {
         var result = await spielergebnisseService.GetErgebnisse6TageRennenAsync(SpieltagID);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Liste aller Pokalspiele
+    /// </summary>
+    /// <param name="SpieltagID"> -1 = alle Pokalspiele</param>
+    /// <returns>Liste aller Pokalspiele</returns>
+    /// <response code="200">Pokalspiele gefunden</response>
+    [HttpGet]
+    [Route("GetPokal")]
+    public async Task<ActionResult> GetErgebnissePokal(int SpieltagID = -1)
+    {
+        var result = await spielergebnisseService.GetErgebnissePokalAsync(SpieltagID);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Liste aller Sargkegeln
+    /// </summary>
+    /// <param name="SpieltagID"> -1 = alle Sargkegeln</param>
+    /// <returns>Liste aller Sargkegeln</returns>
+    /// <response code="200">Sargkegeln gefunden</response>
+    [HttpGet]
+    [Route("GetSargkegeln")]
+    public async Task<ActionResult> GetErgebnisseSargkegeln(int SpieltagID = -1)
+    {
+        var result = await spielergebnisseService.GetErgebnisseSargkegelnAsync(SpieltagID);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Liste aller Blitztuniere
+    /// </summary>
+    /// <param name="SpieltagID"> -1 = alle Blitztuniere</param>
+    /// <returns>Liste aller Blitztuniere</returns>
+    /// <response code="200">Blitztuniere gefunden</response>
+    [HttpGet]
+    [Route("GetBlitztunier")]
+    public async Task<ActionResult> GetErgebnisseBlitztunier(int SpieltagID = -1)
+    {
+        var result = await spielergebnisseService.GetErgebnisseBlitztunierAsync(SpieltagID);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Liste aller Meisterschaft
+    /// </summary>
+    /// <param name="SpieltagID"> -1 = alle Meisterschaft</param>
+    /// <returns>Liste aller Meisterschaft</returns>
+    /// <response code="200">Meisterschaft gefunden</response>
+    [HttpGet]
+    [Route("GetMeisterschaft")]
+    public async Task<ActionResult> GetErgebnisseMeisterschaft(int SpieltagID = -1)
+    {
+        var result = await spielergebnisseService.GetErgebnisseMeisterschaftAsync(SpieltagID);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Liste aller Kombimeisterschaft
+    /// </summary>
+    /// <param name="SpieltagID"> -1 = alle Kombimeisterschaft</param>
+    /// <returns>Liste aller Kombimeisterschaft</returns>
+    /// <response code="200">Kombimeisterschaft gefunden</response>
+    [HttpGet]
+    [Route("GetKombimeisterschaft")]
+    public async Task<ActionResult> GetErgebnisseKombimeisterschaft(int SpieltagID = -1)
+    {
+        var result = await spielergebnisseService.GetErgebnisseKombimeisterschaftAsync(SpieltagID);
         return Ok(result);
     }
 }

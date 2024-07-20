@@ -30,11 +30,56 @@ public class SpielergebnisseService : ISpielergebnisseService
     }
 
     /// <summary>
+    /// Liefere alle Ergebnisse zu Blitztunier
+    /// </summary>
+    /// <returns>Liste aller Blitztunier</returns>
+    public async Task<List<vwSpielBlitztunier>> GetErgebnisseBlitztunierAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetErgebnisseBlitztunierAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Liefere alle Ergebnisse zu Kombimeisterschaft
+    /// </summary>
+    /// <returns>Liste aller Kombimeisterschaft</returns>
+    public async Task<List<vwSpielKombimeisterschaft>> GetErgebnisseKombimeisterschaftAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetErgebnisseKombimeisterschaftAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Liefere alle Ergebnisse zu Meisterschaft
+    /// </summary>
+    /// <returns>Liste aller Meisterschaft</returns>
+    public async Task<List<vwSpielMeisterschaft>> GetErgebnisseMeisterschaftAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetErgebnisseMeisterschaftAsync(SpieltagID);
+    }
+
+    /// <summary>
     /// Liefere alle Ergebnisse zu Neuner/Ratten
     /// </summary>
     /// <returns>Liste aller Neuner/Ratten</returns>
     public async Task<List<vwNeunerRatten>> GetErgebnisseNeunerRattenAsync(int SpieltagID = -1)
     {
         return await spielergebnisseDBService.GetErgebnisseNeunerRattenAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Liefere alle Ergebnisse zu Pokalspielen
+    /// </summary>
+    /// <returns>Liste aller Pokalspiele</returns>
+    public async Task<List<vwSpielPokal>> GetErgebnissePokalAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetErgebnissePokalAsync(SpieltagID);
+    }
+
+    /// <summary>
+    /// Liefere alle Ergebnisse zu Sargkegeln
+    /// </summary>
+    /// <returns>Liste aller Sargkegeln</returns>
+    public async Task<List<vwSpielSargkegeln>> GetErgebnisseSargkegelnAsync(int SpieltagID = -1)
+    {
+        return await spielergebnisseDBService.GetErgebnisseSargkegelnAsync(SpieltagID);
     }
 }
