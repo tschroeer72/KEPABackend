@@ -116,9 +116,9 @@ namespace KEPABackend.Modell
                 //string strConstring = Configuration["ConnectionStrings:ConnStr"];
                 //optionsBuilder.UseMySql(strConstring, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
 
-                optionsBuilder.UseMySql(Settings.ConString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
+                //optionsBuilder.UseMySql(Settings.ConString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
 
-                optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
+                //optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
             }
         }
 

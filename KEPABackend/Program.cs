@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +52,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 ConfigurationManager configuration = builder.Configuration;
 
-builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("ConnStr"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb")));
 
 DIConfigurations.RegisterServices(builder.Services);
 
@@ -95,6 +96,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseRouting();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
