@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace KEPABackend.Modell
 {
     /// <summary>
     /// ApplicationDbContext
     /// </summary>
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : IdentityDbContext<IdentityUser> //DbContext
     {
+        private readonly Settings Settings;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public ApplicationDbContext()
+        public ApplicationDbContext(IOptions<Settings> settings)
         {
+            Settings = settings.Value;            
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="options"></param>
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IOptions<Settings> settings)
             : base(options)
         {
+            Settings = settings.Value;
         }
 
         /// <summary>
@@ -105,6 +113,11 @@ namespace KEPABackend.Modell
         {
             if (!optionsBuilder.IsConfigured)
             {
+                //string strConstring = Configuration["ConnectionStrings:ConnStr"];
+                //optionsBuilder.UseMySql(strConstring, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
+
+                optionsBuilder.UseMySql(Settings.ConString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
+
                 optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
             }
         }

@@ -2,9 +2,15 @@ using KEPABackend;
 using KEPABackend.Enums;
 using KEPABackend.Modell;
 using KEPABackend.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,8 +47,41 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
+ConfigurationManager configuration = builder.Configuration;
+
 builder.Services.AddDbContext<ApplicationDbContext>();
+
 DIConfigurations.RegisterServices(builder.Services);
+
+// For Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Adding Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+    // Adding Jwt Bearer
+    .AddJwtBearer(options =>
+     {
+         options.SaveToken = true;
+         options.RequireHttpsMetadata = false;
+         options.TokenValidationParameters = new TokenValidationParameters()
+         {
+             ValidateIssuer = true,
+             ValidateAudience = true,
+             ValidAudience = configuration["Settings:JWT:ValidAudience"],
+             ValidIssuer = configuration["Settings:JWT:ValidIssuer"],
+             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Settings:JWT:Secret"]))
+         };
+     });
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
@@ -54,10 +93,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseAuthorization();
-
 app.MapControllers();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
@@ -66,3 +105,9 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+/*
+ 
+https://www.c-sharpcorner.com/article/jwt-authentication-and-authorization-in-net-6-0-with-identity-framework/
+  
+ */
