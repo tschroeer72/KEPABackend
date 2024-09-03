@@ -6,7 +6,7 @@ using KEPABackend.DTOs.Output;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using KEPABackend.Validations;
 using Microsoft.AspNetCore.Mvc;
 

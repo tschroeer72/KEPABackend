@@ -1,6 +1,7 @@
 ﻿using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
@@ -8,6 +9,7 @@ namespace KEPABackend.Controllers;
 /// <summary>
 /// API Controller für Meisterschaftstypen
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class MeisterschaftstypController : ControllerBase

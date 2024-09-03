@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using KEPABackend.DTOs;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using KEPABackend.Services;
 using KEPABackend.Validations;
 using Moq;

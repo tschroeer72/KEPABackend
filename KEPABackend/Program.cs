@@ -1,6 +1,6 @@
 using KEPABackend;
 using KEPABackend.Enums;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using KEPABackend.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
@@ -57,34 +57,50 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
 DIConfigurations.RegisterServices(builder.Services);
 
 // For Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+//    .AddEntityFrameworkStores<ApplicationDbContext>()
+//    .AddDefaultTokenProviders();
 
 // Adding Authentication
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
 
-    // Adding Jwt Bearer
-    .AddJwtBearer(options =>
+//    // Adding Jwt Bearer
+//    .AddJwtBearer(options =>
+//     {
+//         options.SaveToken = true;
+//         options.RequireHttpsMetadata = false;
+//         options.TokenValidationParameters = new TokenValidationParameters()
+//         {
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidAudience = configuration["Settings:JWT:ValidAudience"],
+//             ValidIssuer = configuration["Settings:JWT:ValidIssuer"],
+//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Settings:JWT:Secret"]))
+//         };
+//     });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+ .AddJwtBearer(options =>
+ {
+     options.TokenValidationParameters = new TokenValidationParameters
      {
-         options.SaveToken = true;
-         options.RequireHttpsMetadata = false;
-         options.TokenValidationParameters = new TokenValidationParameters()
-         {
-             ValidateIssuer = true,
-             ValidateAudience = true,
-             ValidAudience = configuration["Settings:JWT:ValidAudience"],
-             ValidIssuer = configuration["Settings:JWT:ValidIssuer"],
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Settings:JWT:Secret"]))
-         };
-     });
+         ValidateIssuer = true,
+         ValidateAudience = true,
+         ValidateLifetime = true,
+         ValidateIssuerSigningKey = true,
+         ValidIssuer = configuration["Settings:JWT:ValidIssuer"],
+         ValidAudience = configuration["Settings:JWT:ValidAudience"],
+         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Settings:JWT:Secret"]))
+     };
+ });
 
 var app = builder.Build();
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
@@ -93,6 +109,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.MapControllers();
 app.UseRouting();
@@ -112,4 +129,6 @@ app.Run();
  
 https://www.c-sharpcorner.com/article/jwt-authentication-and-authorization-in-net-6-0-with-identity-framework/
   
+
+Scaffold-DbContext "server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -Context ApplicationDbContext -f
  */

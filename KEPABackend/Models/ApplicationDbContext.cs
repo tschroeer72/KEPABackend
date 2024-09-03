@@ -1,134 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
-namespace KEPABackend.Modell
+namespace KEPABackend.Models
 {
-    /// <summary>
-    /// ApplicationDbContext
-    /// </summary>
-    public partial class ApplicationDbContext : IdentityDbContext<IdentityUser> //DbContext
+    public partial class ApplicationDbContext : DbContext
     {
-        private readonly Settings Settings;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ApplicationDbContext(IOptions<Settings> settings)
+        public ApplicationDbContext()
         {
-            Settings = settings.Value;            
         }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="options"></param>
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IOptions<Settings> settings)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Settings = settings.Value;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<Tbl9erRatten> Tbl9erRattens { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblDbchangeLog> TblDbchangeLogs { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblMeisterschaften> TblMeisterschaftens { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblMeisterschaftstyp> TblMeisterschaftstyps { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblMitglieder> TblMitglieders { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSetting> TblSettings { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpiel6TageRennen> TblSpiel6TageRennens { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpielBlitztunier> TblSpielBlitztuniers { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpielKombimeisterschaft> TblSpielKombimeisterschafts { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpielMeisterschaft> TblSpielMeisterschafts { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpielPokal> TblSpielPokals { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpielSargKegeln> TblSpielSargKegelns { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblSpieltag> TblSpieltags { get; set; } = null!;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual DbSet<TblTeilnehmer> TblTeilnehmers { get; set; } = null!;
 
-
-        /// <summary>
-        /// OnConfiguring
-        /// </summary>
-        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //string strConstring = Configuration["ConnectionStrings:ConnStr"];
-                //optionsBuilder.UseMySql(strConstring, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
-
-                //optionsBuilder.UseMySql(Settings.ConString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
-
-                //optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.26-mariadb"));
             }
         }
 
-        /// <summary>
-        /// OnModelCreating
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("utf8mb4_general_ci").HasCharSet("utf8mb4");
+            modelBuilder.UseCollation("utf8mb4_general_ci")
+                .HasCharSet("utf8mb4");
 
             modelBuilder.Entity<Tbl9erRatten>(entity =>
             {
@@ -190,12 +105,9 @@ namespace KEPABackend.Modell
 
                 entity.Property(e => e.Aktiv).HasColumnType("int(11)");
 
-                entity.Property(e => e.Beginn)
-                    .IsRequired()
-                    .HasColumnType("datetime");
+                entity.Property(e => e.Beginn).HasColumnType("datetime");
 
                 entity.Property(e => e.Bezeichnung)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .UseCollation("utf8_general_ci")
                     .HasCharSet("utf8");
@@ -267,12 +179,11 @@ namespace KEPABackend.Modell
 
                 entity.Property(e => e.HolzMin).HasColumnType("int(11)");
 
-                entity.Property(e => e.MitgliedSeit)
-                    .IsRequired()
-                    .HasColumnType("datetime");
+                entity.Property(e => e.Login).HasMaxLength(255);
+
+                entity.Property(e => e.MitgliedSeit).HasColumnType("datetime");
 
                 entity.Property(e => e.Nachname)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .UseCollation("utf8_general_ci")
                     .HasCharSet("utf8");
@@ -283,6 +194,8 @@ namespace KEPABackend.Modell
                     .HasCharSet("utf8");
 
                 entity.Property(e => e.PassivSeit).HasColumnType("datetime");
+
+                entity.Property(e => e.Password).HasMaxLength(255);
 
                 entity.Property(e => e.Platz).HasMaxLength(255);
 
@@ -332,7 +245,6 @@ namespace KEPABackend.Modell
                     .HasColumnName("TurboDBNummer");
 
                 entity.Property(e => e.Vorname)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .UseCollation("utf8_general_ci")
                     .HasCharSet("utf8");
@@ -688,10 +600,6 @@ namespace KEPABackend.Modell
             OnModelCreatingPartial(modelBuilder);
         }
 
-        /// <summary>
-        /// OnModelCreatingPartial
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

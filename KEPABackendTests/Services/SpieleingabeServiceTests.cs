@@ -8,7 +8,7 @@ using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Interfaces.DBServices;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using KEPABackend.Services;
 using KEPABackend.Validations;
 using Moq;

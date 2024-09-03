@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KEPABackend.Modell
+namespace KEPABackend.Models
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public partial class TblSpielSargKegeln
+    public partial class TblSpielPokal
     {
         public int Id { get; set; }
         public int SpieltagId { get; set; }
@@ -14,5 +13,4 @@ namespace KEPABackend.Modell
         public virtual TblMitglieder Spieler { get; set; } = null!;
         public virtual TblSpieltag Spieltag { get; set; } = null!;
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KEPABackend.Modell
+namespace KEPABackend.Models
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class TblMitglieder
     {
         public TblMitglieder()
@@ -52,6 +51,8 @@ namespace KEPABackend.Modell
         public int? Punkte { get; set; }
         public string? Platz { get; set; }
         public int? TurboDbnummer { get; set; }
+        public string? Login { get; set; }
+        public string? Password { get; set; }
 
         public virtual ICollection<Tbl9erRatten> Tbl9erRattens { get; set; }
         public virtual ICollection<TblSpiel6TageRennen> TblSpiel6TageRennenSpielerId1Navigations { get; set; }
@@ -66,5 +67,4 @@ namespace KEPABackend.Modell
         public virtual ICollection<TblSpielSargKegeln> TblSpielSargKegelns { get; set; }
         public virtual ICollection<TblTeilnehmer> TblTeilnehmers { get; set; }
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEPABackend.Modell;
+namespace KEPABackend.DTOs.Input;
 
 public class RegisterModel
 {

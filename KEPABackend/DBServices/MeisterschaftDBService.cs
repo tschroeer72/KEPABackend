@@ -1,6 +1,6 @@
 ﻿using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.DBServices;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace KEPABackend.DBServices;

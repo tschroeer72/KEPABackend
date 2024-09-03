@@ -1,6 +1,7 @@
 ﻿using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.ControllerServices;
 using KEPABackend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace KEPABackend.Controllers;
 /// <summary>
 /// Spielergebnisse
 /// </summary>
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class SpielergebnisseController : ControllerBase

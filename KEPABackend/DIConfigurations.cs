@@ -4,6 +4,7 @@ using KEPABackend.Services;
 using KEPABackend.DTOs;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Interfaces.ControllerServices;
+using KEPABackend.Models;
 
 namespace KEPABackend;
 
@@ -45,6 +46,8 @@ public static class DIConfigurations
 
         services.AddTransient<ISpielergebnisseDBService, SpielergebnisseDBService>();
         services.AddTransient<ISpielergebnisseService, SpielergebnisseService>();
+
+        //services.AddTransient<IdentitySeed>();
 
         services.AddAutoMapper(typeof(DtoEntityMapperProfile));
     }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using KEPABackend.Exceptions;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using KEPABackend.DBServices;
 using KEPABackend.Validations;
 using Microsoft.EntityFrameworkCore;

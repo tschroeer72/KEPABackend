@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using KEPABackend.DTOs.Input;
 using KEPABackend.DTOs.Output;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 
 namespace KEPABackend.DTOs;
 

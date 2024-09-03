@@ -3,7 +3,7 @@ using KEPABackend.DTOs.Input;
 using KEPABackend.Enums;
 using KEPABackend.Exceptions;
 using KEPABackend.Interfaces.DBServices;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace KEPABackend.DBServices;

@@ -1,5 +1,6 @@
 ﻿using KEPABackend.DTOs.Input;
 using KEPABackend.Interfaces.ControllerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEPABackend.Controllers;
@@ -7,6 +8,7 @@ namespace KEPABackend.Controllers;
 /// <summary>
 /// API Controller für Mitglieder
 /// </summary>
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class SpieleingabeController : ControllerBase

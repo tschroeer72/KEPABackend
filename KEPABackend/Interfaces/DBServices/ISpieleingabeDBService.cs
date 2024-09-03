@@ -1,6 +1,6 @@
 ﻿using KEPABackend.DTOs.Output;
 using KEPABackend.Enums;
-using KEPABackend.Modell;
+using KEPABackend.Models;
 
 namespace KEPABackend.Interfaces.DBServices;
 
