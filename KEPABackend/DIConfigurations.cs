@@ -19,6 +19,8 @@ public static class DIConfigurations
     /// <param name="services"></param>
     public static void RegisterServices(IServiceCollection services)
     {
+        services.AddScoped<ILoginService, LoginService>();
+
         services.AddTransient<IMitgliederDBService, MitgliederDBService>();
         services.AddTransient<IMitgliederService, MitgliederService>();
         services.AddTransient<MitgliederCreateValidator>();

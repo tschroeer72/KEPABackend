@@ -2,7 +2,7 @@
 
 namespace KEPABackend.DTOs.Input;
 
-public class LoginModel
+public class Login
 {
     [Required(ErrorMessage = "User Name is required")]
     public string Username { get; set; }

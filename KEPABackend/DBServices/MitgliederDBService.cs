@@ -97,4 +97,14 @@ public class MitgliederDBService : IMitgliederDBService
 
         return mitglied;
     }
+
+    public async Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword)
+    {
+        var mitglied = await DbContext.TblMitglieders
+            .Where(w => w.Login == sUsername && w.Password == sPassword)
+            .Select(s => s)
+            .SingleOrDefaultAsync();
+
+        return mitglied == null ? false : true;
+    }
 }

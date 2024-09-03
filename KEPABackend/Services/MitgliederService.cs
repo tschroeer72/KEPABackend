@@ -154,4 +154,8 @@ public class MitgliederService : IMitgliederService
         return result;
     }
 
+    public async Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword)
+    {
+        return await MitgliederDBService.AreCredentialsCorrectAsync(sUsername, sPassword);
+    }
 }

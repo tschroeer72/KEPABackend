@@ -35,4 +35,6 @@ public interface IMitgliederDBService
     /// <param name="ID"></param>
     /// <returns>Mitglied mit der ID </returns>
     Task<TblMitglieder?> GetMitgliedByIDAsync(int ID);
+
+    Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword);
 }
