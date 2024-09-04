@@ -33,6 +33,7 @@ public class MitgliederController : ControllerBase
     /// <returns>die geänderte Entität</returns>
     /// <response code="201">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     [HttpPost]
     [Route("Create")]
     public async Task<ActionResult> CreateMitglieder(MitgliedCreate mitgliedCreate)
@@ -48,6 +49,7 @@ public class MitgliederController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Mitglied nicht gefunden</response>
     [HttpPut]
     [Route("Update")]
@@ -64,6 +66,7 @@ public class MitgliederController : ControllerBase
     /// <param name="Aktiv"></param>
     /// <returns></returns>
     /// <response code="200">Mitglieder gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(Mitgliederliste), 200)]
     [Route("GetAllMitglieder")]
@@ -79,6 +82,7 @@ public class MitgliederController : ControllerBase
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <response code="200">Mitglied gefunden</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Mitglied nicht gefunden</response>
     [HttpGet]
     [ProducesResponseType(typeof(Mitgliederliste), 200)]

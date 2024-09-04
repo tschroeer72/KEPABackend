@@ -30,6 +30,7 @@ public class MeisterschaftstypController : ControllerBase
     /// </summary>
     /// <returns>Liste aller Meisterschaftstypen</returns>
     /// <response code="200">Meisterschaftstypen gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(Meisterschaftstypen), 200)]
     [Route("GetAllMeisterschaftstypen")]
@@ -45,6 +46,7 @@ public class MeisterschaftstypController : ControllerBase
     /// <param name="ID"></param>
     /// <returns>Meisterschaftstyp</returns>
     /// <response code="200">Meisterschaftstyp gefunden</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Meisterschaftstyp nicht gefunden</response>
     [HttpGet]
     [ProducesResponseType(typeof(Meisterschaftstypen), 200)]

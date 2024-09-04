@@ -29,6 +29,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spieltagCreate"></param>
     /// <returns>ID des Spieltages</returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="409">Spieltag existiert bereits</response>    
     [HttpPost]
     [Route("CreateSpieltag")]
@@ -44,6 +45,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="200">Beenden erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag existiert nicht</response>    
     [HttpPut]
     [Route("CloseSpieltag")]
@@ -59,6 +61,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag existiert nicht</response>  
     /// <response code="409">Spieltag in Verwendung</response>  
     [HttpDelete]
@@ -75,6 +78,7 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <returns>ID und Datum des Spieltages</returns>
     /// <response code="200">Spieltag gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [Route("GetSpieltagInBearbeitungAsync")]
     public async Task<ActionResult> GetSpieltagInBearbeitung()
@@ -89,6 +93,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="neunerRattenCreate"></param>
     /// <returns></returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -106,6 +111,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Neuner/Ratten-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("Update9erRatten")]
@@ -122,6 +128,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Neuner/Ratten-Eintrag nicht gefunden</response>  
     [HttpDelete]
     [Route("Delete9erRatten")]
@@ -138,6 +145,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spiel6TageRennenCreate"></param>
     /// <returns>ID der Entity</returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -155,6 +163,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spiel6TageRennen-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("Update6TageRennen")]
@@ -171,6 +180,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spiel6TageRennen nicht gefunden</response>  
     [HttpDelete]
     [Route("Delete6TageRennen")]
@@ -187,6 +197,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spielBlitztunierCreate"></param>
     /// <returns>ID der Entity</returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -204,6 +215,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielBlitztunier-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateBlitztunier")]
@@ -220,6 +232,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielBlitztunier nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteBlitztunier")]
@@ -236,6 +249,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spielMeisterschaftCreate"></param>
     /// <returns>ID der Entity</returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -253,6 +267,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielMeisterschaft-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateMeisterschaft")]
@@ -269,6 +284,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     ///  <response code="204">Löschen erfolgreich</response>
+    ///  <response code="401">Unauthorized</response>
     /// <response code="404">SpielMeister nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteMeisterschaft")]
@@ -285,6 +301,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spielKombimeisterschaftCreate"></param>
     /// <returns></returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -302,6 +319,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielKombimeisterschaft-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateKombimeisterschaft")]
@@ -317,7 +335,8 @@ public class SpieleingabeController : ControllerBase
     /// </summary>
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
-    ///  <response code="204">Löschen erfolgreich</response>
+    /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielKombimeisterschaft nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteKombimeisterschaft")]
@@ -334,6 +353,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spielPokalCreate"></param>
     /// <returns></returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -351,6 +371,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielPokal-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdatePokal")]
@@ -367,6 +388,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielPokal nicht gefunden</response>  
     [HttpDelete]
     [Route("DeletePokal")]
@@ -383,6 +405,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="spielSargkegelnCreate"></param>
     /// <returns></returns>
     /// <response code="201">Anlegen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Spieltag oder Spieler existiert nicht</response>  
     /// <response code="409">Eintrag bereits vorhanden</response>  
     [HttpPost]
@@ -400,6 +423,7 @@ public class SpieleingabeController : ControllerBase
     /// <returns></returns>
     /// <response code="205">Update erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielPokal-Eintrag, Spieltag oder Spieler existiert nicht</response>  
     [HttpPut]
     [Route("UpdateSargkegeln")]
@@ -416,6 +440,7 @@ public class SpieleingabeController : ControllerBase
     /// <param name="SpieltagID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">SpielSargkegeln nicht gefunden</response>  
     [HttpDelete]
     [Route("DeleteSargkegeln")]

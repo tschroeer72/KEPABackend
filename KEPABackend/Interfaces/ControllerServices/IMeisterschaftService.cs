@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
-/// Interface 
+/// Interface für MeisterschaftService
 /// </summary>
 public interface IMeisterschaftService
 {

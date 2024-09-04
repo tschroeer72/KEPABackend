@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace KEPABackend.Models
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class TblMeisterschaften
     {
         public TblMeisterschaften()
@@ -24,4 +25,5 @@ namespace KEPABackend.Models
         public virtual ICollection<TblSpieltag> TblSpieltags { get; set; }
         public virtual ICollection<TblTeilnehmer> TblTeilnehmers { get; set; }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

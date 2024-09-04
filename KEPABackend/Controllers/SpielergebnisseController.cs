@@ -32,6 +32,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Neuner/Ratten</param>
     /// <returns>Liste aller Neuner/Ratten</returns>
     /// <response code="200">Neuner/Ratten gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwNeunerRatten), 200)]
     [Route("GetNeunerRatten")]
@@ -47,6 +48,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle 6-Tage-Rennen</param>
     /// <returns>Liste aller 6-Tage-Rennen</returns>
     /// <response code="200">6-Tage-Rennen gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpiel6TageRennen), 200)]
     [Route("Get6TageRennen")]
@@ -62,6 +64,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Pokalspiele</param>
     /// <returns>Liste aller Pokalspiele</returns>
     /// <response code="200">Pokalspiele gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpielPokal), 200)]
     [Route("GetPokal")]
@@ -77,6 +80,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Sargkegeln</param>
     /// <returns>Liste aller Sargkegeln</returns>
     /// <response code="200">Sargkegeln gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpielSargkegeln), 200)]
     [Route("GetSargkegeln")]
@@ -92,6 +96,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Blitztuniere</param>
     /// <returns>Liste aller Blitztuniere</returns>
     /// <response code="200">Blitztuniere gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpielBlitztunier), 200)]
     [Route("GetBlitztunier")]
@@ -107,6 +112,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Meisterschaft</param>
     /// <returns>Liste aller Meisterschaft</returns>
     /// <response code="200">Meisterschaft gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpielMeisterschaft), 200)]
     [Route("GetMeisterschaft")]
@@ -122,6 +128,7 @@ public class SpielergebnisseController : ControllerBase
     /// <param name="SpieltagID"> -1 = alle Kombimeisterschaft</param>
     /// <returns>Liste aller Kombimeisterschaft</returns>
     /// <response code="200">Kombimeisterschaft gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(vwSpielKombimeisterschaft), 200)]
     [Route("GetKombimeisterschaft")]

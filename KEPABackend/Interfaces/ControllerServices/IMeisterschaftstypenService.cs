@@ -3,7 +3,7 @@
 namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
-/// Interface 
+/// Interface für MeisterschaftstypenService
 /// </summary>
 public interface IMeisterschaftstypenService
 {

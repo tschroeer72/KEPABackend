@@ -10,6 +10,8 @@ using KEPABackend.DTOs.Input;
 using KEPABackend.DTOs.Output;
 using KEPABackend.Interfaces.DBServices;
 using KEPABackend.Interfaces.ControllerServices;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace KEPABackend.Services;
 
@@ -80,6 +82,12 @@ public class MitgliederService : IMitgliederService
         }
 
         TblMitglieder? mitglied = await MitgliederDBService.GetMitgliedByIDAsync(mitgliedUpdate.ID) ?? throw new MitgliedNotFoundException();
+
+        if (!string.IsNullOrEmpty(mitgliedUpdate.Password))
+        {
+            mitgliedUpdate.Password = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(mitgliedUpdate.Password)));
+        }
+
         Mapper.Map(mitgliedUpdate, mitglied);
         await MitgliederDBService.UpdateMitgliederAsync();
 
@@ -104,7 +112,9 @@ public class MitgliederService : IMitgliederService
             TelefonMobil = mitglied.TelefonMobil,
             Fax = mitglied.Fax,
             Bemerkungen = mitglied.Bemerkungen,
-            Notizen = mitglied.Notizen
+            Notizen = mitglied.Notizen,
+            Login = mitglied.Login,
+            Password = mitglied.Password
         };
         return updatedMitglied;
     }
@@ -149,11 +159,19 @@ public class MitgliederService : IMitgliederService
             TelefonMobil = mitglied.TelefonMobil,
             Fax = mitglied.Fax,
             Bemerkungen = mitglied.Bemerkungen,
-            Notizen = mitglied.Notizen
+            Notizen = mitglied.Notizen,
+            Login = mitglied.Login,
+            Password = mitglied.Password
         };
         return result;
     }
 
+    /// <summary>
+    /// Überprüfung, ob die Credentails korrekt sind
+    /// </summary>
+    /// <param name="sUsername"></param>
+    /// <param name="sPassword"></param>
+    /// <returns></returns>
     public async Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword)
     {
         return await MitgliederDBService.AreCredentialsCorrectAsync(sUsername, sPassword);

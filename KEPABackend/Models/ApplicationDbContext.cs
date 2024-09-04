@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KEPABackend.Models
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
@@ -35,7 +36,6 @@ namespace KEPABackend.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=w01bdc60.kasserver.com;database=d03c455b;uid=d03c455b;pwd=KKpJnQJsm2t6VNXo;sslmode=Required", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.26-mariadb"));
             }
         }
@@ -602,4 +602,5 @@ namespace KEPABackend.Models
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

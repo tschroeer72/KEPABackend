@@ -1,16 +1,40 @@
 ﻿namespace KEPABackend;
 
+/// <summary>
+/// Configuration
+/// </summary>
 public class Settings
 {
-    public string ConString { get; set; }
-    public string AdminEmail { get; set; }
-    public string AdminPW { get; set; }
-    public JWTSettings JWT { get; set; }
+    /// <summary>
+    /// Connectionstring
+    /// </summary>
+    public string ConString { get; set; } = default!;
+    //public string AdminEmail { get; set; }
+    //public string AdminPW { get; set; }
+
+    /// <summary>
+    /// JSON Web Token
+    /// </summary>
+    public JWTSettings JWT { get; set; } = default!;
 }
 
+/// <summary>
+/// JSON Web Token
+/// </summary>
 public class JWTSettings
 {
-    public string ValidAudience { get; set; }
-    public string ValidIssuer { get; set; }
-    public string Secret { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ValidAudience { get; set; } = default!;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ValidIssuer { get; set; } = default!;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Secret { get; set; } = default!;
 }

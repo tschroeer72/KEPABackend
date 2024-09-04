@@ -254,7 +254,7 @@ public class SpieleingabeServiceTests
         var result = await spieleingabeService.GetSpieltagInBearbeitungAsync();
 
         //Assert
-        Assert.Equal(aktuellerSpieltag.ID, result.ID);
+        Assert.Equal(aktuellerSpieltag.ID, result?.ID);
     }
 
     // *****************

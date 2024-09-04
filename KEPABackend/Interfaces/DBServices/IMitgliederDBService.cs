@@ -4,7 +4,7 @@ using KEPABackend.Models;
 namespace KEPABackend.Interfaces.DBServices;
 
 /// <summary>
-/// Interface 
+/// Interface für MitgliederDBService
 /// </summary>
 public interface IMitgliederDBService
 {
@@ -36,5 +36,11 @@ public interface IMitgliederDBService
     /// <returns>Mitglied mit der ID </returns>
     Task<TblMitglieder?> GetMitgliedByIDAsync(int ID);
 
+    /// <summary>
+    /// Überprüfung, ob die Credentails korrekt sind
+    /// </summary>
+    /// <param name="sUsername"></param>
+    /// <param name="sPassword"></param>
+    /// <returns></returns>
     Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword);
 }

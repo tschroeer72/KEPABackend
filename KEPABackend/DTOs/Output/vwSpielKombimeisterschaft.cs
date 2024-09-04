@@ -35,17 +35,17 @@ public record vwSpielKombimeisterschaft
     /// <summary>
     /// Vorname Spieler 1
     /// </summary>
-    public string Spieler1Vorname { get; set; }
+    public string Spieler1Vorname { get; set; } = default!;
 
     /// <summary>
     /// Nachname Spieler 1
     /// </summary>
-    public string Spieler1Nachname { get; set; }
+    public string Spieler1Nachname { get; set; } = default!;
 
     /// <summary>
     /// Spitzname Spieler 1
     /// </summary>
-    public string Spieler1Spitzname { get; set; }
+    public string Spieler1Spitzname { get; set; } = default!;
 
     /// <summary>
     /// Spieler2ID
@@ -55,17 +55,17 @@ public record vwSpielKombimeisterschaft
     /// <summary>
     /// Vorname Spieler 2
     /// </summary>
-    public string Spieler2Vorname { get; set; }
+    public string Spieler2Vorname { get; set; } = default!;
 
     /// <summary>
     /// Nachname Spieler 2
     /// </summary>
-    public string Spieler2Nachname { get; set; }
+    public string Spieler2Nachname { get; set; } = default!;
 
     /// <summary>
     /// Spitzname Spieler 2
     /// </summary>
-    public string Spieler2Spitzname { get; set; }
+    public string Spieler2Spitzname { get; set; } = default!;
 
     /// <summary>
     /// Punkte 3 bis 8 Spieler 1

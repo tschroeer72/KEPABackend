@@ -3,7 +3,7 @@
 namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
-/// Interface
+/// Interface für SpielergebnisseService
 /// </summary>
 public interface ISpielergebnisseService
 {

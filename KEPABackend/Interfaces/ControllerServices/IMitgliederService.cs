@@ -4,7 +4,7 @@ using KEPABackend.DTOs.Input;
 namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
-/// Interface 
+/// Interface für MitgliederService
 /// </summary>
 public interface IMitgliederService
 {
@@ -36,5 +36,11 @@ public interface IMitgliederService
     /// <returns>Mitglied mit der ID </returns>
     Task<Mitgliederliste> GetMitgliedByIDAsync(int ID);
 
+    /// <summary>
+    /// Überprüfung, ob die Credentails korrekt sind
+    /// </summary>
+    /// <param name="sUsername"></param>
+    /// <param name="sPassword"></param>
+    /// <returns></returns>
     Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword);
 }

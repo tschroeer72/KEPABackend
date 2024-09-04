@@ -33,17 +33,17 @@ public record vwNeunerRatten
     /// <summary>
     /// Vorname
     /// </summary>
-    public string Vorname { get; set; }
+    public string Vorname { get; set; } = default!;
 
     /// <summary>
     /// Nachname
     /// </summary>
-    public string Nachname { get; set; }
+    public string Nachname { get; set; } = default!;
 
     /// <summary>
     /// SPitzname
     /// </summary>
-    public string Spitzname { get; set; }
+    public string Spitzname { get; set; } = default!;
 
     /// <summary>
     /// Geschobene Neuner

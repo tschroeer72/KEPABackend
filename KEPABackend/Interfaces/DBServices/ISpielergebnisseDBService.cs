@@ -2,6 +2,9 @@
 
 namespace KEPABackend.Interfaces.DBServices;
 
+/// <summary>
+/// Interface für SpielergebnisseDBService
+/// </summary>
 public interface ISpielergebnisseDBService
 {
     /// <summary>

@@ -4,7 +4,7 @@ using KEPABackend.Models;
 namespace KEPABackend.Interfaces.DBServices;
 
 /// <summary>
-/// Interface IMeisterschaftsDBService
+/// Interface für MeisterschaftsDBService
 /// </summary>
 public interface IMeisterschaftDBService
 {

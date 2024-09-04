@@ -5,7 +5,7 @@ using KEPABackend.Models;
 namespace KEPABackend.Interfaces.DBServices;
 
 /// <summary>
-/// Interface 
+/// Interface für SpieleingabeDBService
 /// </summary>
 public interface ISpieleingabeDBService
 {

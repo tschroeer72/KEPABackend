@@ -77,7 +77,9 @@ public class MitgliederDBService : IMitgliederDBService
                 TelefonMobil = s.TelefonMobil,
                 Fax = s.Fax,
                 Bemerkungen = s.Bemerkungen,
-                Notizen = s.Notizen
+                Notizen = s.Notizen,
+                Login = s.Login,
+                Password = s.Password
             }).ToListAsync();
 
         return lst;
@@ -98,6 +100,12 @@ public class MitgliederDBService : IMitgliederDBService
         return mitglied;
     }
 
+    /// <summary>
+    /// Überprüfung, ob die Credentails korrekt sind
+    /// </summary>
+    /// <param name="sUsername"></param>
+    /// <param name="sPassword"></param>
+    /// <returns></returns>
     public async Task<bool> AreCredentialsCorrectAsync(string sUsername, string sPassword)
     {
         var mitglied = await DbContext.TblMitglieders
@@ -105,6 +113,6 @@ public class MitgliederDBService : IMitgliederDBService
             .Select(s => s)
             .SingleOrDefaultAsync();
 
-        return mitglied == null ? false : true;
+        return mitglied != null;
     }
 }

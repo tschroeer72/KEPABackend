@@ -33,6 +33,7 @@ public class MeisterschaftController : ControllerBase
     /// <returns>MeisterschaftsID</returns>
     /// <response code="201">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">MeisterschaftstypNotFoundException</response>
     [HttpPost]
     [Route("Create")]
@@ -49,6 +50,7 @@ public class MeisterschaftController : ControllerBase
     /// <returns>die geänderte Entität</returns>
     /// <response code="205">Anlegen erfolgreich</response>
     /// <response code="400">Validation Error</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">[MeisterschaftNotFoundException | MeisterschaftstypNotFoundException]</response>
     [HttpPut]
     [Route("Update")]
@@ -64,6 +66,7 @@ public class MeisterschaftController : ControllerBase
     /// </summary>
     /// <returns>Liste aller Meisterschaften</returns>
     /// <response code="200">Meisterschaften gefunden</response>
+    /// <response code="401">Unauthorized</response>
     [HttpGet]
     [ProducesResponseType(typeof(Meisterschaft), 200)]
     [Route("GetAllMeisterschaften")]
@@ -79,6 +82,7 @@ public class MeisterschaftController : ControllerBase
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <response code="200">Meisterschaft gefunden</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Meisterschaft nicht gefunden</response>
     [HttpGet]
     [ProducesResponseType(typeof(Meisterschaft), 200)]
@@ -96,6 +100,7 @@ public class MeisterschaftController : ControllerBase
     /// <param name="TeilnehmerID"></param>
     /// <returns></returns>
     /// <response code="201">Hinzufügen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
     [HttpPost]
     [Route("AddTeilnehmer")]
@@ -112,6 +117,7 @@ public class MeisterschaftController : ControllerBase
     /// <param name="TeilnehmerID"></param>
     /// <returns></returns>
     /// <response code="204">Löschen erfolgreich</response>
+    /// <response code="401">Unauthorized</response>
     /// <response code="404">Meisterschaft nicht gefunden | Teilnehmer nicht gefunden</response>
     [HttpDelete]
     [Route("DeleteTeilnehmer")]

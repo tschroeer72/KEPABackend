@@ -40,5 +40,8 @@ public class MitgliederUpdateValidator :AbstractValidator<MitgliedUpdate>
         RuleFor(mitglied => mitglied.MitgliedSeit).NotNull().LessThanOrEqualTo(DateTime.Now);
         RuleFor(mitglied => mitglied.PassivSeit).GreaterThan(gt => gt.MitgliedSeit).GreaterThan(gt => gt.Geburtsdatum);
         RuleFor(mitglied => mitglied.AusgeschiedenAm).GreaterThan(gt => gt.MitgliedSeit).GreaterThan(gt => gt.Geburtsdatum);
+
+        RuleFor(mitglied => mitglied.Login).MaximumLength(255);
+        RuleFor(mitglied => mitglied.Password).MaximumLength(255);
     }
 }

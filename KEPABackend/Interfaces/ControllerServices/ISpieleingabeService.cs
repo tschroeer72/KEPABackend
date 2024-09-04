@@ -4,7 +4,7 @@ using KEPABackend.DTOs.Input;
 namespace KEPABackend.Interfaces.ControllerServices;
 
 /// <summary>
-/// Interface 
+/// Interface für SpieleingabeService
 /// </summary>
 public interface ISpieleingabeService
 {

@@ -107,4 +107,14 @@ public class Mitgliederliste
     /// NOtizen
     /// </summary>
     public string? Notizen { get; set; }
+
+    /// <summary>
+    /// Loginname
+    /// </summary>
+    public string? Login { get; set; }
+
+    /// <summary>
+    /// Passwort
+    /// </summary>
+    public string? Password { get; set; }
 }
