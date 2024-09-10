@@ -99,6 +99,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      };
  });
 
+builder.Services.AddCors(c => c.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
@@ -113,7 +120,8 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseRouting();
-app.UseCors();
+
+app.UseCors("MyPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>

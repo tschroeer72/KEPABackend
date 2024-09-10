@@ -55,7 +55,7 @@ public class LoginController : ControllerBase
 
             var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-            return Ok(token);
+            return Ok(new { token });
         }
         else
             return Unauthorized();
