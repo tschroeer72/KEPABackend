@@ -286,7 +286,7 @@ public class MitgliederUpdateValidationTests
             ID = 1,
             Vorname = "Test",
             Nachname = "Test",
-            Straße = "TestTestTestTestTestTestTestTestTestTestTestTestTest",
+            StraÃŸe = "TestTestTestTestTestTestTestTestTestTestTestTestTest",
             MitgliedSeit = dtTestDatum20240101_090000
         };
 
@@ -296,7 +296,7 @@ public class MitgliederUpdateValidationTests
         //Assert
         Assert.False(result.IsValid);
         Assert.Single(result.Errors);
-        Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("Straße"));
+        Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("Straï¿½e"));
     }
 
     [Fact]

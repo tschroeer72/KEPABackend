@@ -23,7 +23,7 @@ public class SpielKombimeisterschaftUpdateValidationTests
             Spieler1Punkte5Kugeln = 1,
             Spieler2Punkte3bis8 = 1,
             Spieler2Punkte5Kugeln = 1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         };
 
         //Act
@@ -47,7 +47,7 @@ public class SpielKombimeisterschaftUpdateValidationTests
             Spieler1Punkte5Kugeln = 1,
             Spieler2Punkte3bis8 = 1,
             Spieler2Punkte5Kugeln = 1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         };
 
         //Act
@@ -73,7 +73,7 @@ public class SpielKombimeisterschaftUpdateValidationTests
             Spieler1Punkte5Kugeln = -1,
             Spieler2Punkte3bis8 = 1,
             Spieler2Punkte5Kugeln = 1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         };
 
         //Act
@@ -99,7 +99,7 @@ public class SpielKombimeisterschaftUpdateValidationTests
             Spieler1Punkte5Kugeln = 1,
             Spieler2Punkte3bis8 = -1,
             Spieler2Punkte5Kugeln = 1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         };
 
         //Act
@@ -125,7 +125,7 @@ public class SpielKombimeisterschaftUpdateValidationTests
             Spieler1Punkte5Kugeln = 1,
             Spieler2Punkte3bis8 = 1,
             Spieler2Punkte5Kugeln = -1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         };
 
         //Act

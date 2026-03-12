@@ -1,8 +1,6 @@
-version: '3.4'
-
 services:
   kepabackend:
-    image: ${DOCKER_REGISTRY-}kepabackend
+    image: kepabackend
     build:
       context: .
       dockerfile: KEPABackend/Dockerfile
@@ -11,7 +9,7 @@ services:
      - "8888:80"
 
   kepabackend-swagger:
-    image: ${DOCKER_REGISTRY-}kepabackend_swagger
+    image: kepabackend_swagger
     build:
       context: .
       dockerfile: KEPABackend/Dockerfile_swagger

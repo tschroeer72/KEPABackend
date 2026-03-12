@@ -79,7 +79,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void MeisterschaftNotFoundException_For_Non_Existing_MeisterschaftsID_by_SpieltagCreate()
+    public async Task MeisterschaftNotFoundException_For_Non_Existing_MeisterschaftsID_by_SpieltagCreate()
     {
         var spieltagCreate = new SpieltagCreate()
         {
@@ -108,7 +108,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpieltagAsync(spieltagCreate);
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
 
     [Fact]
@@ -170,7 +170,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_DeleteSpieltag()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_DeleteSpieltag()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -193,11 +193,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpieltagAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_CloseSpieltag()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_CloseSpieltag()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -221,7 +221,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CloseSpieltagAsync(1);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
@@ -297,7 +297,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_Create9erRatten()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_Create9erRatten()
     {
         //Arrange
         NeunerRattenCreate neunerRattenCreate = new()
@@ -328,11 +328,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
 
         //Assert
-        Assert.ThrowsAsync<NeunerRattenAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<NeunerRattenAlreadyExistsException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_Create9erRatten()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_Create9erRatten()
     {
         //Arrange
         NeunerRattenCreate neunerRattenCreate = new()
@@ -362,11 +362,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void NeunerRattenAlreadyExistsException_For_Create9erRatten()
+    public async Task NeunerRattenAlreadyExistsException_For_Create9erRatten()
     {
         //Arrange
         NeunerRattenCreate neunerRattenCreate = new()
@@ -397,7 +397,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.Create9erRattenAsync(neunerRattenCreate);
 
         //Assert
-        Assert.ThrowsAsync<NeunerRattenAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<NeunerRattenAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -439,7 +439,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void NeunerRattenNotFoundException_For_Non_Existing_NeunerRattenID_for_UpdateNeunerRatten()
+    public async Task NeunerRattenNotFoundException_For_Non_Existing_NeunerRattenID_for_UpdateNeunerRatten()
     {
         //Arrange
         NeunerRattenUpdate neunerRattenUpdate = new()
@@ -473,11 +473,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<NeunerRattenNotFoundException>(func);
+        await Assert.ThrowsAsync<NeunerRattenNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateNeunerRatten()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateNeunerRatten()
     {
         //Arrange
         NeunerRattenUpdate neunerRattenUpdate = new()
@@ -511,11 +511,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateNeunerRatten()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateNeunerRatten()
     {
         //Arrange
         NeunerRattenUpdate neunerRattenUpdate = new()
@@ -549,7 +549,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.Update9erRattenAsync(neunerRattenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -581,7 +581,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void NeunerRattenNotFoundException_For_Non_Existing_NeunerRattenID_For_DeleteNeunerRatten()
+    public async Task NeunerRattenNotFoundException_For_Non_Existing_NeunerRattenID_For_DeleteNeunerRatten()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -605,7 +605,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteNeunerRattenAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<NeunerRattenNotFoundException>(func);
+        await Assert.ThrowsAsync<NeunerRattenNotFoundException>(func);
     }
 
     // *****************
@@ -649,7 +649,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpiel6TageRennen()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpiel6TageRennen()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -681,11 +681,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpiel6TageRennen()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpiel6TageRennen()
     {
         //Arrange
         Spiel6TageRennenCreate spiel6TageRennenCreate = new()
@@ -716,11 +716,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void Spiel6TageRennenAlreadyExistsException_For_CreateSpiel6TageRennen()
+    public async Task Spiel6TageRennenAlreadyExistsException_For_CreateSpiel6TageRennen()
     {
         //Arrange
         Spiel6TageRennenCreate spiel6TageRennenCreate = new()
@@ -752,7 +752,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpiel6TageRennenAsync(spiel6TageRennenCreate);
 
         //Assert
-        Assert.ThrowsAsync<Spiel6TageRennenAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<Spiel6TageRennenAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -795,7 +795,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void Spiel6TageRennenNotFoundException_For_Non_Existing_Spiel6TageRennenID_for_UpdateSpiel6TageRennen()
+    public async Task Spiel6TageRennenNotFoundException_For_Non_Existing_Spiel6TageRennenID_for_UpdateSpiel6TageRennen()
     {
         //Arrange
         Spiel6TageRennenUpdate spiel6TageRennenUpdate = new()
@@ -830,11 +830,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<Spiel6TageRennenNotFoundException>(func);
+        await Assert.ThrowsAsync<Spiel6TageRennenNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpiel6TageRennen()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpiel6TageRennen()
     {
         //Arrange
         Spiel6TageRennenUpdate spiel6TageRennenUpdate = new()
@@ -869,11 +869,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpiel6TageRennen()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpiel6TageRennen()
     {
         //Arrange
         Spiel6TageRennenUpdate spiel6TageRennenUpdate = new()
@@ -908,7 +908,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpiel6TageRennenAsync(spiel6TageRennenUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -940,7 +940,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void Spiel6TageRennenNotFoundException_For_Non_Existing_Spiel6TageRennenID_For_DeleteSpiel6TageRennen()
+    public async Task Spiel6TageRennenNotFoundException_For_Non_Existing_Spiel6TageRennenID_For_DeleteSpiel6TageRennen()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -964,7 +964,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpiel6TageRennenAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<Spiel6TageRennenNotFoundException>(func);
+        await Assert.ThrowsAsync<Spiel6TageRennenNotFoundException>(func);
     }
 
     // ***************
@@ -1008,7 +1008,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielBlitztunier()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielBlitztunier()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -1040,11 +1040,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielBlitztunier()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielBlitztunier()
     {
         //Arrange
         SpielBlitztunierCreate spielBlitztunierCreate = new()
@@ -1075,11 +1075,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void SpielBlitztunierAlreadyExistsException_For_CreateSpielBlitztunier()
+    public async Task SpielBlitztunierAlreadyExistsException_For_CreateSpielBlitztunier()
     {
         //Arrange
         SpielBlitztunierCreate spielBlitztunierCreate = new()
@@ -1111,7 +1111,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielBlitztunierAsync(spielBlitztunierCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpielBlitztunierAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<SpielBlitztunierAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -1154,7 +1154,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielBlitztunierNotFoundException_For_Non_Existing_SpielBlitztunierID_for_UpdateSpielBlitztunier()
+    public async Task SpielBlitztunierNotFoundException_For_Non_Existing_SpielBlitztunierID_for_UpdateSpielBlitztunier()
     {
         //Arrange
         SpielBlitztunierUpdate spielBlitztunierUpdate = new()
@@ -1189,11 +1189,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpielBlitztunierNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielBlitztunierNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielBlitztunier()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielBlitztunier()
     {
         //Arrange
         SpielBlitztunierUpdate spielBlitztunierUpdate = new()
@@ -1228,11 +1228,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielBlitztunier()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielBlitztunier()
     {
         //Arrange
         SpielBlitztunierUpdate spielBlitztunierUpdate = new()
@@ -1267,7 +1267,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielBlitztunierAsync(spielBlitztunierUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -1299,7 +1299,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielBlitztunierNotFoundException_For_Non_Existing_SpielBlitztunierID_For_DeleteSpielBlitztunier()
+    public async Task SpielBlitztunierNotFoundException_For_Non_Existing_SpielBlitztunierID_For_DeleteSpielBlitztunier()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -1323,7 +1323,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpielBlitztunierAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpielBlitztunierNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielBlitztunierNotFoundException>(func);
     }
 
     // *****************
@@ -1367,7 +1367,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielMeisterschaft()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielMeisterschaft()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -1399,11 +1399,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielMeisterschaft()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftCreate spielMeisterschaftCreate = new()
@@ -1434,11 +1434,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void SpielMeisterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
+    public async Task SpielMeisterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftCreate spielMeisterschaftCreate = new()
@@ -1470,7 +1470,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielMeisterschaftAsync(spielMeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpielMeisterschaftAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<SpielMeisterschaftAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -1513,7 +1513,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielMeisterschaftNotFoundException_For_Non_Existing_SpielMeisterschaftID_for_UpdateSpielMeisterschaft()
+    public async Task SpielMeisterschaftNotFoundException_For_Non_Existing_SpielMeisterschaftID_for_UpdateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
@@ -1548,11 +1548,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpielMeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielMeisterschaftNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielMeisterschaft()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
@@ -1587,11 +1587,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielMeisterschaft()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielMeisterschaft()
     {
         //Arrange
         SpielMeisterschaftUpdate spielMeisterschaftUpdate = new()
@@ -1626,7 +1626,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielMeisterschaftAsync(spielMeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -1658,7 +1658,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielMeisterschaftNotFoundException_For_Non_Existing_SpielMeisterschaftID_For_DeleteSpielMeisterschaft()
+    public async Task SpielMeisterschaftNotFoundException_For_Non_Existing_SpielMeisterschaftID_For_DeleteSpielMeisterschaft()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -1682,7 +1682,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpielMeisterschaftAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpielMeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielMeisterschaftNotFoundException>(func);
     }
 
     // **********************
@@ -1727,7 +1727,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielKombimeisterschaft()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielKombimeisterschaft()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -1760,11 +1760,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielKombimeisterschaft()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielKombimeisterschaft()
     {
         //Arrange
         SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
@@ -1796,11 +1796,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void SpielKombimeinsterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
+    public async Task SpielKombimeinsterschaftAlreadyExistsException_For_CreateSpielMeisterschaft()
     {
         //Arrange
         SpielKombimeisterschaftCreate spielKombimeisterschaftCreate = new()
@@ -1833,7 +1833,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielKombimeisterschaftAsync(spielKombimeisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpielKombimeisterschaftAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<SpielKombimeisterschaftAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -1879,7 +1879,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielKombimeisterschaftNotFoundException_For_Non_Existing_SpielKombimeisterschaftID_for_UpdateSpielKombimeisterschaft()
+    public async Task SpielKombimeisterschaftNotFoundException_For_Non_Existing_SpielKombimeisterschaftID_for_UpdateSpielKombimeisterschaft()
     {
         //Arrange
         SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate = new()
@@ -1917,11 +1917,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpielKombimeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielKombimeisterschaftNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielKombimeisterschaft()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielKombimeisterschaft()
     {
         //Arrange
         SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate = new()
@@ -1959,11 +1959,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielKombimeisterschaft()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielKombimeisterschaft()
     {
         //Arrange
         SpielKombimeisterschaftUpdate spielKombimeisterschaftUpdate = new()
@@ -2001,7 +2001,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielKombimeisterschaftAsync(spielKombimeisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -2033,7 +2033,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielMeisterschaftNotFoundException_For_Non_Existing_SpielKombimeisterschaftID_For_DeleteSpielKombimeisterschaft()
+    public async Task SpielMeisterschaftNotFoundException_For_Non_Existing_SpielKombimeisterschaftID_For_DeleteSpielKombimeisterschaft()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -2057,7 +2057,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpielKombimeisterschaftAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpielKombimeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielKombimeisterschaftNotFoundException>(func);
     }
 
     // *********
@@ -2100,7 +2100,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielPokal()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielPokal()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -2131,11 +2131,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielPokal()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielPokal()
     {
         //Arrange
         SpielPokalCreate spielPokalCreate = new()
@@ -2165,11 +2165,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void SpielPokalAlreadyExistsException_For_CreateSpielPokal()
+    public async Task SpielPokalAlreadyExistsException_For_CreateSpielPokal()
     {
         //Arrange
         SpielPokalCreate spielPokalCreate = new()
@@ -2200,7 +2200,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielPokalAsync(spielPokalCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpielPokalAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<SpielPokalAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -2241,7 +2241,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_for_UpdateSpielPokal()
+    public async Task SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_for_UpdateSpielPokal()
     {
         //Arrange
         SpielPokalUpdate spielPokalUpdate = new()
@@ -2274,11 +2274,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielPokal()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielPokal()
     {
         //Arrange
         SpielPokalUpdate spielPokalUpdate = new()
@@ -2311,11 +2311,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielPokal()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielPokal()
     {
         //Arrange
         SpielPokalUpdate spielPokalUpdate = new()
@@ -2348,7 +2348,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielPokalAsync(spielPokalUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -2380,7 +2380,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_For_DeleteSpielPokal()
+    public async Task SpielPokalNotFoundException_For_Non_Existing_SpielPokalID_For_DeleteSpielPokal()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -2404,7 +2404,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpielPokalAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielPokalNotFoundException>(func);
     }
 
     // **************
@@ -2446,7 +2446,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielSargkegeln()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_For_CreateSpielSargkegeln()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -2477,11 +2477,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielSargkegeln()
+    public async Task MitgliedNotFoundException_For_Non_Existing_SpielerID_For_CreateSpielSargkegeln()
     {
         //Arrange
         SpielSargkegelnCreate spielSargkegelnCreate = new()
@@ -2511,11 +2511,11 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
-    public void SpielPokalAlreadyExistsException_For_CreateSpielSargkegeln()
+    public async Task SpielPokalAlreadyExistsException_For_CreateSpielSargkegeln()
     {
         //Arrange
         SpielSargkegelnCreate spielSargkegelnCreate = new()
@@ -2546,7 +2546,7 @@ public class SpieleingabeServiceTests
         async Task func() => await spieleingabeService.CreateSpielSargkegelnAsync(spielSargkegelnCreate);
 
         //Assert
-        Assert.ThrowsAsync<SpielSargkegelnAlreadyExistsException>(func);
+        await Assert.ThrowsAsync<SpielSargkegelnAlreadyExistsException>(func);
     }
 
     [Fact]
@@ -2587,7 +2587,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielSargkegelnNotFoundException_For_Non_Existing_SpielSargkegelnID_for_UpdateSpielSargkegeln()
+    public async Task SpielSargkegelnNotFoundException_For_Non_Existing_SpielSargkegelnID_for_UpdateSpielSargkegeln()
     {
         //Arrange
         SpielSargkegelnUpdate spielSargkegelnUpdate = new()
@@ -2620,11 +2620,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielSargkegelnAsync(spielSargkegelnUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpielSargkegelnNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielSargkegelnNotFoundException>(func);
     }
 
     [Fact]
-    public void SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielSargkegeln()
+    public async Task SpieltagNotFoundException_For_Non_Existing_SpieltagID_for_UpdateSpielSargkegeln()
     {
         //Arrange
         SpielSargkegelnUpdate spielSargkegelnUpdate = new()
@@ -2657,11 +2657,11 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielSargkegelnAsync(spielSargkegelnUpdate);
 
         //Assert
-        Assert.ThrowsAsync<SpieltagNotFoundException>(func);
+        await Assert.ThrowsAsync<SpieltagNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielSargkegeln()
+    public async Task MitgliedNotFoundException_For_Non_Existing_MitgliedID_for_UpdateSpielSargkegeln()
     {
         //Arrange
         SpielSargkegelnUpdate spielSargkegelnUpdate = new()
@@ -2694,7 +2694,7 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.UpdateSpielSargkegelnAsync(spielSargkegelnUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -2726,7 +2726,7 @@ public class SpieleingabeServiceTests
     }
 
     [Fact]
-    public void SpielSargkegelnNotFoundException_For_Non_Existing_SpielSargkegelnID_For_DeleteSpielSargkegeln()
+    public async Task SpielSargkegelnNotFoundException_For_Non_Existing_SpielSargkegelnID_For_DeleteSpielSargkegeln()
     {
         //Arrange
         var spieleingabeDBServiceMock = new Mock<ISpieleingabeDBService>();
@@ -2750,6 +2750,6 @@ public class SpieleingabeServiceTests
         Func<Task> func = async () => await spieleingabeService.DeleteSpielSargkegelnAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<SpielSargkegelnNotFoundException>(func);
+        await Assert.ThrowsAsync<SpielSargkegelnNotFoundException>(func);
     }
 }

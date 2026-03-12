@@ -64,7 +64,7 @@ public class MeisterschaftstypServiceTests
     }
 
     [Fact]
-    public void MeisterschaftNotFoundExeption_for_GetMeisterschaftstypByIDAsync_with_Non_Exiting_ID()
+    public async Task MeisterschaftNotFoundExeption_for_GetMeisterschaftstypByIDAsync_with_Non_Exiting_ID()
     {
         //Arrange
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
@@ -74,6 +74,6 @@ public class MeisterschaftstypServiceTests
         Func<Task> func = async () => await mitgliederService.GetMeisterschaftstypByIDAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
 }

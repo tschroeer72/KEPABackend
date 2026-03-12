@@ -18,7 +18,7 @@ public class SpielKombiMeisterschaftCreateValidationTests
             SpieltagID = 1,
             SpielerID1 = 1,
             SpielerID2 = 1,
-            HinRückrunde = HinRückrunde.Hinrunde
+            HinRÃ¼ckrunde = HinRÃ¼ckrunde.Hinrunde
         }; 
 
         //Act
@@ -29,7 +29,7 @@ public class SpielKombiMeisterschaftCreateValidationTests
     }
 
     //[Fact]
-    //public void Validation_Error_For_HinRückrunde_SpielKombimeisterschaftCreate()
+    //public void Validation_Error_For_HinRï¿½ckrunde_SpielKombimeisterschaftCreate()
     //{
     //    //Arrange
     //    var spielKombimeisterschaftCreate = new SpielKombimeisterschaftCreate()
@@ -37,7 +37,7 @@ public class SpielKombiMeisterschaftCreateValidationTests
     //        SpieltagID = 1,
     //        SpielerID1 = 1,
     //        SpielerID2 = 1,
-    //        HinRückrunde = -1
+    //        HinRï¿½ckrunde = -1
     //    };
 
     //    //Act
@@ -46,6 +46,6 @@ public class SpielKombiMeisterschaftCreateValidationTests
     //    //Assert
     //    Assert.False(result.IsValid);
     //    Assert.Single(result.Errors);
-    //    Assert.Contains(result.Errors, err => err.ErrorCode.Equals("IsInEnumValidator") && err.PropertyName.Equals("HinRückrunde"));
+    //    Assert.Contains(result.Errors, err => err.ErrorCode.Equals("IsInEnumValidator") && err.PropertyName.Equals("HinRï¿½ckrunde"));
     //}
 }

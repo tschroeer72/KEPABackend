@@ -283,7 +283,7 @@ public class MitgliederCreateValidationTests
         //Assert
         Assert.False(result.IsValid);
         Assert.Single(result.Errors);
-        Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("Straße"));
+        Assert.Contains(result.Errors, err => err.ErrorCode.Equals("MaximumLengthValidator") && err.PropertyName.Equals("Stra?e"));
     }
 
     [Fact]

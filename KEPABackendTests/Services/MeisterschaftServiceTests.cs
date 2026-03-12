@@ -126,7 +126,7 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID()
+    public async Task MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID()
     {
         //Arrange
         var lstMeisterschaftstypen = new List<Meisterschaftstypen>()
@@ -163,7 +163,7 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
 
     [Fact]
@@ -259,7 +259,7 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID_For_UpdateMeisterschaft()
+    public async Task MeisterschaftstypNotFoundException_for_Non_Existing_MeisterschaftstypID_For_UpdateMeisterschaft()
     {
         //Arrange
         var lstMeisterschaftstypen = new List<Meisterschaftstypen>()
@@ -297,7 +297,7 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.UpdateMeisterschaftAsync(meisterschaftUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftstypNotFoundException>(func);
     }
 
     [Fact]
@@ -372,16 +372,16 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftNotFoundExeption_for_GetMeisterschaftByIDAsync_with_Non_Exiting_ID()
+    public async Task MeisterschaftNotFoundExeption_for_GetMeisterschaftByIDAsync_with_Non_Exiting_ID()
     {
         //Arrange
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
         var meisterschaftDBServiceMock = new Mock<IMeisterschaftDBService>();
         var meisterschaftService = new MeisterschaftService(
-            meisterschaftstypenDBServiceMock.Object, 
-            meisterschaftDBServiceMock.Object, 
-            Mapper, 
-            MeisterschaftCreateValidator, 
+            meisterschaftstypenDBServiceMock.Object,
+            meisterschaftDBServiceMock.Object,
+            Mapper,
+            MeisterschaftCreateValidator,
             MeisterschaftUpdateValidator,
             MitgliederDBService);
 
@@ -389,7 +389,7 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.GetMeisterschaftByIDAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
     }
 
     [Fact]
@@ -433,7 +433,7 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftNotFoundExeption_For_Non_Existing_MeisterschaftsID_AddTeilnehmer()
+    public async Task MeisterschaftNotFoundExeption_For_Non_Existing_MeisterschaftsID_AddTeilnehmer()
     {
         //Arrange
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
@@ -460,11 +460,11 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.AddTeilnehmerAsync(It.IsAny<int>(), mitglied.Id);
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundExeption_For_Non_Existing_MitgliederID_AddTeilnehmer()
+    public async Task MitgliedNotFoundExeption_For_Non_Existing_MitgliederID_AddTeilnehmer()
     {
         //Arrange
         var meisterschaft = new TblMeisterschaften()
@@ -491,7 +491,7 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.AddTeilnehmerAsync(meisterschaft.Id, It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -535,7 +535,7 @@ public class MeisterschaftServiceTests
     }
 
     [Fact]
-    public void MeisterschaftNotFoundExeption_For_Non_Existing_MeisterschaftsID_DeleteTeilnehmer()
+    public async Task MeisterschaftNotFoundExeption_For_Non_Existing_MeisterschaftsID_DeleteTeilnehmer()
     {
         //Arrange
         var meisterschaftstypenDBServiceMock = new Mock<IMeisterschaftstypenDBService>();
@@ -562,11 +562,11 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.DeleteTeilnehmerAsync(It.IsAny<int>(), mitglied.Id);
 
         //Assert
-        Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
+        await Assert.ThrowsAsync<MeisterschaftNotFoundException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundExeption_For_Non_Existing_MitgliederID_DeleteTeilnehmer()
+    public async Task MitgliedNotFoundExeption_For_Non_Existing_MitgliederID_DeleteTeilnehmer()
     {
         //Arrange
         var meisterschaft = new TblMeisterschaften()
@@ -593,6 +593,6 @@ public class MeisterschaftServiceTests
         async Task func() => await meisterschaftService.DeleteTeilnehmerAsync(meisterschaft.Id, It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 }

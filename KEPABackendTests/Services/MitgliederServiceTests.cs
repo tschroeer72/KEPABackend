@@ -129,7 +129,7 @@ public class MitgliederServiceTests
     }
 
     [Fact]
-    public void MitgliedNotFoundExeption_for_GetMitgliedByID_with_Non_Exiting_ID()
+    public async Task MitgliedNotFoundExeption_for_GetMitgliedByID_with_Non_Exiting_ID()
     {
         //Arrange
         var mitgliederDBServiceMock = new Mock<IMitgliederDBService>();
@@ -139,7 +139,7 @@ public class MitgliederServiceTests
         Func<Task> func = async () => await mitgliederService.GetMitgliedByIDAsync(It.IsAny<int>());
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 
     [Fact]
@@ -165,7 +165,7 @@ public class MitgliederServiceTests
     }
 
     [Fact]
-    public void ValidationExeption_For_UpdateMitglied()
+    public async Task ValidationExeption_For_UpdateMitglied()
     {
         //Arrange
         var mitgliedUpdate = new MitgliedUpdate()
@@ -183,11 +183,11 @@ public class MitgliederServiceTests
         Func<Task> func = async () => await mitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
 
         //Assert
-        Assert.ThrowsAsync<ValidationException>(func);
+        await Assert.ThrowsAsync<ValidationException>(func);
     }
 
     [Fact]
-    public void MitgliedNotFoundExeption_For_UpdateMitglied_with_Non_Existing_ID()
+    public async Task MitgliedNotFoundExeption_For_UpdateMitglied_with_Non_Existing_ID()
     {
         //Arrange
         var mitgliedUpdate = new MitgliedUpdate()
@@ -204,6 +204,6 @@ public class MitgliederServiceTests
         Func<Task> func = async () => await mitgliederService.UpdateMitgliederAsync(mitgliedUpdate);
 
         //Assert
-        Assert.ThrowsAsync<MitgliedNotFoundException>(func);
+        await Assert.ThrowsAsync<MitgliedNotFoundException>(func);
     }
 }
