@@ -39,6 +39,7 @@ public class MeisterschaftController : ControllerBase
     [Route("Create")]
     public async Task<ActionResult> CreateMeisterschaft(MeisterschaftCreate meisterschaftCreate)
     {
+        var test = 0;
         var result = await MeisterschaftService.CreateMeisterschaftAsync(meisterschaftCreate);
         return Created("/", result);
     }
