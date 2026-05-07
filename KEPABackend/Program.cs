@@ -45,7 +45,7 @@ builder.Services.AddSwaggerGen(options =>
 
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    options.IncludeXmlComments(System.IO.Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 
@@ -53,6 +53,14 @@ builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"
 ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("ConnStr"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.25-mariadb")));
+// Add GraphQL Services
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<KEPABackend.GraphQL.Query>()
+    .AddMutationType<KEPABackend.GraphQL.Mutation>()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
 
 DIConfigurations.RegisterServices(builder.Services);
 
@@ -119,6 +127,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.MapControllers();
+app.MapGraphQL();
 app.UseRouting();
 
 app.UseCors("MyPolicy");
